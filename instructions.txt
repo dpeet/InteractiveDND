@@ -1,0 +1,8 @@
+to install opencv on a raspberry pi, follow instructions here http://pklab.net/?id=392&lang=EN
+
+picamera was referenced from http://www.pyimagesearch.com/2015/03/30/accessing-the-raspberry-pi-camera-with-opencv-and-python
+
+SIFT and SURF are missing in opencv 3 as per http://www.pyimagesearch.com/2015/07/16/where-did-sift-and-surf-go-in-opencv-3/
+
+May need to `export DISPLAY=":0" `
+before starting program
