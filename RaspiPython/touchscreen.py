@@ -102,14 +102,14 @@ class RootWidget(FloatLayout):
                 text='Welcome to the Die Tower!',
                 color = (0,0,0,1),
                 font_size='30sp',
-                pos = (-170, 260))
+                pos_hint = {'center_x': 0.25, 'center_y': .9})
         self.add_widget(tLabel)
 
         dLabel = Label(
                 text='Select your Die!',
                 color = (0,0,0,1),
                 font_size='20sp',
-                pos = (0, 100))
+                pos_hint = {'center_x': 0.5, 'center_y': .7})
         self.add_widget(dLabel)
 
 ############################################################################################################################
