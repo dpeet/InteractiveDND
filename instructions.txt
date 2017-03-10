@@ -6,3 +6,11 @@ SIFT and SURF are missing in opencv 3 as per http://www.pyimagesearch.com/2015/0
 
 May need to `export DISPLAY=":0" `
 before starting program
+
+need to edit config.ini (sudo nano ~/.kivy/config.ini)  from https://github.com/mrichardson23/rpi-kivy-screen
+
+Go into the [input] section, remove the lines that are in there and put in:
+
+mouse = mouse
+mtdev_%(name)s = probesysfs,provider=mtdev
+hid_%(name)s = probesysfs,provider=hidinput
