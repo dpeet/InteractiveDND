@@ -4,12 +4,11 @@ from matplotlib import pyplot as plt
 
 MIN_MATCH_COUNT = 10
 
-img1 = cv2.imread('3.png',0)          # queryImage
-img2 = cv2.imread('image.png',0) # trainImage
+img1 = cv2.imread('1.jpg',0)          # queryImage
+img2 = cv2.imread('image3.jpg',0) # trainImage
 
-canny1 = cv2.Canny(img1, 100, 200)
-canny2 = cv2.Canny(img2, 100, 200)
-
+# plt.imshow(img1, 'gray'),plt.show()
+# plt.imshow(img2, 'gray'),plt.show()
 
 # Import ORB as SIFT to avoid confusion.
 try:
@@ -33,8 +32,8 @@ except ImportError:
 sift = cv2.ORB_create()
 
 # find the keypoints and descriptors with SIFT
-kp1, des1 = sift.detectAndCompute(canny1, None)
-kp2, des2 = sift.detectAndCompute(canny2, None)
+kp1, des1 = sift.detectAndCompute(img1, None)
+kp2, des2 = sift.detectAndCompute(img2, None)
 
 FLANN_INDEX_KDTREE = 0
 index_params = dict(algorithm = 0,
@@ -45,7 +44,7 @@ search_params = dict(checks = 50)
 
 flann = cv2.FlannBasedMatcher(index_params, search_params)
 
-matches = flann.knnMatch(np.float32(des1),np.float32(des2),k=2)
+matches = flann.knnMatch(np.float32(des1), np.float32(des2), 2)
 
 # store all the good matches as per Lowe's ratio test.
 good = []

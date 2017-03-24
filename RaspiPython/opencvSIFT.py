@@ -149,8 +149,8 @@ def drawMatches(image_1, image_1_keypoints, image_2, image_2_keypoints, matches)
   return joined_image
 
 # If you want to output your image, this basic code should work.
-image_1 = cv2.imread("image.jpg")
-image_2 = cv2.imread("3.jpg")
+image_1 = cv2.imread("image3.jpg")
+image_2 = cv2.imread("1.jpg")
 kp1, kp2, matches = findMatchesBetweenImages(image_1, image_2)
 output = drawMatches(image_1, kp1, image_2, kp2, matches)
 # cv2.imshow("Image", output)
