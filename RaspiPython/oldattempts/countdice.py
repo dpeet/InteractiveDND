@@ -8,7 +8,7 @@ print(cv2.__version__)
 
 DICE_SIZE = 16
 BLUR_FACTOR = 5
-RED_LOW_THRESHOLD = 150
+RED_LOW_THRESHOLD = 60
 MIN_PIP_AREA = 10
 
 
@@ -17,7 +17,7 @@ def resizeRect(rect, sizeFactor):
 
 
 # img = cv2.imread("dice3.jpg")
-img = cv2.imread("image5.jpg")
+img = cv2.imread("image6.jpg")
 # img = cv2.imread("dice-real.jpg")
 
 ### Threshold image

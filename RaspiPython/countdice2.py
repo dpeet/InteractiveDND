@@ -11,14 +11,14 @@ import sys
 
 HAVE_DISPLAY = True  # show debug windows
 
-BINARIZATION_THRESHOLD = 60  # Selects the bright white die area
+BINARIZATION_THRESHOLD = 50  # Selects the bright white die area
 
 # Area size definitions (the script "knows" how big a die should be)
 AREA_FACTOR = 1  # compensate camera zoom or position
-DIE_AREA_MIN = AREA_FACTOR * 1400
-DIE_AREA_MAX = AREA_FACTOR * 1700
-PIP_AREA_MIN = AREA_FACTOR * 45
-PIP_AREA_MAX = AREA_FACTOR * 70
+DIE_AREA_MIN = AREA_FACTOR * 1000
+DIE_AREA_MAX = AREA_FACTOR * 3000
+PIP_AREA_MIN = AREA_FACTOR * 5
+PIP_AREA_MAX = AREA_FACTOR * 30
 
 # vc = cv2.VideoCapture()  # prepare webcam for input
 # vc.open(0)  # open webcam
@@ -45,23 +45,25 @@ else:
     # vc.set(cv2.cv.CV_CAP_PROP_SATURATION,0.130)
     # vc.set(cv2.cv.CV_CAP_PROP_GAIN,0.08)
 
-    dilateKernel = cv2.getStructuringElement(cv2.MORPH_CROSS, (2, 2))
     # while True:
     # retval, image = vc.read()  # read frame from camera
-    image = cv2.imread("image6.jpg")
+    image = cv2.imread("image7.jpg")
     if not True:
         print ("Could not read frame from camera.")
         sys.exit(1)
     else:
         # cv2.imshow('input', image)
-        image = image[60:-60, 40:-50]  # crop picture
+        image = image[0:-200, 300:-100]  # crop picture
         # cv2.imshow('cropped', image)
+        # image = cv2.medianBlur(image, 5)
         gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)  # convert to grayscale
         retval, bin = cv2.threshold(gray, BINARIZATION_THRESHOLD, 255, cv2.THRESH_BINARY)  # select white die areas
+        dilateKernel = cv2.getStructuringElement(cv2.MORPH_CROSS, (7, 7))
         bin = cv2.dilate(bin, dilateKernel)  # dilate white areas to prevent pip fraying
+        cv2.imshow("dilated", bin)
         if HAVE_DISPLAY:
             cv2.imshow('binary', bin)
-        im3, contours0, hierarchy = cv2.findContours(bin.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)  # find contours
+        _, contours0, hierarchy = cv2.findContours(bin.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)  # find contours
         contours = [cv2.approxPolyDP(cnt, 2, True) for cnt in contours0]  # simplify contours
 
         # for all contours: check white area size (die), check area size of sub-contours (pips)
