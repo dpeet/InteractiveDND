@@ -11,14 +11,14 @@ import sys
 
 HAVE_DISPLAY = True  # show debug windows
 
-BINARIZATION_THRESHOLD = 190  # Selects the bright white die area
+BINARIZATION_THRESHOLD = 60  # Selects the bright white die area
 
 # Area size definitions (the script "knows" how big a die should be)
-AREA_FACTOR = 0.7  # compensate camera zoom or position
-DIE_AREA_MIN = AREA_FACTOR * 900
-DIE_AREA_MAX = AREA_FACTOR * 1500
-PIP_AREA_MIN = AREA_FACTOR * 15
-PIP_AREA_MAX = AREA_FACTOR * 45
+AREA_FACTOR = 1  # compensate camera zoom or position
+DIE_AREA_MIN = AREA_FACTOR * 1400
+DIE_AREA_MAX = AREA_FACTOR * 1700
+PIP_AREA_MIN = AREA_FACTOR * 45
+PIP_AREA_MAX = AREA_FACTOR * 70
 
 # vc = cv2.VideoCapture()  # prepare webcam for input
 # vc.open(0)  # open webcam
@@ -55,12 +55,13 @@ else:
     else:
         # cv2.imshow('input', image)
         image = image[60:-60, 40:-50]  # crop picture
+        # cv2.imshow('cropped', image)
         gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)  # convert to grayscale
         retval, bin = cv2.threshold(gray, BINARIZATION_THRESHOLD, 255, cv2.THRESH_BINARY)  # select white die areas
         bin = cv2.dilate(bin, dilateKernel)  # dilate white areas to prevent pip fraying
         if HAVE_DISPLAY:
             cv2.imshow('binary', bin)
-        contours0, hierarchy = cv2.findContours(bin.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)  # find contours
+        im3, contours0, hierarchy = cv2.findContours(bin.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)  # find contours
         contours = [cv2.approxPolyDP(cnt, 2, True) for cnt in contours0]  # simplify contours
 
         # for all contours: check white area size (die), check area size of sub-contours (pips)
@@ -68,6 +69,8 @@ else:
         for i in range(len(contours)):
             dieCnt = contours[i]
             dieArea = cv2.contourArea(dieCnt)
+            print (i, " ", dieArea)
+
             if dieArea > DIE_AREA_MIN and dieArea < DIE_AREA_MAX:
                 # print "Contour", i, "is a die with area", dieArea
                 pipId = hierarchy[0][i][2]
@@ -97,6 +100,6 @@ else:
         cv2.imshow('Die and Pips', image)
 
         if HAVE_DISPLAY:
-            ch = cv2.waitKey(10)
-            if ch == 27:  # exit on Esc
-                break
+            ch = cv2.waitKey(0)
+            # if ch == 27:  # exit on Esc
+            #     break
