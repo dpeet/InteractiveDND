@@ -54,6 +54,7 @@ class RootWidget(FloatLayout):
         sp_list = list()
         tp_list = list()
         f2p_list = list()
+        f3p_list = list()
         pageNum = 1
         setting = 0 ## 0 = no preference
                     ## 1 = manual calculation
@@ -195,6 +196,10 @@ class RootWidget(FloatLayout):
 
         initData = ["Tie Roll (1d20)"]
 
+        numData = ["1", "2", "3", "4", "5", "6"]
+
+        diceData = ["d4", "d6", "d8", "d10", "d12", "d20"]
+
         
 ################################# First page widgets! ##############################################################################
     
@@ -231,6 +236,8 @@ class RootWidget(FloatLayout):
             elif pageNum == 4:
                 for item in f2p_list:
                     self.remove_widget(item)
+                for item in f3p_list:
+                    self.remove_widget(item)
 
                 for item2 in tp_list:
                     self.add_widget(item2)
@@ -244,6 +251,12 @@ class RootWidget(FloatLayout):
                 print("%d page is selected" % pageNum)
                 print("%d option is selected" % die)
                 print(selected1)
+                for item in tp_list:
+                    self.remove_widget(item)
+
+                for item2 in f3p_list:
+                    self.add_widget(item2)
+                
                 changePageNum(4)
 
             elif instance == autoDiceButton:
@@ -297,6 +310,17 @@ class RootWidget(FloatLayout):
             elif rh:
                 lhs, rhs = totalLabel.text.split(" ", 1)
                 totalLabel.text = "%s %s to Roll" % (lhs, rh)
+
+        def manualSelection(instance):
+            if instance == clearButton:
+                totalManLabel.text = "The total value = 0"
+            else:
+                num = int(instance.text)
+                mylist = totalManLabel.text.split(" ")
+                num2 = int(mylist[len(mylist)-1])
+                num2 = num2 + num
+                totalManLabel.text = ("The total Value = %d" % num2)
+                
 
                 
             
@@ -491,14 +515,14 @@ class RootWidget(FloatLayout):
                         text = 'Back',
                         color = (0,0,0,1),
                         size_hint = (.1, .1),
-                        pos_hint = {'center_x': .85, 'center_y': .23})
+                        pos_hint = {'center_x': .8, 'center_y': .2})
         backButton.bind(on_press=backPage)
 
         calButton = Button(
                         text = "Calculate!",
                         color = (0,0,0,1),
                         size_hint = (.1, .1),
-                        pos_hint = {'center_x': .65, 'center_y': .23})
+                        pos_hint = {'center_x': .65, 'center_y': .2})
         calButton.bind(on_press=dieSelect)
 
         sLabel = Label(
@@ -546,24 +570,32 @@ class RootWidget(FloatLayout):
         self.add_widget(dImg1)
         self.add_widget(dImg2)
 
-################################# Third page widgets! ##############################################################################
+################################# Third page widgets! ####################################################################################
+
+        optionLabel = Label(
+                text='Select your calculation option',
+                color = (0,0,0,1),
+                font_size='40sp',
+                pos_hint = {'center_x': .5, 'center_y': .7})
 
         manualDiceButton = Button(
                         text = 'Manual',
                         color = (0,0,0,1),
-                        size_hint = (.1, .1),
-                        pos_hint = {'center_x': .25, 'center_y': .5})
+                        size_hint = (.25, .25),
+                        font_size='35sp',
+                        pos_hint = {'center_x': .3, 'center_y': .5})
         manualDiceButton.bind(on_press=diceSelection)
 
         autoDiceButton = Button(
                         text = 'AutoCal',
                         color = (0,0,0,1),
-                        size_hint = (.1, .1),
-                        pos_hint = {'center_x': .75, 'center_y': .5})
+                        size_hint = (.25, .25),
+                        font_size='35sp',
+                        pos_hint = {'center_x': .7, 'center_y': .5})
         autoDiceButton.bind(on_press=diceSelection)
         
 
-################################# Forth page widgets! ##############################################################################
+################################# Forth page (AUTO) widgets! ##############################################################################
 
         diceNumLabel = Label(
                 text='Number of Dice?',
@@ -606,13 +638,6 @@ class RootWidget(FloatLayout):
                         size_hint = (.1, .1),
                         pos_hint = {'center_x': .8, 'center_y': yVal1})
         fiveButton.bind(on_press=autoSelection)
-
-##        sixButton = Button(
-##                        text = "6",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .96, 'center_y': .7})
-##        sixButton.bind(on_press=dieSelect)
 
 
         diceTypLabel = Label(
@@ -686,11 +711,169 @@ class RootWidget(FloatLayout):
                 pos_hint = {'center_x': .6, 'center_y': .2})
 
         
+################################# Forth page (MANUAL) widgets! ############################################################################
+        
+        yValf = 0.65
+        yVals = 0.55
+        yValt = 0.45
+        yValfr = 0.35
+        num1Button = Button(
+                        text = "1",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .16, 'center_y': yValf})
+        num1Button.bind(on_press=manualSelection)
+
+        num2Button = Button(
+                        text = "2",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .32, 'center_y': yValf})
+        num2Button.bind(on_press=manualSelection)
+
+        num3Button = Button(
+                        text = "3",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .48, 'center_y': yValf})
+        num3Button.bind(on_press=manualSelection)
+
+        num4Button = Button(
+                        text = "4",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .64, 'center_y': yValf})
+        num4Button.bind(on_press=manualSelection)
+
+        num5Button = Button(
+                        text = "5",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .8, 'center_y': yValf})
+        num5Button.bind(on_press=manualSelection)
+
+        num6Button = Button(
+                        text = "6",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .16, 'center_y': yVals})
+        num6Button.bind(on_press=manualSelection)
+
+        num7Button = Button(
+                        text = "7",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .32, 'center_y': yVals})
+        num7Button.bind(on_press=manualSelection)
+
+        num8Button = Button(
+                        text = "8",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .48, 'center_y': yVals})
+        num8Button.bind(on_press=manualSelection)
+
+        num9Button = Button(
+                        text = "9",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .64, 'center_y': yVals})
+        num9Button.bind(on_press=manualSelection)
+
+        num10Button = Button(
+                        text = "10",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .8, 'center_y': yVals})
+        num10Button.bind(on_press=manualSelection)
+
+        num11Button = Button(
+                        text = "11",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .16, 'center_y': yValt})
+        num11Button.bind(on_press=manualSelection)
+
+        num12Button = Button(
+                        text = "12",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .32, 'center_y': yValt})
+        num12Button.bind(on_press=manualSelection)
+
+        num13Button = Button(
+                        text = "13",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .48, 'center_y': yValt})
+        num13Button.bind(on_press=manualSelection)
+
+        num14Button = Button(
+                        text = "14",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .64, 'center_y': yValt})
+        num14Button.bind(on_press=manualSelection)
+
+        num15Button = Button(
+                        text = "15",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .8, 'center_y': yValt})
+        num15Button.bind(on_press=manualSelection)
+
+        num16Button = Button(
+                        text = "16",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .16, 'center_y': yValfr})
+        num16Button.bind(on_press=manualSelection)
+
+        num17Button = Button(
+                        text = "17",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .32, 'center_y': yValfr})
+        num17Button.bind(on_press=manualSelection)
+
+        num18Button = Button(
+                        text = "18",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .48, 'center_y': yValfr})
+        num18Button.bind(on_press=manualSelection)
+
+        num19Button = Button(
+                        text = "19",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .64, 'center_y': yValfr})
+        num19Button.bind(on_press=manualSelection)
+
+        num20Button = Button(
+                        text = "20",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .8, 'center_y': yValfr})
+        num20Button.bind(on_press=manualSelection)
+
+        clearButton = Button(
+                        text = "clear",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .65, 'center_y': .2})
+        clearButton.bind(on_press=manualSelection)
+
+        totalManLabel = Label(
+                text='The total value = 0',
+                color = (0,0,0,1),
+                font_size='40sp',
+                pos_hint = {'center_x': .33, 'center_y': .2})
+
         
 
-
         
-####################################################################################################################################
+###########################################################################################################################################
 
         
         
@@ -712,11 +895,12 @@ class RootWidget(FloatLayout):
         sp_list.append(calButton)
         sp_list.append(list_view)
         sp_list.append(sLabel)
-        sp_list.append(sLabel2)
+##        sp_list.append(sLabel2)
 
         tp_list.append(manualDiceButton)
         tp_list.append(autoDiceButton)
         tp_list.append(backButton)
+        tp_list.append(optionLabel)
 
         
         f2p_list.append(diceNumLabel)
@@ -736,6 +920,32 @@ class RootWidget(FloatLayout):
         f2p_list.append(backButton)
         f2p_list.append(totalValLabel)
         f2p_list.append(cal2Button)
+
+##        f3p_list.append(list_view2)
+##        f3p_list.append(list_view3)
+        f3p_list.append(num1Button)
+        f3p_list.append(num2Button)
+        f3p_list.append(num3Button)
+        f3p_list.append(num4Button)
+        f3p_list.append(num5Button)
+        f3p_list.append(num6Button)
+        f3p_list.append(num7Button)
+        f3p_list.append(num8Button)
+        f3p_list.append(num9Button)
+        f3p_list.append(num10Button)
+        f3p_list.append(num11Button)
+        f3p_list.append(num12Button)
+        f3p_list.append(num13Button)
+        f3p_list.append(num14Button)
+        f3p_list.append(num15Button)
+        f3p_list.append(num16Button)
+        f3p_list.append(num17Button)
+        f3p_list.append(num18Button)
+        f3p_list.append(num19Button)
+        f3p_list.append(num20Button)
+        f3p_list.append(backButton)
+        f3p_list.append(clearButton)
+        f3p_list.append(totalManLabel)
         
 ##        f2p_list.append(sixButton)
         
