@@ -50,8 +50,14 @@ class RootWidget(FloatLayout):
         
     def __init__(self, **kwargs):
         super(RootWidget, self).__init__(**kwargs)
-        
+        fp_list = list()
+        sp_list = list()
+        tp_list = list()
+        f2p_list = list()
         pageNum = 1
+        setting = 0 ## 0 = no preference
+                    ## 1 = manual calculation
+                    ## 2 = automatic calculation
         
         dmgData = ["Slashing (cut)",
                 "Bludgeoning (smash)",
@@ -199,43 +205,141 @@ class RootWidget(FloatLayout):
             self.remove_widget(initButton)
 
         def backPage(instance):
-            for item in sp_list:
-                self.remove_widget(item)
+            global die
+            global selected1
+            global pageNum
+            if pageNum == 2:
+                for item in sp_list:
+                    self.remove_widget(item)
 
-            for item2 in fp_list:
-                self.add_widget(item2)
-            
-            die = 0
-            dLabel.text = ('Select your Die!')
+                for item2 in fp_list:
+                    self.add_widget(item2)
+                
+                die = 0
+                dLabel.text = ('Select your Die!')
+                changePageNum(1)
+##                pageNum = 1
+            elif pageNum == 3:
+                for item in tp_list:
+                    self.remove_widget(item)
 
-        
+                for item2 in sp_list:
+                    self.add_widget(item2)
+                changePageNum(2)
+                print("herewego")
+##                pageNum = 2
+            elif pageNum == 4:
+                for item in f2p_list:
+                    self.remove_widget(item)
+
+                for item2 in tp_list:
+                    self.add_widget(item2)
+                changePageNum(3)
+
+        def diceSelection(instance):
+            global die
+            global selected1
+            global pageNum
+            if instance == manualDiceButton:
+                print("%d page is selected" % pageNum)
+                print("%d option is selected" % die)
+                print(selected1)
+                changePageNum(4)
+
+            elif instance == autoDiceButton:
+                print("%d page2 is selected" % pageNum)
+                print("%d option is selected" % die)
+                print(selected1)
+                for item in tp_list:
+                    self.remove_widget(item)
+
+                for item2 in f2p_list:
+                    self.add_widget(item2)
+                changePageNum(4)
+
+        def changePageNum(num):
+            global pageNum
+            pageNum = num
+
+        def autoSelection(instance):
+            lh = ""
+            rh = ""
+            if instance == oneButton:
+                lh = instance.text
+            elif instance == twoButton:
+                lh = instance.text
+            elif instance == threeButton:
+                lh = instance.text
+            elif instance == fourButton:
+                lh = instance.text
+            elif instance == fiveButton:
+                lh = instance.text
+            elif instance == d4Button:
+                rh = instance.text
+            elif instance == d6Button:
+                rh = instance.text
+            elif instance == d8Button:
+                rh = instance.text
+            elif instance == d10Button:
+                rh = instance.text
+            elif instance == d12Button:
+                rh = instance.text
+            elif instance == d20Button:
+                rh = instance.text
+            elif instance == cal2Button:
+                mylist = totalLabel.text.split(" ")
+                if mylist[0] != "?" and mylist[2] != "?":
+                    totalValLabel.text = str(random.randint(int(mylist[0]), int(mylist[0]) * int(mylist[2])))
+                
+            if lh:
+                lhs, rhs = totalLabel.text.split(" ", 1)
+                totalLabel.text = "%s %s" % (lh, rhs)
+            elif rh:
+                lhs, rhs = totalLabel.text.split(" ", 1)
+                totalLabel.text = "%s %s to Roll" % (lhs, rh)
+
+                
             
         def dieSelect(instance):
             global die
+            global selected1
+            global pageNum
             flag = True
             if instance == initButton:
                 dLabel.text = ('%s is selected!' % instance.text)
                 data = [{'text': i, 'is_selected': False} for i in initData]
+                sLabel2.text = 'Value: --'
+                sLabel.text = 'Select your option'
                 die = 1
             elif instance == stButton:
                 dLabel.text = ('%s is selected!' % instance.text)
                 data = [{'text': i, 'is_selected': False} for i in stData]
+                sLabel2.text = 'Value: --'
+                sLabel.text = 'Select your option'
                 die = 2
             elif instance == wpButton:
                 dLabel.text = ('%s is selected!' % instance.text)
                 data = [{'text': i, 'is_selected': False} for i in wpData]
+                sLabel2.text = 'Value: --'
+                sLabel.text = 'Select your option'
                 die = 3
             elif instance == skButton:
                 dLabel.text = ('%s is selected!' % instance.text)
                 data = [{'text': i, 'is_selected': False} for i in skData]
+                sLabel2.text = 'Value: --'
+                sLabel.text = 'Select your option'
                 die = 4
             elif instance == dmgButton:
                 dLabel.text = ('%s is selected!' % instance.text)
                 data = [{'text': i, 'is_selected': False} for i in dmgData]
+                sLabel2.text = 'Value: --'
+                sLabel.text = 'Select your option'
                 die = 5
             elif instance == saButton:
                 dLabel.text = ('%s is selected!' % instance.text)
                 data = [{'text': i, 'is_selected': False} for i in saData]
+                sLabel2.text = 'Value: --'
+                sLabel.text = 'Select your option'
                 die = 6
             elif instance == calButton:
                 flag = False
@@ -249,33 +353,21 @@ class RootWidget(FloatLayout):
                     sLabel.text = selectedItem
                     ran = random.randint(1, 100)
                     sLabel2.text = ('Value: %d' % ran)
-                
 
-                
-##                if dLabel.text == 'Please select a die first!' or dLabel.text == 'Select your Die!':
-##                    dLabel.text = 'Please select a die first!'
-##                    flag = False
-##                else:
-##
-##                    self.remove_widget(initButton)
-##                    self.remove_widget(stButton)
-##                    self.remove_widget(wpButton)
-##                    self.remove_widget(calButton)
-##                    self.add_widget(backButton)
-##                    self.add_widget(sLabel)
-##                    if die == 1:
-##                        ran = random.randint(1, 10)
-##                    elif die == 2:
-##                        ran = random.randint(1, 100)
-##                    elif die == 3:
-##                        ran = random.randint(1, 1000)
-##                    sLabel.text = ('Your score is %d' % ran)
+                    for item in sp_list:
+                        self.remove_widget(item)
+
+                    for item2 in tp_list:
+                        self.add_widget(item2)
+                    changePageNum(3)
+                    print("here %d" % pageNum)
 
                     
             elif instance == nxtButton:
                 print('%d is current die' % die)
             else:
                 print('what is this?')
+            
             if flag :
 
 
@@ -288,15 +380,14 @@ class RootWidget(FloatLayout):
 
                 for item2 in sp_list:
                     self.add_widget(item2)
+                changePageNum(2)
 
         initButton = Button(
-##                    text = "Initiative",
                     size_hint = (.2, .2),
                     background_normal = "./images/initiative.png",
                     pos_hint = {'center_x': .20, 'center_y': .6})
 
         initButton.bind(on_press=dieSelect)
-##        self.add_widget(initButton)
 
         initLabel = Label(
                 text='Initiative',
@@ -307,13 +398,11 @@ class RootWidget(FloatLayout):
         
         
         stButton = Button(
-##                    text = "Saving",
                     size_hint = (.2, .2),
                     background_normal = "./images/save throw.png",
                     pos_hint = {'center_x': .5, 'center_y': .6})
 
         stButton.bind(on_press=dieSelect)
-##        self.add_widget(stButton)
 
         stLabel = Label(
                 text='Saving Throw',
@@ -322,13 +411,11 @@ class RootWidget(FloatLayout):
                 pos_hint = {'center_x': .5, 'center_y': .47})
 
         wpButton = Button(
-##                    text = "Weapon",
                     size_hint = (.2, .2),
                     background_normal = "./images/weapon.png",
                     pos_hint = {'center_x': .8, 'center_y': .6})
 
         wpButton.bind(on_press=dieSelect)
-##        self.add_widget(wpButton)
 
         wpLabel = Label(
                 text='Weapons',
@@ -337,13 +424,11 @@ class RootWidget(FloatLayout):
                 pos_hint = {'center_x': .8, 'center_y': .47})
 
         skButton = Button(
-##                    text = "Skills",
                     size_hint = (.2, .2),
                     background_normal = "./images/skill.png",
                     pos_hint = {'center_x': .2, 'center_y': .30})
 
         skButton.bind(on_press=dieSelect)
-##        self.add_widget(skButton)
 
         skLabel = Label(
                 text='Skills',
@@ -352,13 +437,11 @@ class RootWidget(FloatLayout):
                 pos_hint = {'center_x': .2, 'center_y': .17})
 
         dmgButton = Button(
-##                    text = "Damage",
                     size_hint = (.2, .2),
                     background_normal = "./images/damage.png",
                     pos_hint = {'center_x': .5, 'center_y': .30})
 
         dmgButton.bind(on_press=dieSelect)
-##        self.add_widget(dmgButton)
 
         dmgLabel = Label(
                 text='Damage',
@@ -367,13 +450,11 @@ class RootWidget(FloatLayout):
                 pos_hint = {'center_x': .5, 'center_y': .17})
 
         saButton = Button(
-##                    text = "Special Abilities",
                     size_hint = (.2, .2),
                     background_normal = "./images/specialAbil.png",
                     pos_hint = {'center_x': .8, 'center_y': .30})
 
         saButton.bind(on_press=dieSelect)
-##        self.add_widget(saButton)
 
         saLabel = Label(
                 text='Special Abilities',
@@ -393,7 +474,6 @@ class RootWidget(FloatLayout):
                 color = (0,0,0,1),
                 font_size='25sp',
                pos_hint = {'center_x': .5, 'center_y': .75})
-##        self.add_widget(dLabel)
 
 ####################################################################################################################################
 
@@ -465,10 +545,155 @@ class RootWidget(FloatLayout):
                      size_hint = (0.08, 0.08))
         self.add_widget(dImg1)
         self.add_widget(dImg2)
+
+################################# Third page widgets! ##############################################################################
+
+        manualDiceButton = Button(
+                        text = 'Manual',
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .25, 'center_y': .5})
+        manualDiceButton.bind(on_press=diceSelection)
+
+        autoDiceButton = Button(
+                        text = 'AutoCal',
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .75, 'center_y': .5})
+        autoDiceButton.bind(on_press=diceSelection)
+        
+
+################################# Forth page widgets! ##############################################################################
+
+        diceNumLabel = Label(
+                text='Number of Dice?',
+                color = (0,0,0,1),
+                font_size='30sp',
+                pos_hint = {'center_x': .25, 'center_y': .7})
+
+        yVal1 = 0.6
+        oneButton = Button(
+                        text = "1",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .16, 'center_y': yVal1})
+        oneButton.bind(on_press=autoSelection)
+
+        twoButton = Button(
+                        text = "2",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .32, 'center_y': yVal1})
+        twoButton.bind(on_press=autoSelection)
+
+        threeButton = Button(
+                        text = "3",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .48, 'center_y': yVal1})
+        threeButton.bind(on_press=autoSelection)
+
+        fourButton = Button(
+                        text = "4",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .64, 'center_y': yVal1})
+        fourButton.bind(on_press=autoSelection)
+
+        fiveButton = Button(
+                        text = "5",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .8, 'center_y': yVal1})
+        fiveButton.bind(on_press=autoSelection)
+
+##        sixButton = Button(
+##                        text = "6",
+##                        color = (0,0,0,1),
+##                        size_hint = (.1, .1),
+##                        pos_hint = {'center_x': .96, 'center_y': .7})
+##        sixButton.bind(on_press=dieSelect)
+
+
+        diceTypLabel = Label(
+                text='Type of Dice?',
+                color = (0,0,0,1),
+                font_size='30sp',
+                pos_hint = {'center_x': .22, 'center_y': .45})
+
+##        diceTypLabel
+        yVal2 = 0.35
+        d4Button = Button(
+                        text = "d 4",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .16, 'center_y': yVal2})
+        d4Button.bind(on_press=autoSelection)
+
+        d6Button = Button(
+                        text = "d 6",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .288, 'center_y': yVal2})
+        d6Button.bind(on_press=autoSelection)
+
+        d8Button = Button(
+                        text = "d 8",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .416, 'center_y': yVal2})
+        d8Button.bind(on_press=autoSelection)
+
+        d10Button = Button(
+                        text = "d 10",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .544, 'center_y': yVal2})
+        d10Button.bind(on_press=autoSelection)
+
+        d12Button = Button(
+                        text = "d 12",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .672, 'center_y': yVal2})
+        d12Button.bind(on_press=autoSelection)
+
+        d20Button = Button(
+                        text = "d 20",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .8, 'center_y': yVal2})
+        d20Button.bind(on_press=autoSelection)
+
+
+        totalLabel = Label(
+                text='? d ? to Roll',
+                color = (0,0,0,1),
+                font_size='40sp',
+                pos_hint = {'center_x': .3, 'center_y': .2})
+
+        cal2Button = Button(
+                        text = "=",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .5, 'center_y': .2})
+        cal2Button.bind(on_press=autoSelection)
+        
+        totalValLabel = Label(
+                text='??',
+                color = (0,0,0,1),
+                font_size='40sp',
+                pos_hint = {'center_x': .6, 'center_y': .2})
+
         
         
-        fp_list = list()
-        sp_list = list()
+
+
+        
+####################################################################################################################################
+
+        
+        
         fp_list.append(initButton)
         fp_list.append(stButton)
         fp_list.append(dmgButton)
@@ -488,6 +713,33 @@ class RootWidget(FloatLayout):
         sp_list.append(list_view)
         sp_list.append(sLabel)
         sp_list.append(sLabel2)
+
+        tp_list.append(manualDiceButton)
+        tp_list.append(autoDiceButton)
+        tp_list.append(backButton)
+
+        
+        f2p_list.append(diceNumLabel)
+        f2p_list.append(diceTypLabel)
+        f2p_list.append(oneButton)
+        f2p_list.append(twoButton)
+        f2p_list.append(threeButton)
+        f2p_list.append(fourButton)
+        f2p_list.append(fiveButton)
+        f2p_list.append(totalLabel)
+        f2p_list.append(d4Button)
+        f2p_list.append(d6Button)
+        f2p_list.append(d8Button)
+        f2p_list.append(d10Button)
+        f2p_list.append(d12Button)
+        f2p_list.append(d20Button)
+        f2p_list.append(backButton)
+        f2p_list.append(totalValLabel)
+        f2p_list.append(cal2Button)
+        
+##        f2p_list.append(sixButton)
+        
+        
 
         for item in sp_list:
             self.remove_widget(item)
