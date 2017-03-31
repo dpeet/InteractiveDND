@@ -15,8 +15,10 @@ from kivy.graphics import Color, Rectangle
 from kivy.uix.image import Image
 from kivy.uix.spinner import Spinner
 from player import Player
+from countdice2 import get_num_from_dice, test_get_num_from_dice
 import json
 from pprint import pprint
+
 
 ##Builder.load_string("""
 ##<ButtonsApp>:
@@ -62,6 +64,7 @@ class RootWidget(FloatLayout):
         zp_list = list()
         playerList = list()
         playerNames = list()
+        initData = list()
         playerDic = dict()
 
 
@@ -74,6 +77,7 @@ class RootWidget(FloatLayout):
 
         for item in playerList:
             playerNames.append(item.playerName)
+            initData.append(("%s  =     0" %item.playerName))
             playerDic[item.playerName] = item
 
         if len(playerNames) > 1:
@@ -230,7 +234,10 @@ class RootWidget(FloatLayout):
                 "Wisdom",
                 "Charisma"]
 
-        initData = ["Tie Roll (1d20)"]
+##        initData = ["Tie Roll (1d20)"]
+
+##        initData = playerNames
+##        initData.sort()
 
         numData = ["1", "2", "3", "4", "5", "6"]
 
@@ -278,6 +285,8 @@ class RootWidget(FloatLayout):
             global die
             global selected1
             global pageNum
+            global currentPlayer
+            self.currentPlayer = currentPlayer
             if instance == manualDiceButton:
                 print("%d page is selected" % pageNum)
                 print("%d option is selected" % die)
@@ -293,6 +302,8 @@ class RootWidget(FloatLayout):
             elif instance == autoDiceButton:
                 print("%d page2 is selected" % pageNum)
                 print("%d option is selected" % die)
+                totalValLabel.text = ("%s rolled  %s !" % (currentPlayer.playerName, str(sum(test_get_num_from_dice()))))
+                print("here")
                 print(selected1)
                 for item in tp_list:
                     self.remove_widget(item)
@@ -334,8 +345,10 @@ class RootWidget(FloatLayout):
             elif instance == cal2Button:
                 mylist = totalLabel.text.split(" ")
                 if mylist[0] != "?" and mylist[2] != "?":
-                    totalValLabel.text = str(random.randint(int(mylist[0]), int(mylist[0]) * int(mylist[2])))
-                    print(currentPlayer)
+##                    totalValLabel.text = str(random.randint(int(mylist[0]), int(mylist[0]) * int(mylist[2])))
+##                    print(test_get_num_from_dice())
+##                    totalValLabel.text = str(sum(test_get_num_from_dice()))
+                    print("here")
                     ## call the openCV file
                 
             if lh:
@@ -565,7 +578,7 @@ class RootWidget(FloatLayout):
 
         dmgButton = Button(
                     size_hint = (.2, .2),
-                    background_normal = "./images/damage.png",
+                    background_normal = "./images/spell.png",
                     pos_hint = {'center_x': .5, 'center_y': .30})
 
         dmgButton.bind(on_press=dieSelect)
@@ -576,7 +589,7 @@ class RootWidget(FloatLayout):
 ##                font_size='20sp',
 ##                pos_hint = {'center_x': .5, 'center_y': .17})
 
-        dmgImg = Image(source='./images/labelDmg.png',
+        dmgImg = Image(source='./images/labelSP.png',
                         
                      pos_hint = {'center_x': .5, 'center_y': .16},
                      size_hint = (0.2, .2))
@@ -706,100 +719,100 @@ class RootWidget(FloatLayout):
 
 ################################# Forth page (AUTO) widgets! ##############################################################################
 
-        diceNumLabel = Label(
-                text='Number of Dice?',
-                color = (0,0,0,1),
-                font_size='50sp',
-                font_name= 'data/fonts/Captain Redemption.ttf',
-                pos_hint = {'center_x': .25, 'center_y': .7})
-
-        yVal1 = 0.6
-        oneButton = Button(
-                        text = "1",
-                        color = (0,0,0,1),
-                        size_hint = (.1, .1),
-                        pos_hint = {'center_x': .16, 'center_y': yVal1})
-        oneButton.bind(on_press=autoSelection)
-
-        twoButton = Button(
-                        text = "2",
-                        color = (0,0,0,1),
-                        size_hint = (.1, .1),
-                        pos_hint = {'center_x': .32, 'center_y': yVal1})
-        twoButton.bind(on_press=autoSelection)
-
-        threeButton = Button(
-                        text = "3",
-                        color = (0,0,0,1),
-                        size_hint = (.1, .1),
-                        pos_hint = {'center_x': .48, 'center_y': yVal1})
-        threeButton.bind(on_press=autoSelection)
-
-        fourButton = Button(
-                        text = "4",
-                        color = (0,0,0,1),
-                        size_hint = (.1, .1),
-                        pos_hint = {'center_x': .64, 'center_y': yVal1})
-        fourButton.bind(on_press=autoSelection)
-
-        fiveButton = Button(
-                        text = "5",
-                        color = (0,0,0,1),
-                        size_hint = (.1, .1),
-                        pos_hint = {'center_x': .8, 'center_y': yVal1})
-        fiveButton.bind(on_press=autoSelection)
-
-
-        diceTypLabel = Label(
-                text='Type of Dice?',
-                color = (0,0,0,1),
-                font_size='50sp',
-                font_name= 'data/fonts/Captain Redemption.ttf',
-                pos_hint = {'center_x': .22, 'center_y': .45})
-
-##        diceTypLabel
-        yVal2 = 0.35
-        d4Button = Button(
-                        text = "d 4",
-                        color = (0,0,0,1),
-                        size_hint = (.1, .1),
-                        pos_hint = {'center_x': .16, 'center_y': yVal2})
-        d4Button.bind(on_press=autoSelection)
-
-        d6Button = Button(
-                        text = "d 6",
-                        color = (0,0,0,1),
-                        size_hint = (.1, .1),
-                        pos_hint = {'center_x': .288, 'center_y': yVal2})
-        d6Button.bind(on_press=autoSelection)
-
-        d8Button = Button(
-                        text = "d 8",
-                        color = (0,0,0,1),
-                        size_hint = (.1, .1),
-                        pos_hint = {'center_x': .416, 'center_y': yVal2})
-        d8Button.bind(on_press=autoSelection)
-
-        d10Button = Button(
-                        text = "d 10",
-                        color = (0,0,0,1),
-                        size_hint = (.1, .1),
-                        pos_hint = {'center_x': .544, 'center_y': yVal2})
-        d10Button.bind(on_press=autoSelection)
-
-        d12Button = Button(
-                        text = "d 12",
-                        color = (0,0,0,1),
-                        size_hint = (.1, .1),
-                        pos_hint = {'center_x': .672, 'center_y': yVal2})
-        d12Button.bind(on_press=autoSelection)
-
-        d20Button = Button(
-                        text = "d 20",
-                        color = (0,0,0,1),
-                        size_hint = (.1, .1),
-                        pos_hint = {'center_x': .8, 'center_y': yVal2})
-        d20Button.bind(on_press=autoSelection)
+##        diceNumLabel = Label(
+##                text='Number of Dice?',
+##                color = (0,0,0,1),
+##                font_size='50sp',
+##                font_name= 'data/fonts/Captain Redemption.ttf',
+##                pos_hint = {'center_x': .25, 'center_y': .7})
+##
+##        yVal1 = 0.6
+##        oneButton = Button(
+##                        text = "1",
+##                        color = (0,0,0,1),
+##                        size_hint = (.1, .1),
+##                        pos_hint = {'center_x': .16, 'center_y': yVal1})
+##        oneButton.bind(on_press=autoSelection)
+##
+##        twoButton = Button(
+##                        text = "2",
+##                        color = (0,0,0,1),
+##                        size_hint = (.1, .1),
+##                        pos_hint = {'center_x': .32, 'center_y': yVal1})
+##        twoButton.bind(on_press=autoSelection)
+##
+##        threeButton = Button(
+##                        text = "3",
+##                        color = (0,0,0,1),
+##                        size_hint = (.1, .1),
+##                        pos_hint = {'center_x': .48, 'center_y': yVal1})
+##        threeButton.bind(on_press=autoSelection)
+##
+##        fourButton = Button(
+##                        text = "4",
+##                        color = (0,0,0,1),
+##                        size_hint = (.1, .1),
+##                        pos_hint = {'center_x': .64, 'center_y': yVal1})
+##        fourButton.bind(on_press=autoSelection)
+##
+##        fiveButton = Button(
+##                        text = "5",
+##                        color = (0,0,0,1),
+##                        size_hint = (.1, .1),
+##                        pos_hint = {'center_x': .8, 'center_y': yVal1})
+##        fiveButton.bind(on_press=autoSelection)
+##
+##
+##        diceTypLabel = Label(
+##                text='Type of Dice?',
+##                color = (0,0,0,1),
+##                font_size='50sp',
+##                font_name= 'data/fonts/Captain Redemption.ttf',
+##                pos_hint = {'center_x': .22, 'center_y': .45})
+##
+####        diceTypLabel
+##        yVal2 = 0.35
+##        d4Button = Button(
+##                        text = "d 4",
+##                        color = (0,0,0,1),
+##                        size_hint = (.1, .1),
+##                        pos_hint = {'center_x': .16, 'center_y': yVal2})
+##        d4Button.bind(on_press=autoSelection)
+##
+##        d6Button = Button(
+##                        text = "d 6",
+##                        color = (0,0,0,1),
+##                        size_hint = (.1, .1),
+##                        pos_hint = {'center_x': .288, 'center_y': yVal2})
+##        d6Button.bind(on_press=autoSelection)
+##
+##        d8Button = Button(
+##                        text = "d 8",
+##                        color = (0,0,0,1),
+##                        size_hint = (.1, .1),
+##                        pos_hint = {'center_x': .416, 'center_y': yVal2})
+##        d8Button.bind(on_press=autoSelection)
+##
+##        d10Button = Button(
+##                        text = "d 10",
+##                        color = (0,0,0,1),
+##                        size_hint = (.1, .1),
+##                        pos_hint = {'center_x': .544, 'center_y': yVal2})
+##        d10Button.bind(on_press=autoSelection)
+##
+##        d12Button = Button(
+##                        text = "d 12",
+##                        color = (0,0,0,1),
+##                        size_hint = (.1, .1),
+##                        pos_hint = {'center_x': .672, 'center_y': yVal2})
+##        d12Button.bind(on_press=autoSelection)
+##
+##        d20Button = Button(
+##                        text = "d 20",
+##                        color = (0,0,0,1),
+##                        size_hint = (.1, .1),
+##                        pos_hint = {'center_x': .8, 'center_y': yVal2})
+##        d20Button.bind(on_press=autoSelection)
 
 
         totalLabel = Label(
@@ -808,13 +821,13 @@ class RootWidget(FloatLayout):
                 font_size='40sp',
                 font_name= 'data/fonts/thecroach.ttf',
                 pos_hint = {'center_x': .3, 'center_y': .2})
-
-        cal2Button = Button(
-                        text = "=",
-                        color = (0,0,0,1),
-                        size_hint = (.1, .1),
-                        pos_hint = {'center_x': .5, 'center_y': .2})
-        cal2Button.bind(on_press=autoSelection)
+##
+##        cal2Button = Button(
+##                        text = "=",
+##                        color = (0,0,0,1),
+##                        size_hint = (.1, .1),
+##                        pos_hint = {'center_x': .5, 'center_y': .2})
+##        cal2Button.bind(on_press=autoSelection)
         
         totalValLabel = Label(
                 text='??',
@@ -1030,23 +1043,23 @@ class RootWidget(FloatLayout):
         tp_list.append(optionLabel)
 
         
-        f2p_list.append(diceNumLabel)
-        f2p_list.append(diceTypLabel)
-        f2p_list.append(oneButton)
-        f2p_list.append(twoButton)
-        f2p_list.append(threeButton)
-        f2p_list.append(fourButton)
-        f2p_list.append(fiveButton)
+##        f2p_list.append(diceNumLabel)
+##        f2p_list.append(diceTypLabel)
+##        f2p_list.append(oneButton)
+##        f2p_list.append(twoButton)
+##        f2p_list.append(threeButton)
+##        f2p_list.append(fourButton)
+##        f2p_list.append(fiveButton)
         f2p_list.append(totalLabel)
-        f2p_list.append(d4Button)
-        f2p_list.append(d6Button)
-        f2p_list.append(d8Button)
-        f2p_list.append(d10Button)
-        f2p_list.append(d12Button)
-        f2p_list.append(d20Button)
+##        f2p_list.append(d4Button)
+##        f2p_list.append(d6Button)
+##        f2p_list.append(d8Button)
+##        f2p_list.append(d10Button)
+##        f2p_list.append(d12Button)
+##        f2p_list.append(d20Button)
         f2p_list.append(backButton)
         f2p_list.append(totalValLabel)
-        f2p_list.append(cal2Button)
+##        f2p_list.append(cal2Button)
 
 ##        f3p_list.append(list_view2)
 ##        f3p_list.append(list_view3)
