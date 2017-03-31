@@ -66,6 +66,7 @@ class RootWidget(FloatLayout):
         playerNames = list()
         initData = list()
         playerDic = dict()
+        initFlag = False
 
 
         ##################### Importing Player data Json File ######################
@@ -285,8 +286,7 @@ class RootWidget(FloatLayout):
             global die
             global selected1
             global pageNum
-            global currentPlayer
-            self.currentPlayer = currentPlayer
+
             if instance == manualDiceButton:
                 print("%d page is selected" % pageNum)
                 print("%d option is selected" % die)
@@ -296,13 +296,13 @@ class RootWidget(FloatLayout):
 
                 for item2 in f3p_list:
                     self.add_widget(item2)
-                
+                 
                 changePageNum(4)
 
             elif instance == autoDiceButton:
                 print("%d page2 is selected" % pageNum)
                 print("%d option is selected" % die)
-                totalValLabel.text = ("%s rolled  %s !" % (currentPlayer.playerName, str(sum(test_get_num_from_dice()))))
+                totalValLabel.text = ("%s rolled  %s !!!" % (spinner.text, str(sum(test_get_num_from_dice()))))
                 print("here")
                 print(selected1)
                 for item in tp_list:
@@ -316,47 +316,47 @@ class RootWidget(FloatLayout):
             global pageNum
             pageNum = num
 
-        def autoSelection(instance):
-            global currentPlayer
-            lh = ""
-            rh = ""
-            if instance == oneButton:
-                lh = instance.text
-            elif instance == twoButton:
-                lh = instance.text
-            elif instance == threeButton:
-                lh = instance.text
-            elif instance == fourButton:
-                lh = instance.text
-            elif instance == fiveButton:
-                lh = instance.text
-            elif instance == d4Button:
-                rh = instance.text
-            elif instance == d6Button:
-                rh = instance.text
-            elif instance == d8Button:
-                rh = instance.text
-            elif instance == d10Button:
-                rh = instance.text
-            elif instance == d12Button:
-                rh = instance.text
-            elif instance == d20Button:
-                rh = instance.text
-            elif instance == cal2Button:
-                mylist = totalLabel.text.split(" ")
-                if mylist[0] != "?" and mylist[2] != "?":
-##                    totalValLabel.text = str(random.randint(int(mylist[0]), int(mylist[0]) * int(mylist[2])))
-##                    print(test_get_num_from_dice())
-##                    totalValLabel.text = str(sum(test_get_num_from_dice()))
-                    print("here")
-                    ## call the openCV file
-                
-            if lh:
-                lhs, rhs = totalLabel.text.split(" ", 1)
-                totalLabel.text = "%s %s" % (lh, rhs)
-            elif rh:
-                lhs, rhs = totalLabel.text.split(" ", 1)
-                totalLabel.text = "%s %s to Roll" % (lhs, rh)
+##        def autoSelection(instance):
+##            global currentPlayer
+##            lh = ""
+##            rh = ""
+##            if instance == oneButton:
+##                lh = instance.text
+##            elif instance == twoButton:
+##                lh = instance.text
+##            elif instance == threeButton:
+##                lh = instance.text
+##            elif instance == fourButton:
+##                lh = instance.text
+##            elif instance == fiveButton:
+##                lh = instance.text
+##            elif instance == d4Button:
+##                rh = instance.text
+##            elif instance == d6Button:
+##                rh = instance.text
+##            elif instance == d8Button:
+##                rh = instance.text
+##            elif instance == d10Button:
+##                rh = instance.text
+##            elif instance == d12Button:
+##                rh = instance.text
+##            elif instance == d20Button:
+##                rh = instance.text
+##            elif instance == cal2Button:
+##                mylist = totalLabel.text.split(" ")
+##                if mylist[0] != "?" and mylist[2] != "?":
+####                    totalValLabel.text = str(random.randint(int(mylist[0]), int(mylist[0]) * int(mylist[2])))
+####                    print(test_get_num_from_dice())
+####                    totalValLabel.text = str(sum(test_get_num_from_dice()))
+##                    print("here")
+##                    ## call the openCV file
+##                
+##            if lh:
+##                lhs, rhs = totalLabel.text.split(" ", 1)
+##                totalLabel.text = "%s %s" % (lh, rhs)
+##            elif rh:
+##                lhs, rhs = totalLabel.text.split(" ", 1)
+##                totalLabel.text = "%s %s to Roll" % (lhs, rh)
 
         def manualSelection(instance):
             if instance == clearButton:
@@ -375,42 +375,50 @@ class RootWidget(FloatLayout):
             global die
             global selected1
             global pageNum
+            global initFlag
             flag = True
+            
             if instance == initButton:
                 dLabel.text = ('%s is selected!' % instance.text)
                 data = [{'text': i, 'is_selected': False} for i in initData]
                 sLabel2.text = 'Value: --'
                 sLabel.text = 'Select your option'
+                initFlag = True
                 die = 1
             elif instance == stButton:
                 dLabel.text = ('%s is selected!' % instance.text)
                 data = [{'text': i, 'is_selected': False} for i in stData]
                 sLabel2.text = 'Value: --'
                 sLabel.text = 'Select your option'
+                initFlag = False
                 die = 2
             elif instance == wpButton:
                 dLabel.text = ('%s is selected!' % instance.text)
                 data = [{'text': i, 'is_selected': False} for i in wpData]
                 sLabel2.text = 'Value: --'
                 sLabel.text = 'Select your option'
+                initFlag = False
                 die = 3
             elif instance == skButton:
                 dLabel.text = ('%s is selected!' % instance.text)
                 data = [{'text': i, 'is_selected': False} for i in skData]
                 sLabel2.text = 'Value: --'
                 sLabel.text = 'Select your option'
+                initFlag = False
                 die = 4
             elif instance == dmgButton:
                 dLabel.text = ('%s is selected!' % instance.text)
                 data = [{'text': i, 'is_selected': False} for i in dmgData]
                 sLabel2.text = 'Value: --'
                 sLabel.text = 'Select your option'
+                initFlag = False
                 die = 5
             elif instance == saButton:
                 dLabel.text = ('%s is selected!' % instance.text)
                 data = [{'text': i, 'is_selected': False} for i in saData]
                 sLabel2.text = 'Value: --'
                 sLabel.text = 'Select your option'
+                initFlag = False
                 die = 6
             elif instance == calButton:
                 flag = False
@@ -419,19 +427,29 @@ class RootWidget(FloatLayout):
                     sLabel.text = "Select One!"
                     sLabel.color = (1,0,0,1)
                 else:
-                    selectedItem = list_adapter.selection[0].text
-                    sLabel.color = (0,0,0,1)
-                    sLabel.text = selectedItem
-                    ran = random.randint(1, 100)
-                    sLabel2.text = ('Value: %d' % ran)
+                    if initFlag:
+                        selectedItem = list_adapter.selection[0].text
+                        sLabel.color = (0,0,0,1)
+                        sLabel.text = selectedItem
+##                        str(sum(test_get_num_from_dice()))
+##                        ran = random.randint(1, 100)
+##                        sLabel2.text = ('Value: %d' % ran)
 
-                    for item in sp_list:
-                        self.remove_widget(item)
+                        print("here %d" % pageNum)
+                    else:
+                        selectedItem = list_adapter.selection[0].text
+                        sLabel.color = (0,0,0,1)
+                        sLabel.text = selectedItem
+                        ran = random.randint(1, 100)
+                        sLabel2.text = ('Value: %d' % ran)
 
-                    for item2 in tp_list:
-                        self.add_widget(item2)
-                    changePageNum(3)
-                    print("here %d" % pageNum)
+                        for item in sp_list:
+                            self.remove_widget(item)
+
+                        for item2 in tp_list:
+                            self.add_widget(item2)
+                        changePageNum(3)
+                        print("here %d" % pageNum)
 
                     
             elif instance == nxtButton:
@@ -815,12 +833,12 @@ class RootWidget(FloatLayout):
 ##        d20Button.bind(on_press=autoSelection)
 
 
-        totalLabel = Label(
-                text='? d ? to Roll',
-                color = (0,0,0,1),
-                font_size='40sp',
-                font_name= 'data/fonts/thecroach.ttf',
-                pos_hint = {'center_x': .3, 'center_y': .2})
+####        totalLabel = Label(
+####                text='? d ? to Roll',
+####                color = (0,0,0,1),
+####                font_size='40sp',
+####                font_name= 'data/fonts/thecroach.ttf',
+####                pos_hint = {'center_x': .3, 'center_y': .2})
 ##
 ##        cal2Button = Button(
 ##                        text = "=",
@@ -832,9 +850,9 @@ class RootWidget(FloatLayout):
         totalValLabel = Label(
                 text='??',
                 color = (0,0,0,1),
-                font_size='40sp',
-                font_name= 'data/fonts/thecroach.ttf',
-                pos_hint = {'center_x': .6, 'center_y': .2})
+                font_size='80sp',
+                font_name= 'data/fonts/Captain Redemption.ttf',
+                pos_hint = {'center_x': .5, 'center_y': .5})
 
         
 ################################# Forth page (MANUAL) widgets! ############################################################################
@@ -1050,7 +1068,7 @@ class RootWidget(FloatLayout):
 ##        f2p_list.append(threeButton)
 ##        f2p_list.append(fourButton)
 ##        f2p_list.append(fiveButton)
-        f2p_list.append(totalLabel)
+##        f2p_list.append(totalLabel)
 ##        f2p_list.append(d4Button)
 ##        f2p_list.append(d6Button)
 ##        f2p_list.append(d8Button)
