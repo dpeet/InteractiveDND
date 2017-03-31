@@ -1,0 +1,39 @@
+[
+	{
+		"class": "Fighter",
+		"name": "Gilbrek Frostbeard",
+		"race": "Mountain Dwarf",
+		"background": "Noble",
+		"playername": "Devon",
+		"alignment": "Lawful Good",
+		"str": 3,
+		"dex": 1,
+		"con": 2,
+		"int": 2,
+		"wis": -1,
+		"cha": 0,
+		"prof": 2,
+		"armor": 16,
+		"speed": 25,
+		"exp": 1165
+		
+	},
+	{
+		"class": "Demol",
+		"name": "EvilEye",
+		"race": "Human",
+		"background": "Rogue",
+		"playername": "Todd",
+		"alignment": "Cthton Nemesis",
+		"str": 2,
+		"dex": 1,
+		"con": 4,
+		"int": 1,
+		"wis": 0,
+		"cha": -1,
+		"prof": 1,
+		"armor": 10,
+		"speed": 30,
+		"exp": 1200
+	}
+]
