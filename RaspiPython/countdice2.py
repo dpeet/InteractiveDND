@@ -60,7 +60,6 @@ def get_num_from_dice():
             # else:
             # print "Contour",i,"with area",dieArea,"discarded"
 
-    die_sum = 0
     dice_numbers = []
     for i in range(len(dice)):
         dieCnt, pipContours = dice[i]
@@ -68,6 +67,7 @@ def get_num_from_dice():
         cv2.drawContours(image, pipContours, -1, (64, 128, 64), 2)
         dice_numbers.append(len(pipContours))
         die_sum = die_sum + len(pipContours)
+        dice_numbers.append(die_sum)
         cv2.putText(image, "%d" % len(pipContours), (dieCnt[0][0][0], dieCnt[0][0][1]), cv2.FONT_HERSHEY_PLAIN,
                     2.0, (255, 64, 64), 2)
     cv2.putText(image, "%d" % die_sum, (10, 50), cv2.FONT_HERSHEY_PLAIN, 3.0, (255, 255, 255), 2)
@@ -77,6 +77,9 @@ def get_num_from_dice():
         ch = cv2.waitKey(0)
         # if ch == 27:  # exit on Esc
         #     break
-    return die_sum
+    return dice_numbers
 
-get_num_from_dice()
+def test_get_num_from_dice():
+    return ([5,1,3])
+
+# get_num_from_dice()
