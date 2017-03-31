@@ -9,20 +9,17 @@ import numpy
 import cv2
 import sys
 
-HAVE_DISPLAY = True  # show debug windows
-
-BINARIZATION_THRESHOLD = 50  # Selects the bright white die area
-
-# Area size definitions (the script "knows" how big a die should be)
-AREA_FACTOR = 1  # compensate camera zoom or position
-DIE_AREA_MIN = AREA_FACTOR * 1000
-DIE_AREA_MAX = AREA_FACTOR * 3000
-PIP_AREA_MIN = AREA_FACTOR * 5
-PIP_AREA_MAX = AREA_FACTOR * 30
-
-
-
 def get_num_from_dice():
+    HAVE_DISPLAY = True  # show debug windows
+    BINARIZATION_THRESHOLD = 50  # Selects the bright white die area
+
+    # Area size definitions (the script "knows" how big a die should be)
+    AREA_FACTOR = 1  # compensate camera zoom or position
+    DIE_AREA_MIN = AREA_FACTOR * 1000
+    DIE_AREA_MAX = AREA_FACTOR * 3000
+    PIP_AREA_MIN = AREA_FACTOR * 5
+    PIP_AREA_MAX = AREA_FACTOR * 30
+
     # retval, image = vc.read()  # read frame from camera
     image = cv2.imread("image7.jpg")
     # cv2.imshow('input', image)
