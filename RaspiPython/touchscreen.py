@@ -680,17 +680,18 @@ class RootWidget(FloatLayout):
         get_scalex_and_y(50, 5, 10)
 
 
+
         initButton = Button(
             size_hint=(get_scalex_and_y(125,125,125)[0], get_scalex_and_y(125,125,125)[1]),
             background_normal="./images/button_init.png",
-            pos_hint={'center_x': .20, 'center_y': .6})
+            pos_hint={'center_x': .20, 'center_y': .4})
 
         initButton.bind(on_press=dieSelect)
 
         stButton = Button(
             size_hint=(get_scalex_and_y(125,125,125)[0], get_scalex_and_y(125,125,125)[1]),
             background_normal="./images/button_saving_throw.png",
-            pos_hint={'center_x': .5, 'center_y': .6})
+            pos_hint={'center_x': .5, 'center_y': .4})
 
         stButton.bind(on_press=dieSelect)
 
@@ -698,28 +699,28 @@ class RootWidget(FloatLayout):
             size_hint=(get_scalex_and_y(125,125,125)[0], get_scalex_and_y(125,125,125)[1]),
 ##            size= (0.1, .1),
             background_normal="./images/button_weapons.png",
-            pos_hint={'center_x': .8, 'center_y': .6})
+            pos_hint={'center_x': .8, 'center_y': .4})
 
         wpButton.bind(on_press=dieSelect)
 
         skButton = Button(
             size_hint=(get_scalex_and_y(125,125,125)[0], get_scalex_and_y(125,125,125)[1]),
             background_normal="./images/button_skills.png",
-            pos_hint={'center_x': .2, 'center_y': .30})
+            pos_hint={'center_x': .2, 'center_y': .2})
 
         skButton.bind(on_press=dieSelect)
 
         spButton = Button(
             size_hint=(get_scalex_and_y(125,125,125)[0], get_scalex_and_y(125,125,125)[1]),
             background_normal="./images/button_spell.png",
-            pos_hint={'center_x': .5, 'center_y': .30})
+            pos_hint={'center_x': .5, 'center_y': .2})
 
         spButton.bind(on_press=dieSelect)
 
         saButton = Button(
             size_hint=(get_scalex_and_y(125,125,125)[0], get_scalex_and_y(125,125,125)[1]),
             background_normal="./images/button_special.png",
-            pos_hint={'center_x': .8, 'center_y': .30})
+            pos_hint={'center_x': .8, 'center_y': .20})
 
         saButton.bind(on_press=dieSelect)
 
@@ -728,15 +729,24 @@ class RootWidget(FloatLayout):
             color=(0, 0, 0, 1),
             font_size='75sp',
             font_name='./images/Captain_Redemption.ttf',
-            pos_hint={'center_x': .5, 'center_y': .85})
+            pos_hint={'center_x': .5, 'center_y': .75}
+        )
         self.add_widget(tLabel)
+
+        dragon = Image(
+            source="./images/Dragon_Title.png",
+            pos_hint = {'center_x': .5, 'center_y': .76}
+        )
+
+
+        self.add_widget(dragon)
 
         dLabel = Label(
             text='Select your Option!',
             color=(0, 0, 0, 1),
             font_size='45sp',
             font_name='./images/Captain_Redemption.ttf',
-            pos_hint={'center_x': .5, 'center_y': .75})
+            pos_hint={'center_x': .5, 'center_y': .6})
 
 
 ################################# Second page widgets! ##############################################################################
