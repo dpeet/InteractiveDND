@@ -51,7 +51,7 @@ root = Builder.load_string('''
             # self here refers to the widget i.e FloatLayout
             pos: self.pos
             size: self.size
-            source: "./images/4.png"
+##            source: "./images/4.png"
 ''')
 
 currentPlayer = None
@@ -564,6 +564,13 @@ class RootWidget(FloatLayout):
                 print('%d is current die' % die)
             else:
                 print('what is this?')
+
+            dImg1 = Image(source='./images/box.png',
+                        pos_hint = {'center_x': .5, 'center_y': .4},
+                        size_hint = (.9,.7))
+            self.add_widget(dImg1)
+            self.remove_widget(tLabel)
+            self.add_widget(tLabel)
 
             if flag :
                 list_adapter.data = data
