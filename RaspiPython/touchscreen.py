@@ -666,34 +666,36 @@ class RootWidget(FloatLayout):
         spinner.bind(text=show_selected_value)
         self.add_widget(spinner)
 ################################# First page widgets! ####################################################################################
-        num = 480/800
-        defNum = .3
-        num2 = 225/250
-        num3 = 250/225
-##        wx = 480
-##        wy = 800
-##        bx = 225
-##        by = 250
-##        defX = wx *by
-##        defY = wy *bx
-        
+
+
+        def get_scalex_and_y(target_width, width, height):
+            screen_width = 480.0
+            screen_height = 800.0
+            x_s = target_width/screen_width
+            y_s = (target_width*height/width)/screen_height
+            # print(target_width, height, width, screen_height)
+            # print (x_s, y_s, x_s/y_s)
+            return x_s, y_s
+
+        get_scalex_and_y(50, 5, 10)
+
+
         initButton = Button(
-            size_hint=(defNum*num2, defNum*num),
+            size_hint=(get_scalex_and_y(125,125,125)[0], get_scalex_and_y(125,125,125)[1]),
             background_normal="./images/button_init.png",
             pos_hint={'center_x': .20, 'center_y': .6})
 
         initButton.bind(on_press=dieSelect)
 
         stButton = Button(
-            size_hint=(defNum*num2, defNum*num),
-            # height=50, width=50,
+            size_hint=(get_scalex_and_y(125,125,125)[0], get_scalex_and_y(125,125,125)[1]),
             background_normal="./images/button_saving_throw.png",
             pos_hint={'center_x': .5, 'center_y': .6})
 
         stButton.bind(on_press=dieSelect)
 
         wpButton = Button(
-            size_hint=(defNum*num2, defNum*num),
+            size_hint=(get_scalex_and_y(125,125,125)[0], get_scalex_and_y(125,125,125)[1]),
 ##            size= (0.1, .1),
             background_normal="./images/button_weapons.png",
             pos_hint={'center_x': .8, 'center_y': .6})
@@ -701,21 +703,21 @@ class RootWidget(FloatLayout):
         wpButton.bind(on_press=dieSelect)
 
         skButton = Button(
-            size_hint=(defNum*num2, defNum*num),
+            size_hint=(get_scalex_and_y(125,125,125)[0], get_scalex_and_y(125,125,125)[1]),
             background_normal="./images/button_skills.png",
             pos_hint={'center_x': .2, 'center_y': .30})
 
         skButton.bind(on_press=dieSelect)
 
         spButton = Button(
-            size_hint=(defNum*num2, defNum*num),
+            size_hint=(get_scalex_and_y(125,125,125)[0], get_scalex_and_y(125,125,125)[1]),
             background_normal="./images/button_spell.png",
             pos_hint={'center_x': .5, 'center_y': .30})
 
         spButton.bind(on_press=dieSelect)
 
         saButton = Button(
-            size_hint=(defNum*num2, defNum*num),
+            size_hint=(get_scalex_and_y(125,125,125)[0], get_scalex_and_y(125,125,125)[1]),
             background_normal="./images/button_special.png",
             pos_hint={'center_x': .8, 'center_y': .30})
 
