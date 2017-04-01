@@ -54,6 +54,7 @@ root = Builder.load_string('''
             source: "./images/4.png"
 ''')
 
+currentPlayer = None
 
 class RootWidget(FloatLayout):
 
@@ -75,6 +76,11 @@ class RootWidget(FloatLayout):
         playerList = list()
         playerNames = list()
         initData = list()
+        dmgData = list()
+        saData = list()
+        wpData = list()
+        skData = list()
+        stData = list()
         playerDic = dict()
         initFlag = False
 
@@ -91,7 +97,9 @@ class RootWidget(FloatLayout):
             initData.append(("%s  =     0" %item.playerName))
             playerDic[item.playerName] = item
 
+
         if len(playerNames) > 1:
+            global currentPlayer
             currentPlayer = playerDic[playerNames[0]]
 
 
@@ -111,114 +119,114 @@ class RootWidget(FloatLayout):
                             "fn_bolditalic": "data/fonts/RobotoCondensed-Italic.ttf"
                         }]
 
-        dmgData = ["Slashing (cut)",
-                "Bludgeoning (smash)",
-                "Piercing (pierce)",
-                "Fire (burn)",
-                "Cold (Freeze)",
-                "Poison (Toxin)",
-                "Acid (Corrosion)",
-                "Psychic (Mental Durability)",
-                "Necrotic (Decay)",
-                "Lightning (Electrical)",
-                "Thunder (Sound)",
-                "Force (Force)"]
-
-        saData = ["Ability Score Loss",
-                "Alternate Form",
-                "Antimagic",
-                "Blindsight And Blindsense",
-                "Breath Weapon",
-                "Change Shape",
-                "Charm and Compulsion",
-                "Cold Immunity",
-                "Constrict",
-                "Damage Reduction",
-                "Darkvision",
-                "Death Attacks",
-                "Disease",
-                "Energy Drain And Negative Levels",
-                "Etherealness",
-                "Evasion And Improved Evasion",
-                "Fast Healing",
-                "Fear",
-                "Fire Immunity",
-                "Gaseous Form",
-                "Gaze Attacks",
-                "Improved Grab",
-                "Incorporeality",
-                "Invisibility",
-                "Level Loss",
-                "Low-Light Vision",
-                "Manufactured Weapons",
-                "Movement Modes",
-                "Natural Weapons",
-                "Nonabilities",
-                "Paralysis",
-                "Poison",
-                "Polymorph",
-                "Pounce",
-                "Powerful Charge",
-                "Psionics",
-                "Rake",
-                "Rays",
-                "Regeneration",
-                "Resistance To Energy",
-                "Scent",
-                "Sonic Attacks",
-                "Spell Immunity",
-                "Spell Resistance",
-                "Spells",
-                "Summon",
-                "Swallow Whole",
-                "Telepathy",
-                "Trample",
-                "Tremorsense",
-                "Turn Resistance",
-                "Vulnerability to Energy"]
-
-        wpData = ["Club (B 1d4)",
-                "Dagger (P 1d4)",
-                "Greatclub (B 1d8)",
-                "Handaxe (S 1d6)",
-                "Javelin (P 1d6)",
-                "Light hammer (B 1d4)",
-                "Mace (B 1d6)",
-                "Quarterstaff (B 1d6)",
-                "Sickle (S 1d4)",
-                "Spear (P 1d6)",
-                "Unarmed strike (B 1)",
-                "Crossbow, light (P 1d8)",
-                "Dart (P 1d4)",
-                "Shortbow (P 1d6)",
-                "Sling (B 1d4)",
-                "Battleaxe (S 1d8)",
-                "Flail (B 1d8)",
-                "Glaive (S 1d10)",
-                "Greataxe (S 1d12)",
-                "Greatsword (S 2d6)",
-                "Halberd (S 1d10)",
-                "Lance (P 1d12)",
-                "Longsword (S 1d8)",
-                "Maul (B 2d6)",
-                "Morningstar (P 1d8)",
-                "Pike (P 1d10)",
-                "Rapier (P 1d8)",
-                "Scimitar (S 1d6)",
-                "Shortsword (P 1d6)",
-                "Trident (P 1d6)",
-                "War pick (P 1d8)",
-                "Warhammer (B 1d8)",
-                "Whip (S 1d4)",
-                "Blowgun (P 1)",
-                "Crossbow, hand (P 1d6)",
-                "Crossbow, heavy (P 1d10)",
-                "Longbow (P 1d8)",
-                "Net"]
-
-
-        wpData.sort()
-
+##        dmgData = ["Slashing (cut)",
+##                "Bludgeoning (smash)",
+##                "Piercing (pierce)",
+##                "Fire (burn)",
+##                "Cold (Freeze)",
+##                "Poison (Toxin)",
+##                "Acid (Corrosion)",
+##                "Psychic (Mental Durability)",
+##                "Necrotic (Decay)",
+##                "Lightning (Electrical)",
+##                "Thunder (Sound)",
+##                "Force (Force)"]
+##
+##        saData = ["Ability Score Loss",
+##                "Alternate Form",
+##                "Antimagic",
+##                "Blindsight And Blindsense",
+##                "Breath Weapon",
+##                "Change Shape",
+##                "Charm and Compulsion",
+##                "Cold Immunity",
+##                "Constrict",
+##                "Damage Reduction",
+##                "Darkvision",
+##                "Death Attacks",
+##                "Disease",
+##                "Energy Drain And Negative Levels",
+##                "Etherealness",
+##                "Evasion And Improved Evasion",
+##                "Fast Healing",
+##                "Fear",
+##                "Fire Immunity",
+##                "Gaseous Form",
+##                "Gaze Attacks",
+##                "Improved Grab",
+##                "Incorporeality",
+##                "Invisibility",
+##                "Level Loss",
+##                "Low-Light Vision",
+##                "Manufactured Weapons",
+##                "Movement Modes",
+##                "Natural Weapons",
+##                "Nonabilities",
+##                "Paralysis",
+##                "Poison",
+##                "Polymorph",
+##                "Pounce",
+##                "Powerful Charge",
+##                "Psionics",
+##                "Rake",
+##                "Rays",
+##                "Regeneration",
+##                "Resistance To Energy",
+##                "Scent",
+##                "Sonic Attacks",
+##                "Spell Immunity",
+##                "Spell Resistance",
+##                "Spells",
+##                "Summon",
+##                "Swallow Whole",
+##                "Telepathy",
+##                "Trample",
+##                "Tremorsense",
+##                "Turn Resistance",
+##                "Vulnerability to Energy"]
+##
+##        wpData = ["Club (B 1d4)",
+##                "Dagger (P 1d4)",
+##                "Greatclub (B 1d8)",
+##                "Handaxe (S 1d6)",
+##                "Javelin (P 1d6)",
+##                "Light hammer (B 1d4)",
+##                "Mace (B 1d6)",
+##                "Quarterstaff (B 1d6)",
+##                "Sickle (S 1d4)",
+##                "Spear (P 1d6)",
+##                "Unarmed strike (B 1)",
+##                "Crossbow, light (P 1d8)",
+##                "Dart (P 1d4)",
+##                "Shortbow (P 1d6)",
+##                "Sling (B 1d4)",
+##                "Battleaxe (S 1d8)",
+##                "Flail (B 1d8)",
+##                "Glaive (S 1d10)",
+##                "Greataxe (S 1d12)",
+##                "Greatsword (S 2d6)",
+##                "Halberd (S 1d10)",
+##                "Lance (P 1d12)",
+##                "Longsword (S 1d8)",
+##                "Maul (B 2d6)",
+##                "Morningstar (P 1d8)",
+##                "Pike (P 1d10)",
+##                "Rapier (P 1d8)",
+##                "Scimitar (S 1d6)",
+##                "Shortsword (P 1d6)",
+##                "Trident (P 1d6)",
+##                "War pick (P 1d8)",
+##                "Warhammer (B 1d8)",
+##                "Whip (S 1d4)",
+##                "Blowgun (P 1)",
+##                "Crossbow, hand (P 1d6)",
+##                "Crossbow, heavy (P 1d10)",
+##                "Longbow (P 1d8)",
+##                "Net"]
+##
+##
+##        wpData.sort()
+##
         skData = ["Acrobatics (Dex)",
                 "Animal Handling (Wis)",
                 "Arcana (Int)",
@@ -237,7 +245,7 @@ class RootWidget(FloatLayout):
                 "Sleight of Hand (Dex)",
                 "Stealth (Dex)",
                 "Survival (Wise)"]
-
+##
         stData = ["Strength",
                 "Dexterity",
                 "Constitution",
@@ -386,6 +394,7 @@ class RootWidget(FloatLayout):
             global selected1
             global pageNum
             global initFlag
+##            global currentPlayer
             flag = True
 
             if instance == initButton:
@@ -397,13 +406,18 @@ class RootWidget(FloatLayout):
                 die = 1
             elif instance == stButton:
                 dLabel.text = ('%s is selected!' % instance.text)
-                data = [{'text': i, 'is_selected': False} for i in stData]
+                
                 sLabel2.text = 'Value: --'
                 sLabel.text = 'Select your option'
+##                stData = playerDic[currentPlayer.playerName].weapons
+##                for  item in stData:
+##                    print(item)
+                data = [{'text': i, 'is_selected': False} for i in stData]
                 initFlag = False
                 die = 2
             elif instance == wpButton:
                 dLabel.text = ('%s is selected!' % instance.text)
+                wpData = playerDic[currentPlayer.playerName].weapons
                 data = [{'text': i, 'is_selected': False} for i in wpData]
                 sLabel2.text = 'Value: --'
                 sLabel.text = 'Select your option'
@@ -411,14 +425,18 @@ class RootWidget(FloatLayout):
                 die = 3
             elif instance == skButton:
                 dLabel.text = ('%s is selected!' % instance.text)
+##                skData = playerDic[currentPlayer.playerName].skills
                 data = [{'text': i, 'is_selected': False} for i in skData]
                 sLabel2.text = 'Value: --'
                 sLabel.text = 'Select your option'
                 initFlag = False
                 die = 4
-            elif instance == dmgButton:
+            elif instance == spButton:
                 dLabel.text = ('%s is selected!' % instance.text)
-                data = [{'text': i, 'is_selected': False} for i in dmgData]
+                print(currentPlayer.playerName)
+                print(playerDic[currentPlayer.playerName].spells)
+                spData = playerDic[currentPlayer.playerName].spells
+                data = [{'text': i, 'is_selected': False} for i in spData]
                 sLabel2.text = 'Value: --'
                 sLabel.text = 'Select your option'
                 initFlag = False
@@ -468,9 +486,6 @@ class RootWidget(FloatLayout):
                 print('what is this?')
 
             if flag :
-
-
-
                 list_adapter.data = data
                 list_view.populate()
 
@@ -482,10 +497,17 @@ class RootWidget(FloatLayout):
                 changePageNum(2)
 
         def show_selected_value(spinner, text):
-            global currentPlayer
+##            global currentPlayer
 ##            print('The spinner', spinner, 'have text', text)
-            currentPlayer = playerDic[text]
+            player = playerDic[text]
+            print(player.playerName)
+            changeCurrentPlayer(player)
             print(currentPlayer.playerName)
+##            return currentPlayer.playerName
+
+        def changeCurrentPlayer(player):
+            global currentPlayer
+            currentPlayer = player
 
 
 
@@ -604,12 +626,12 @@ class RootWidget(FloatLayout):
                      pos_hint = {'center_x': .2, 'center_y': .16},
                      size_hint = (0.2, .2))
 
-        dmgButton = Button(
+        spButton = Button(
                     size_hint = (.2, .2),
                     background_normal = "./images/spell.png",
                     pos_hint = {'center_x': .5, 'center_y': .30})
 
-        dmgButton.bind(on_press=dieSelect)
+        spButton.bind(on_press=dieSelect)
 
 ##        dmgLabel = Label(
 ##                text='Damage',
@@ -1040,7 +1062,7 @@ class RootWidget(FloatLayout):
 
         fp_list.append(initButton)
         fp_list.append(stButton)
-        fp_list.append(dmgButton)
+        fp_list.append(spButton)
         fp_list.append(skButton)
         fp_list.append(saButton)
         fp_list.append(wpButton)
