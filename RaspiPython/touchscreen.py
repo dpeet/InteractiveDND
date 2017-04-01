@@ -752,7 +752,7 @@ class RootWidget(FloatLayout):
 
         backButton = Button(
             text='Back',
-            color=(255, 255, 255, 1),
+            color=(1, 1, 1, 1),
             size_hint=(0.175, 0.05),
             pos_hint={'center_x': .1, 'center_y': .95})
         backButton.bind(on_press=backPage)
