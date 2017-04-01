@@ -22,6 +22,9 @@ from kivy.core.window import Window
 
 from kivy.config import Config
 
+Config.set('graphics', 'width', '480')
+Config.set('graphics', 'height', '800')
+
 
 
 ##Builder.load_string("""
@@ -54,14 +57,13 @@ root = Builder.load_string('''
 
 class RootWidget(FloatLayout):
 
-##    Config.set('graphics', 'width', '200')
-##    Config.set('graphics', 'height', '200')
-    Window.size = (500, 1000)
+
+    #Window.size = (500, 1000)
     def callback2(instance):
         print('The button <%s> is being pressed' % instance.text)
 
 
-        
+
     def __init__(self, **kwargs):
         super(RootWidget, self).__init__(**kwargs)
         fp_list = list()
@@ -78,7 +80,7 @@ class RootWidget(FloatLayout):
 
 
         ##################### Importing Player data Json File ######################
-        with open('player.json') as data_file:    
+        with open('player.json') as data_file:
             data = json.load(data_file)
 
         for item in data:
@@ -94,7 +96,7 @@ class RootWidget(FloatLayout):
 
 
         ############################################################################
-        
+
         pageNum = 0
         setting = 0 ## 0 = no preference
                     ## 1 = manual calculation
@@ -108,7 +110,7 @@ class RootWidget(FloatLayout):
                             "fn_italic": "data/fonts/RobotoCondensed-LightItalic.ttf",
                             "fn_bolditalic": "data/fonts/RobotoCondensed-Italic.ttf"
                         }]
-        
+
         dmgData = ["Slashing (cut)",
                 "Bludgeoning (smash)",
                 "Piercing (pierce)",
@@ -253,7 +255,7 @@ class RootWidget(FloatLayout):
         diceData = ["d4", "d6", "d8", "d10", "d12", "d20"]
 
 
-        
+
 ################################# First page widgets! ##############################################################################
 
         def backPage(instance):
@@ -266,7 +268,7 @@ class RootWidget(FloatLayout):
 
                 for item2 in fp_list:
                     self.add_widget(item2)
-                
+
                 die = 0
                 dLabel.text = ('Select your Die!')
                 changePageNum(1)
@@ -304,7 +306,7 @@ class RootWidget(FloatLayout):
 
                 for item2 in f3p_list:
                     self.add_widget(item2)
-                 
+
                 changePageNum(4)
 
             elif instance == autoDiceButton:
@@ -358,7 +360,7 @@ class RootWidget(FloatLayout):
 ####                    totalValLabel.text = str(sum(test_get_num_from_dice()))
 ##                    print("here")
 ##                    ## call the openCV file
-##                
+##
 ##            if lh:
 ##                lhs, rhs = totalLabel.text.split(" ", 1)
 ##                totalLabel.text = "%s %s" % (lh, rhs)
@@ -375,17 +377,17 @@ class RootWidget(FloatLayout):
                 num2 = int(mylist[len(mylist)-1])
                 num2 = num2 + num
                 totalManLabel.text = ("The total Value = %d" % num2)
-                
 
-                
-            
+
+
+
         def dieSelect(instance):
             global die
             global selected1
             global pageNum
             global initFlag
             flag = True
-            
+
             if instance == initButton:
                 dLabel.text = ('%s is selected!' % instance.text)
                 data = [{'text': i, 'is_selected': False} for i in initData]
@@ -459,12 +461,12 @@ class RootWidget(FloatLayout):
                         changePageNum(3)
                         print("here %d" % pageNum)
 
-                    
+
             elif instance == nxtButton:
                 print('%d is current die' % die)
             else:
                 print('what is this?')
-            
+
             if flag :
 
 
@@ -478,7 +480,7 @@ class RootWidget(FloatLayout):
                 for item2 in sp_list:
                     self.add_widget(item2)
                 changePageNum(2)
-        
+
         def show_selected_value(spinner, text):
             global currentPlayer
 ##            print('The spinner', spinner, 'have text', text)
@@ -487,7 +489,7 @@ class RootWidget(FloatLayout):
 
 
 
-##                
+##
 ################################### 0 page widgets! ########################################################################################
 ##
 ##        dataPlayer = [{'text': i, 'is_selected': False} for i in wpData]
@@ -498,7 +500,7 @@ class RootWidget(FloatLayout):
 ##                                                 'selected_color': (1,0,0,1),
 ##                                                 'deselected_color': (0,0,0,1),
 ##                                                 'height': 45}
-##        
+##
 ##        list_adapter2 = ListAdapter(data=dataPlayer,
 ##                                    args_converter=args_converter2,
 ##                                    cls=ListItemButton,
@@ -512,7 +514,7 @@ class RootWidget(FloatLayout):
 ##        list_view2.background_normal = (0,0,0,1)
 
 ################################# 0 page widgets! ########################################################################################
-        
+
 
         spinner = Spinner(
                         # default value shown
@@ -527,7 +529,7 @@ class RootWidget(FloatLayout):
         self.add_widget(spinner)
 ################################# First page widgets! ####################################################################################
 
-                
+
         initButton = Button(
                     size_hint = (.2, .2),
                     background_normal = "./images/initiative.png",
@@ -542,12 +544,12 @@ class RootWidget(FloatLayout):
 ##                pos_hint = {'center_x': .2, 'center_y': .47})
 
         initImg = Image(source='./images/labelInit.png',
-                        
+
                      pos_hint = {'center_x': .2, 'center_y': .46},
                      size_hint = (0.2, .2))
 
-        
-        
+
+
         stButton = Button(
                     size_hint = (.2, .2),
                     background_normal = "./images/save throw.png",
@@ -562,7 +564,7 @@ class RootWidget(FloatLayout):
 ##                pos_hint = {'center_x': .5, 'center_y': .47})
 
         stImg = Image(source='./images/labelST.png',
-                        
+
                      pos_hint = {'center_x': .5, 'center_y': .46},
                      size_hint = (0.2, .2))
 
@@ -580,7 +582,7 @@ class RootWidget(FloatLayout):
 ##                pos_hint = {'center_x': .8, 'center_y': .47})
 
         wpImg = Image(source='./images/labelWP.png',
-                        
+
                      pos_hint = {'center_x': .8, 'center_y': .46},
                      size_hint = (0.2, .2))
 
@@ -598,7 +600,7 @@ class RootWidget(FloatLayout):
 ##                pos_hint = {'center_x': .2, 'center_y': .17})
 
         skImg = Image(source='./images/labelSk.png',
-                        
+
                      pos_hint = {'center_x': .2, 'center_y': .16},
                      size_hint = (0.2, .2))
 
@@ -616,7 +618,7 @@ class RootWidget(FloatLayout):
 ##                pos_hint = {'center_x': .5, 'center_y': .17})
 
         dmgImg = Image(source='./images/labelSP.png',
-                        
+
                      pos_hint = {'center_x': .5, 'center_y': .16},
                      size_hint = (0.2, .2))
 
@@ -634,7 +636,7 @@ class RootWidget(FloatLayout):
 ##                pos_hint = {'center_x': .8, 'center_y': .17})
 
         saImg = Image(source='./images/labelSA.png',
-                        
+
                      pos_hint = {'center_x': .8, 'center_y': .16},
                      size_hint = (0.2, .2))
 
@@ -676,14 +678,14 @@ class RootWidget(FloatLayout):
                 font_size='40sp',
                 font_name= './images/Captain Redemption.ttf',
                 pos_hint = {'center_x': .72, 'center_y': .6})
-        
+
         sLabel2 = Label(
                 text='Value: --',
                 color = (0,0,0,1),
                 font_size='40sp',
                 font_name= './images/Captain Redemption.ttf',
                 pos_hint = {'center_x': .72, 'center_y': .50})
-        
+
         data = [{'text': i, 'is_selected': False} for i in wpData]
 
         args_converter = lambda row_index, rec: {'text': rec['text'],
@@ -692,7 +694,7 @@ class RootWidget(FloatLayout):
                                                  'selected_color': (1,0,0,1),
                                                  'deselected_color': (0,0,0,1),
                                                  'height': 45}
-        
+
         list_adapter = ListAdapter(data=data,
                                     args_converter=args_converter,
                                     cls=ListItemButton,
@@ -741,7 +743,7 @@ class RootWidget(FloatLayout):
                         font_size='35sp',
                         pos_hint = {'center_x': .7, 'center_y': .5})
         autoDiceButton.bind(on_press=diceSelection)
-        
+
 
 ################################# Forth page (AUTO) widgets! ##############################################################################
 
@@ -854,7 +856,7 @@ class RootWidget(FloatLayout):
 ##                        size_hint = (.1, .1),
 ##                        pos_hint = {'center_x': .5, 'center_y': .2})
 ##        cal2Button.bind(on_press=autoSelection)
-        
+
         totalValLabel = Label(
                 text='??',
                 color = (0,0,0,1),
@@ -862,9 +864,9 @@ class RootWidget(FloatLayout):
                 font_name= './images/Captain Redemption.ttf',
                 pos_hint = {'center_x': .5, 'center_y': .5})
 
-        
+
 ################################# Forth page (MANUAL) widgets! ############################################################################
-        
+
         yValf = 0.65
         yVals = 0.55
         yValt = 0.45
@@ -1023,9 +1025,9 @@ class RootWidget(FloatLayout):
                 font_name= './images/Captain Redemption.ttf',
                 pos_hint = {'center_x': .33, 'center_y': .2})
 
-        
 
-        
+
+
 ###########################################################################################################################################
 
 ##        zp_list.append()
@@ -1034,8 +1036,8 @@ class RootWidget(FloatLayout):
 ##        zp_list.append()
 ##        zp_list.append()
 ##        zp_list.append()
-        
-        
+
+
         fp_list.append(initButton)
         fp_list.append(stButton)
         fp_list.append(dmgButton)
@@ -1049,14 +1051,14 @@ class RootWidget(FloatLayout):
         fp_list.append(skImg)
         fp_list.append(saImg)
         fp_list.append(wpImg)
-        
+
 ##        fp_list.append(initLabel)
 ##        fp_list.append(stLabel)
 ##        fp_list.append(dmgLabel)
 ##        fp_list.append(skLabel)
 ##        fp_list.append(saLabel)
 ##        fp_list.append(wpLabel)
-        
+
         sp_list.append(backButton)
         sp_list.append(calButton)
         sp_list.append(list_view)
@@ -1068,7 +1070,7 @@ class RootWidget(FloatLayout):
         tp_list.append(backButton)
         tp_list.append(optionLabel)
 
-        
+
 ##        f2p_list.append(diceNumLabel)
 ##        f2p_list.append(diceTypLabel)
 ##        f2p_list.append(oneButton)
@@ -1112,10 +1114,10 @@ class RootWidget(FloatLayout):
         f3p_list.append(backButton)
         f3p_list.append(clearButton)
         f3p_list.append(totalManLabel)
-        
+
 ##        f2p_list.append(sixButton)
-        
-        
+
+
 
         for item in sp_list:
             self.remove_widget(item)
@@ -1123,11 +1125,11 @@ class RootWidget(FloatLayout):
         for item2 in fp_list:
             self.add_widget(item2)
 
-    
+
     def btn_pressed(self, instance, pos):
         print ('pos: printed from widget: {pos}'.format(pos=pos))
 
-        
+
 
 class CustomBtn(Widget):
 
