@@ -122,6 +122,7 @@ class RootWidget(FloatLayout):
                             "fn_italic": "data/fonts/RobotoCondensed-LightItalic.ttf",
                             "fn_bolditalic": "data/fonts/RobotoCondensed-Italic.ttf"
                         }]
+        ## init add dex
 
 ##        dmgData = ["Slashing (cut)",
 ##                "Bludgeoning (smash)",
@@ -413,16 +414,16 @@ class RootWidget(FloatLayout):
             if instance == initButton:
                 dLabel.text = ('%s is selected!' % instance.text)
                 data = [{'text': i, 'is_selected': False} for i in initData]
-                sLabel2.text = 'Value: --'
-                sLabel.text = 'Select your option'
+                sLabel2.text = '0'
+                sLabel.text = '0'
                 initFlag = True
                 currentPage = 1
                 die = 1
             elif instance == stButton:
                 dLabel.text = ('%s is selected!' % instance.text)
                 
-                sLabel2.text = 'Value: --'
-                sLabel.text = 'Select your option'
+                sLabel2.text = '0'
+                sLabel.text = '0'
 ##                stData = playerDic[currentPlayer.playerName].weapons
 ##                for  item in stData:
 ##                    print(item)
@@ -434,10 +435,13 @@ class RootWidget(FloatLayout):
                 dLabel.text = ('%s is selected!' % instance.text)
                 print(currentPlayer.playerName)
                 print(playerDic[currentPlayer.playerName].weapons)
-                wpData = playerDic[currentPlayer.playerName].weapons
+                wpData = []
+                for item in playerDic[currentPlayer.playerName].weapons:
+                    wpData.append(item[0])
+##                wpData = playerDic[currentPlayer.playerName].weapons
                 data = [{'text': i, 'is_selected': False} for i in wpData]
-                sLabel2.text = 'Value: --'
-                sLabel.text = 'Select your option'
+                sLabel2.text = '0'
+                sLabel.text = '0'
                 initFlag = False
                 currentPage = 3
                 die = 3
@@ -445,8 +449,8 @@ class RootWidget(FloatLayout):
                 dLabel.text = ('%s is selected!' % instance.text)
 ##                skData = playerDic[currentPlayer.playerName].skills
                 data = [{'text': i, 'is_selected': False} for i in skData]
-                sLabel2.text = 'Value: --'
-                sLabel.text = 'Select your option'
+                sLabel2.text = '0'
+                sLabel.text = '0'
                 initFlag = False
                 currentPage = 4
                 die = 4
@@ -456,8 +460,8 @@ class RootWidget(FloatLayout):
                 print(playerDic[currentPlayer.playerName].spells)
                 spData = playerDic[currentPlayer.playerName].spells
                 data = [{'text': i, 'is_selected': False} for i in spData]
-                sLabel2.text = 'Value: --'
-                sLabel.text = 'Select your option'
+                sLabel2.text = '0'
+                sLabel.text = '0'
                 initFlag = False
                 currentPage = 5
                 die = 5
@@ -465,8 +469,8 @@ class RootWidget(FloatLayout):
                 dLabel.text = ('%s is selected!' % instance.text)
                 saData = playerDic[currentPlayer.playerName].special
                 data = [{'text': i, 'is_selected': False} for i in saData]
-                sLabel2.text = 'Value: --'
-                sLabel.text = 'Select your option'
+                sLabel2.text = '0'
+                sLabel.text = '0'
                 initFlag = False
                 currentPage = 6
                 die = 6
@@ -493,12 +497,12 @@ class RootWidget(FloatLayout):
                         ran = random.randint(1, 100)
                         sLabel2.text = ('Value: %d' % ran)
 
-                        for item in sp_list:
-                            self.remove_widget(item)
-
-                        for item2 in tp_list:
-                            self.add_widget(item2)
-                        changePageNum(3)
+##                        for item in sp_list:
+##                            self.remove_widget(item)
+##
+##                        for item2 in tp_list:
+##                            self.add_widget(item2)
+##                        changePageNum(3)
                         print("here %d" % pageNum)
 
             elif instance == autoButton:
@@ -520,17 +524,40 @@ class RootWidget(FloatLayout):
                     else:
                         selectedItem = list_adapter.selection[0].text
                         sLabel.color = (0,0,0,1)
-                        sLabel.text = selectedItem
+                        
+                        sLabel.text = str(sum(test_get_num_from_dice())+int(sLabel3.text))
+
+                        
                         ran = random.randint(1, 100)
                         sLabel2.text = ('Value: %d' % ran)
 
-                        for item in sp_list:
-                            self.remove_widget(item)
-
-                        for item2 in tp_list:
-                            self.add_widget(item2)
-                        changePageNum(3)
                         print("here %d" % pageNum)
+            elif instance == autoButton2:
+                flag = False
+                selected1 = list_adapter.selection
+                if not selected1:
+                    sLabel.text = "Select One!"
+                    sLabel.color = (1,0,0,1)
+                else:
+                    if initFlag:
+                        selectedItem = list_adapter.selection[0].text
+                        sLabel.color = (0,0,0,1)
+                        sLabel.text = selectedItem
+##                        str(sum(test_get_num_from_dice()))
+##                        ran = random.randint(1, 100)
+##                        sLabel2.text = ('Value: %d' % ran)
+
+                        print("here %d" % pageNum)
+                    else:
+                        selectedItem = list_adapter.selection[0].text
+                        sLabel.color = (0,0,0,1)
+                        
+                        sLabel.text = str(sum(test_get_num_from_dice())+int(sLabel3.text))
+
+                        
+                        ran = random.randint(1, 100)
+                        sLabel2.text = ('Value: %d' % ran)
+
 
 
             elif instance == nxtButton:
@@ -561,7 +588,9 @@ class RootWidget(FloatLayout):
 ##                    data = [{'text': i, 'is_selected': False} for i in stData]
 
                 if currentPage == 3:
-                    wpData = currentPlayer.weapons
+                    wpData = []
+                    for item in playerDic[currentPlayer.playerName].weapons:
+                        wpData.append(item[0])
                     data = [{'text': i, 'is_selected': False} for i in wpData]
 
 ##                elif currentPage == 4:
@@ -578,6 +607,17 @@ class RootWidget(FloatLayout):
                 print(currentPage)
                 list_adapter.data = data
                 list_view.populate()
+
+        def listSelected (instance):
+            if len(list_adapter.selection) > 0:
+                selectedItem = list_adapter.selection[0].text
+                if currentPage == 3:
+                    for item in currentPlayer.weapons:
+                        if item[0] == selectedItem:
+                            print(item[1])
+                            print(item[2])
+                            sLabel3.text = item[1]
+                            sLabel4.text = item[2]
 
 
 ##
@@ -631,14 +671,14 @@ class RootWidget(FloatLayout):
 ##        defY = wy *bx
         
         initButton = Button(
-            size_hint=(defNum, defNum*num*num3),
+            size_hint=(defNum*num2, defNum*num),
             background_normal="./images/button_init.png",
             pos_hint={'center_x': .20, 'center_y': .6})
 
         initButton.bind(on_press=dieSelect)
 
         stButton = Button(
-            size_hint=(defNum, defNum*num*num3),
+            size_hint=(defNum*num2, defNum*num),
             # height=50, width=50,
             background_normal="./images/button_saving_throw.png",
             pos_hint={'center_x': .5, 'center_y': .6})
@@ -646,7 +686,7 @@ class RootWidget(FloatLayout):
         stButton.bind(on_press=dieSelect)
 
         wpButton = Button(
-            size_hint=(defNum, defNum*num*num3),
+            size_hint=(defNum*num2, defNum*num),
 ##            size= (0.1, .1),
             background_normal="./images/button_weapons.png",
             pos_hint={'center_x': .8, 'center_y': .6})
@@ -700,40 +740,63 @@ class RootWidget(FloatLayout):
         backButton.bind(on_press=backPage)
 
         manualButton = Button(
-                        text = "Calculate!",
+                        text = "Rnadom",
                         color = (0,0,0,1),
                         size_hint = (.1, .1),
-                        pos_hint = {'center_x': .65, 'center_y': .2})
+                        pos_hint = {'center_x': .35, 'center_y': .2})
         manualButton.bind(on_press=dieSelect)
 
         autoButton = Button(
-                        text = "Calculate!",
+                        text = "Roll Atk",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .5, 'center_y': .2})
+        autoButton.bind(on_press=dieSelect)
+
+        autoButton2 = Button(
+                        text = "Roll Dmg",
                         color = (0,0,0,1),
                         size_hint = (.1, .1),
                         pos_hint = {'center_x': .65, 'center_y': .2})
-        autoButton.bind(on_press=dieSelect)
+        autoButton2.bind(on_press=dieSelect)
 
         
 
         sLabel = Label(
-                text='Select your option',
+                text='0',
                 color = (0,0,0,1),
                 font_size='40sp',
                 font_name= './images/Captain_Redemption.ttf',
-                pos_hint = {'center_x': .3, 'center_y': .6})
+                pos_hint = {'center_x': .25, 'center_y': .7})
 
         sLabel2 = Label(
-                text='Value: --',
+                text='0',
                 color = (0,0,0,1),
                 font_size='40sp',
                 font_name= './images/Captain_Redemption.ttf',
-                pos_hint = {'center_x': .3, 'center_y': .50})
+                pos_hint = {'center_x': .25, 'center_y': .55})
+
+        sLabel3 = Label(
+                text='0',
+                color = (0,0,0,1),
+                font_size='40sp',
+                font_name= './images/Captain_Redemption.ttf',
+                pos_hint = {'center_x': .45, 'center_y': .7})
+
+        sLabel4 = Label(
+                text='0',
+                color = (0,0,0,1),
+                font_size='40sp',
+                font_name= './images/Captain_Redemption.ttf',
+                pos_hint = {'center_x': .45, 'center_y': .55})
+        
 
         data = [{'text': i, 'is_selected': False} for i in wpData]
 
         args_converter = lambda row_index, rec: {'text': rec['text'],
                                                  'size_hint_x': 10,
                                                  'size_hint_y': None,
+                                                 'font_size': 15,
                                                  'selected_color': (1,0,0,1),
                                                  'deselected_color': (0,0,0,1),
                                                  'height': 45}
@@ -744,13 +807,17 @@ class RootWidget(FloatLayout):
                                     selection_mode='single',
                                     allow_empty_selection=True)
 
+        list_adapter.bind(on_selection_change=listSelected)
+
 
         list_view = ListView(adapter = list_adapter,
-                             pos_hint = {'center_x': .7, 'center_y': .43},
-                             size_hint = (0.4, 0.6))
+                             pos_hint = {'center_x': .75, 'center_y': .43},
+                             size_hint = (0.25, 0.5))
         list_view.background_normal = (0,0,0,1)
+        
+        
 ##
-##        list_adapter.bind(on_selection_change=self.selection_change)
+####        list_adapter.bind(on_selection_change=self.selection_change)
 
 
 ################################# Third page widgets! ####################################################################################
@@ -1098,8 +1165,11 @@ class RootWidget(FloatLayout):
         sp_list.append(list_view)
         sp_list.append(sLabel)
         sp_list.append(sLabel2)
+        sp_list.append(sLabel3)
+        sp_list.append(sLabel4)
         sp_list.append(manualButton)
         sp_list.append(autoButton)
+        sp_list.append(autoButton2)
 
 ##        tp_list.append(manualDiceButton)
 ##        tp_list.append(autoDiceButton)

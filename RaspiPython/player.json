@@ -16,7 +16,7 @@
       "armor_class":16,
       "speed":25,
       "exp":1165,
-      "weapons":["Warhammer", "Handaxe", "Maul"],
+      "weapons":[["Warhammer", "5", "1d8+7"], ["Handaxe", "5", "1d6+0"], ["Maul", "5", "2d6+3"]],
       "spells":["Mage Hand", "Green Flame"],
       "special":["Second Wind"],
 	  "skills":["Athletics","History","Intimidation","Persuasion"]
@@ -38,7 +38,7 @@
       "armor_class":10,
       "speed":30,
       "exp":1200,
-      "weapons":["LongBow", "Bow"],
+      "weapons":[["Crossbow", "3", "1d6+2"], ["LongBow", "4", "1d8+3"]],
       "spells":["Silence", "Wind Wall"],
       "special":["Burrow"],
 	  "skills":["Athletics","History","Intimidation","Persuasion"]
