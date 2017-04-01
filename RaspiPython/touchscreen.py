@@ -778,7 +778,15 @@ class RootWidget(FloatLayout):
             pos_hint={'center_x': .75, 'center_y': .1})
         autoButton2.bind(on_press=dieSelect)
 
-        
+        attack = Image(
+            source="./images/Field_Attack.png",
+            pos_hint={'center_x': .25, 'center_y': .48}
+        )
+
+        Damage = Image(
+            source="./images/Field_Damage.png",
+            pos_hint={'center_x': .25, 'center_y': .28}
+        )
 
         sLabel = Label(
                 text='0',
@@ -792,21 +800,21 @@ class RootWidget(FloatLayout):
                 color = (0,0,0,1),
                 font_size='40sp',
                 font_name= './images/Captain_Redemption.ttf',
-                pos_hint = {'center_x': .25, 'center_y': .35})
+                pos_hint = {'center_x': .25, 'center_y': .30})
 
         sLabel3 = Label(
                 text='0',
                 color = (0,0,0,1),
                 font_size='40sp',
                 font_name= './images/Captain_Redemption.ttf',
-                pos_hint = {'center_x': .45, 'center_y': .5})
+                pos_hint = {'center_x': .48, 'center_y': .5})
 
         sLabel4 = Label(
                 text='0',
                 color = (0,0,0,1),
                 font_size='40sp',
                 font_name= './images/Captain_Redemption.ttf',
-                pos_hint = {'center_x': .45, 'center_y': .35})
+                pos_hint = {'center_x': .48, 'center_y': .30})
         
 
         data = [{'text': i, 'is_selected': False} for i in wpData]
@@ -815,8 +823,9 @@ class RootWidget(FloatLayout):
                                                  'size_hint_x': 10,
                                                  'size_hint_y': None,
                                                  'font_size': 15,
-                                                 'selected_color': (1,0,0,1),
-                                                 'deselected_color': (0,0,0,1),
+                                                 'selected_color': (.5,.5,.5,.25),
+                                                 'deselected_color': (50,50,50,1),
+                                                 'color': (0, 0, 0, 1),
                                                  'height': 45}
 
         list_adapter = ListAdapter(data=data,
@@ -829,9 +838,9 @@ class RootWidget(FloatLayout):
 
 
         list_view = ListView(adapter = list_adapter,
-                             pos_hint = {'center_x': .75, 'center_y': .35},
+                             pos_hint = {'center_x': .75, 'center_y': .31},
                              size_hint = (0.25, 0.5))
-        list_view.background_normal = (0,0,0,1)
+        list_view.background_normal = (0,0,0,0)
         
         
 ##
@@ -1181,6 +1190,8 @@ class RootWidget(FloatLayout):
         sp_list.append(backButton)
 ##        sp_list.append(calButton)
         sp_list.append(list_view)
+        sp_list.append(attack)
+        sp_list.append(Damage)
         sp_list.append(sLabel)
         sp_list.append(sLabel2)
         sp_list.append(sLabel3)
