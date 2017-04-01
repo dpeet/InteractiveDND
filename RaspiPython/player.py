@@ -29,4 +29,4 @@ class Player:
         self.weapons = args[0]["weapons"]
         self.spells = args[0]["spells"]
         self.special = args[0]["special"]
-##        self.skills = args[0]["skills"]
+        self.skills = args[0]["skills"]

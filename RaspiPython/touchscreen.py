@@ -275,6 +275,7 @@ class RootWidget(FloatLayout):
             global selected1
             global pageNum
             global currentSetting
+            print("clicked")
             if pageNum == 2:
                 for item in sp_list:
                     self.remove_widget(item)
@@ -469,7 +470,38 @@ class RootWidget(FloatLayout):
                 initFlag = False
                 currentPage = 6
                 die = 6
-            elif instance == calButton:
+            elif instance == manualButton:
+                flag = False
+                selected1 = list_adapter.selection
+                if not selected1:
+                    sLabel.text = "Select One!"
+                    sLabel.color = (1,0,0,1)
+                else:
+                    if initFlag:
+                        selectedItem = list_adapter.selection[0].text
+                        sLabel.color = (0,0,0,1)
+                        sLabel.text = selectedItem
+##                        str(sum(test_get_num_from_dice()))
+##                        ran = random.randint(1, 100)
+##                        sLabel2.text = ('Value: %d' % ran)
+
+                        print("here %d" % pageNum)
+                    else:
+                        selectedItem = list_adapter.selection[0].text
+                        sLabel.color = (0,0,0,1)
+                        sLabel.text = selectedItem
+                        ran = random.randint(1, 100)
+                        sLabel2.text = ('Value: %d' % ran)
+
+                        for item in sp_list:
+                            self.remove_widget(item)
+
+                        for item2 in tp_list:
+                            self.add_widget(item2)
+                        changePageNum(3)
+                        print("here %d" % pageNum)
+
+            elif instance == autoButton:
                 flag = False
                 selected1 = list_adapter.selection
                 if not selected1:
@@ -543,6 +575,7 @@ class RootWidget(FloatLayout):
                     saData = currentPlayer.special
 ##                    print(saData)
                     data = [{'text': i, 'is_selected': False} for i in saData]
+                print(currentPage)
                 list_adapter.data = data
                 list_view.populate()
 
@@ -587,16 +620,25 @@ class RootWidget(FloatLayout):
         self.add_widget(spinner)
 ################################# First page widgets! ####################################################################################
         num = 480/800
-        defNum = .2
+        defNum = .3
+        num2 = 225/250
+        num3 = 250/225
+##        wx = 480
+##        wy = 800
+##        bx = 225
+##        by = 250
+##        defX = wx *by
+##        defY = wy *bx
+        
         initButton = Button(
-            size_hint=(defNum, defNum*num),
+            size_hint=(defNum, defNum*num*num3),
             background_normal="./images/button_init.png",
             pos_hint={'center_x': .20, 'center_y': .6})
 
         initButton.bind(on_press=dieSelect)
 
         stButton = Button(
-            size_hint=(defNum, defNum*num),
+            size_hint=(defNum, defNum*num*num3),
             # height=50, width=50,
             background_normal="./images/button_saving_throw.png",
             pos_hint={'center_x': .5, 'center_y': .6})
@@ -604,7 +646,7 @@ class RootWidget(FloatLayout):
         stButton.bind(on_press=dieSelect)
 
         wpButton = Button(
-            size_hint=(defNum, defNum*num),
+            size_hint=(defNum, defNum*num*num3),
 ##            size= (0.1, .1),
             background_normal="./images/button_weapons.png",
             pos_hint={'center_x': .8, 'center_y': .6})
@@ -612,21 +654,21 @@ class RootWidget(FloatLayout):
         wpButton.bind(on_press=dieSelect)
 
         skButton = Button(
-            size_hint=(defNum, defNum*num),
+            size_hint=(defNum*num2, defNum*num),
             background_normal="./images/button_skills.png",
             pos_hint={'center_x': .2, 'center_y': .30})
 
         skButton.bind(on_press=dieSelect)
 
         spButton = Button(
-            size_hint=(defNum, defNum*num),
+            size_hint=(defNum*num2, defNum*num),
             background_normal="./images/button_spell.png",
             pos_hint={'center_x': .5, 'center_y': .30})
 
         spButton.bind(on_press=dieSelect)
 
         saButton = Button(
-            size_hint=(defNum, defNum*num),
+            size_hint=(defNum*num2, defNum*num),
             background_normal="./images/button_special.png",
             pos_hint={'center_x': .8, 'center_y': .30})
 
@@ -654,29 +696,38 @@ class RootWidget(FloatLayout):
                         text = 'Back',
                         color = (0,0,0,1),
                         size_hint = (.1, .1),
-                        pos_hint = {'center_x': .8, 'center_y': .2})
+                        pos_hint = {'center_x': .1, 'center_y': .9})
         backButton.bind(on_press=backPage)
 
-        calButton = Button(
+        manualButton = Button(
                         text = "Calculate!",
                         color = (0,0,0,1),
                         size_hint = (.1, .1),
                         pos_hint = {'center_x': .65, 'center_y': .2})
-        calButton.bind(on_press=dieSelect)
+        manualButton.bind(on_press=dieSelect)
+
+        autoButton = Button(
+                        text = "Calculate!",
+                        color = (0,0,0,1),
+                        size_hint = (.1, .1),
+                        pos_hint = {'center_x': .65, 'center_y': .2})
+        autoButton.bind(on_press=dieSelect)
+
+        
 
         sLabel = Label(
                 text='Select your option',
                 color = (0,0,0,1),
                 font_size='40sp',
                 font_name= './images/Captain_Redemption.ttf',
-                pos_hint = {'center_x': .72, 'center_y': .6})
+                pos_hint = {'center_x': .3, 'center_y': .6})
 
         sLabel2 = Label(
                 text='Value: --',
                 color = (0,0,0,1),
                 font_size='40sp',
                 font_name= './images/Captain_Redemption.ttf',
-                pos_hint = {'center_x': .72, 'center_y': .50})
+                pos_hint = {'center_x': .3, 'center_y': .50})
 
         data = [{'text': i, 'is_selected': False} for i in wpData]
 
@@ -695,7 +746,7 @@ class RootWidget(FloatLayout):
 
 
         list_view = ListView(adapter = list_adapter,
-                             pos_hint = {'center_x': .3, 'center_y': .43},
+                             pos_hint = {'center_x': .7, 'center_y': .43},
                              size_hint = (0.4, 0.6))
         list_view.background_normal = (0,0,0,1)
 ##
@@ -711,21 +762,21 @@ class RootWidget(FloatLayout):
                 font_name= './images//Captain_Redemption.ttf',
                 pos_hint = {'center_x': .5, 'center_y': .7})
 
-        manualDiceButton = Button(
-                        text = 'Manual',
-                        color = (0,0,0,1),
-                        size_hint = (.25, .25),
-                        font_size='35sp',
-                        pos_hint = {'center_x': .3, 'center_y': .5})
-        manualDiceButton.bind(on_press=diceSelection)
-
-        autoDiceButton = Button(
-                        text = 'AutoCal',
-                        color = (0,0,0,1),
-                        size_hint = (.25, .25),
-                        font_size='35sp',
-                        pos_hint = {'center_x': .7, 'center_y': .5})
-        autoDiceButton.bind(on_press=diceSelection)
+##        manualDiceButton = Button(
+##                        text = 'Manual',
+##                        color = (0,0,0,1),
+##                        size_hint = (.25, .25),
+##                        font_size='35sp',
+##                        pos_hint = {'center_x': .3, 'center_y': .5})
+##        manualDiceButton.bind(on_press=diceSelection)
+##
+##        autoDiceButton = Button(
+##                        text = 'AutoCal',
+##                        color = (0,0,0,1),
+##                        size_hint = (.25, .25),
+##                        font_size='35sp',
+##                        pos_hint = {'center_x': .7, 'center_y': .5})
+##        autoDiceButton.bind(on_press=diceSelection)
 
 
 ################################# Forth page (AUTO) widgets! ##############################################################################
@@ -1043,13 +1094,15 @@ class RootWidget(FloatLayout):
 ##        fp_list.append(wpLabel)
 
         sp_list.append(backButton)
-        sp_list.append(calButton)
+##        sp_list.append(calButton)
         sp_list.append(list_view)
         sp_list.append(sLabel)
-##        sp_list.append(sLabel2)
+        sp_list.append(sLabel2)
+        sp_list.append(manualButton)
+        sp_list.append(autoButton)
 
-        tp_list.append(manualDiceButton)
-        tp_list.append(autoDiceButton)
+##        tp_list.append(manualDiceButton)
+##        tp_list.append(autoDiceButton)
         tp_list.append(backButton)
         tp_list.append(optionLabel)
 
