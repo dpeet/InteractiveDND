@@ -61,7 +61,7 @@ pageNum = 0
 class RootWidget(FloatLayout):
 
 
-    #Window.size = (500, 1000)
+    Window.size = (480, 800)
     def callback2(instance):
         print('The button <%s> is being pressed' % instance.text)
 
@@ -589,129 +589,62 @@ class RootWidget(FloatLayout):
 
 
         initButton = Button(
-                    size_hint = (.2, .2),
-                    background_normal = "./images/initiative.png",
-                    pos_hint = {'center_x': .20, 'center_y': .6})
+            size_hint=(.2, .2),
+            background_normal="./images/button_init.png",
+            pos_hint={'center_x': .20, 'center_y': .6})
 
         initButton.bind(on_press=dieSelect)
 
-##        initLabel = Label(
-##                text='Initiative',
-##                color = (0,0,0,1),
-##                font_size='20sp',
-##                pos_hint = {'center_x': .2, 'center_y': .47})
-
-        initImg = Image(source='./images/labelInit.png',
-
-                     pos_hint = {'center_x': .2, 'center_y': .46},
-                     size_hint = (0.2, .2))
-
-
-
         stButton = Button(
-                    size_hint = (.2, .2),
-                    background_normal = "./images/save throw.png",
-                    pos_hint = {'center_x': .5, 'center_y': .6})
+            size_hint=(.2, .2),
+            # height=50, width=50,
+            background_normal="./images/button_saving_throw.png",
+            pos_hint={'center_x': .5, 'center_y': .6})
 
         stButton.bind(on_press=dieSelect)
 
-##        stLabel = Label(
-##                text='Saving Throw',
-##                color = (0,0,0,1),
-##                font_size='20sp',
-##                pos_hint = {'center_x': .5, 'center_y': .47})
-
-        stImg = Image(source='./images/labelST.png',
-
-                     pos_hint = {'center_x': .5, 'center_y': .46},
-                     size_hint = (0.2, .2))
-
         wpButton = Button(
-                    size_hint = (.2, .2),
-                    background_normal = "./images/weapon.png",
-                    pos_hint = {'center_x': .8, 'center_y': .6})
+            size_hint=(.2, .2),
+            background_normal="./images/button_weapons.png",
+            pos_hint={'center_x': .8, 'center_y': .6})
 
         wpButton.bind(on_press=dieSelect)
 
-##        wpLabel = Label(
-##                text='Weapons',
-##                color = (0,0,0,1),
-##                font_size='20sp',
-##                pos_hint = {'center_x': .8, 'center_y': .47})
-
-        wpImg = Image(source='./images/labelWP.png',
-
-                     pos_hint = {'center_x': .8, 'center_y': .46},
-                     size_hint = (0.2, .2))
-
         skButton = Button(
-                    size_hint = (.2, .2),
-                    background_normal = "./images/skill.png",
-                    pos_hint = {'center_x': .2, 'center_y': .30})
+            size_hint=(.2, .2),
+            background_normal="./images/button_skills.png",
+            pos_hint={'center_x': .2, 'center_y': .30})
 
         skButton.bind(on_press=dieSelect)
 
-##        skLabel = Label(
-##                text='Skills',
-##                color = (0,0,0,1),
-##                font_size='20sp',
-##                pos_hint = {'center_x': .2, 'center_y': .17})
-
-        skImg = Image(source='./images/labelSk.png',
-
-                     pos_hint = {'center_x': .2, 'center_y': .16},
-                     size_hint = (0.2, .2))
-
         spButton = Button(
-                    size_hint = (.2, .2),
-                    background_normal = "./images/spell.png",
-                    pos_hint = {'center_x': .5, 'center_y': .30})
+            size_hint=(.2, .2),
+            background_normal="./images/button_spell.png",
+            pos_hint={'center_x': .5, 'center_y': .30})
 
         spButton.bind(on_press=dieSelect)
 
-##        dmgLabel = Label(
-##                text='Damage',
-##                color = (0,0,0,1),
-##                font_size='20sp',
-##                pos_hint = {'center_x': .5, 'center_y': .17})
-
-        dmgImg = Image(source='./images/labelSP.png',
-
-                     pos_hint = {'center_x': .5, 'center_y': .16},
-                     size_hint = (0.2, .2))
-
         saButton = Button(
-                    size_hint = (.2, .2),
-                    background_normal = "./images/specialAbil.png",
-                    pos_hint = {'center_x': .8, 'center_y': .30})
+            size_hint=(.2, .2),
+            background_normal="./images/button_special.png",
+            pos_hint={'center_x': .8, 'center_y': .30})
 
         saButton.bind(on_press=dieSelect)
 
-##        saLabel = Label(
-##                text='Special Abilities',
-##                color = (0,0,0,1),
-##                font_size='20sp',
-##                pos_hint = {'center_x': .8, 'center_y': .17})
-
-        saImg = Image(source='./images/labelSA.png',
-
-                     pos_hint = {'center_x': .8, 'center_y': .16},
-                     size_hint = (0.2, .2))
-
         tLabel = Label(
-                text='Welcome to the Die Tower!',
-                color = (0,0,0,1),
-                font_size='75sp',
-                font_name= './images/Captain Redemption.ttf',
-                pos_hint = {'center_x': .5, 'center_y': .85})
+            text='DnD Dice Tower!',
+            color=(0, 0, 0, 1),
+            font_size='75sp',
+            font_name='./images/Captain_Redemption.ttf',
+            pos_hint={'center_x': .5, 'center_y': .85})
         self.add_widget(tLabel)
 
         dLabel = Label(
-                text='Select your Option!',
-                color = (0,0,0,1),
-                font_size='45sp',
-                font_name= './images/Captain Redemption.ttf',
-               pos_hint = {'center_x': .5, 'center_y': .75})
+            text='Select your Option!',
+            color=(0, 0, 0, 1),
+            font_size='45sp',
+            font_name='./images/Captain_Redemption.ttf',
+            pos_hint={'center_x': .5, 'center_y': .75})
 
 
 ################################# Second page widgets! ##############################################################################
@@ -734,14 +667,14 @@ class RootWidget(FloatLayout):
                 text='Select your option',
                 color = (0,0,0,1),
                 font_size='40sp',
-                font_name= './images/Captain Redemption.ttf',
+                font_name= './images/Captain_Redemption.ttf',
                 pos_hint = {'center_x': .72, 'center_y': .6})
 
         sLabel2 = Label(
                 text='Value: --',
                 color = (0,0,0,1),
                 font_size='40sp',
-                font_name= './images/Captain Redemption.ttf',
+                font_name= './images/Captain_Redemption.ttf',
                 pos_hint = {'center_x': .72, 'center_y': .50})
 
         data = [{'text': i, 'is_selected': False} for i in wpData]
@@ -768,22 +701,13 @@ class RootWidget(FloatLayout):
 ##        list_adapter.bind(on_selection_change=self.selection_change)
 
 
-        dImg1 = Image(source='./images/dice.png',
-                     pos_hint = {'center_x': .15, 'center_y': .84},
-                     size_hint = (0.08, 0.08))
-        dImg2 = Image(source='./images/dice.png',
-                     pos_hint = {'center_x': .85, 'center_y': .84},
-                     size_hint = (0.08, 0.08))
-        self.add_widget(dImg1)
-        self.add_widget(dImg2)
-
 ################################# Third page widgets! ####################################################################################
 
         optionLabel = Label(
                 text='Select your calculation option',
                 color = (0,0,0,1),
                 font_size='60sp',
-                font_name= './images//Captain Redemption.ttf',
+                font_name= './images//Captain_Redemption.ttf',
                 pos_hint = {'center_x': .5, 'center_y': .7})
 
         manualDiceButton = Button(
@@ -809,7 +733,7 @@ class RootWidget(FloatLayout):
 ##                text='Number of Dice?',
 ##                color = (0,0,0,1),
 ##                font_size='50sp',
-##                font_name= 'data/fonts/Captain Redemption.ttf',
+##                font_name= 'data/fonts/Captain_Redemption.ttf',
 ##                pos_hint = {'center_x': .25, 'center_y': .7})
 ##
 ##        yVal1 = 0.6
@@ -853,7 +777,7 @@ class RootWidget(FloatLayout):
 ##                text='Type of Dice?',
 ##                color = (0,0,0,1),
 ##                font_size='50sp',
-##                font_name= 'data/fonts/Captain Redemption.ttf',
+##                font_name= 'data/fonts/Captain_Redemption.ttf',
 ##                pos_hint = {'center_x': .22, 'center_y': .45})
 ##
 ####        diceTypLabel
@@ -919,7 +843,7 @@ class RootWidget(FloatLayout):
                 text='??',
                 color = (0,0,0,1),
                 font_size='80sp',
-                font_name= './images/Captain Redemption.ttf',
+                font_name= './images/Captain_Redemption.ttf',
                 pos_hint = {'center_x': .5, 'center_y': .5})
 
 
@@ -1080,7 +1004,7 @@ class RootWidget(FloatLayout):
                 text='The total value = 0',
                 color = (0,0,0,1),
                 font_size='40sp',
-                font_name= './images/Captain Redemption.ttf',
+                font_name= './images/Captain_Redemption.ttf',
                 pos_hint = {'center_x': .33, 'center_y': .2})
 
 
@@ -1103,12 +1027,12 @@ class RootWidget(FloatLayout):
         fp_list.append(saButton)
         fp_list.append(wpButton)
         fp_list.append(dLabel)
-        fp_list.append(initImg)
-        fp_list.append(stImg)
-        fp_list.append(dmgImg)
-        fp_list.append(skImg)
-        fp_list.append(saImg)
-        fp_list.append(wpImg)
+        # fp_list.append(initImg)
+        # fp_list.append(stImg)
+        # fp_list.append(dmgImg)
+        # fp_list.append(skImg)
+        # fp_list.append(saImg)
+        # fp_list.append(wpImg)
 
 ##        fp_list.append(initLabel)
 ##        fp_list.append(stLabel)
