@@ -39,8 +39,8 @@
       "speed":30,
       "exp":1200,
       "weapons":["LongBow", "Bow"],
-      "spells":["Mage Hand", "Green Flame"],
-      "special":["Second Wind"],
+      "spells":["Silence", "Wind Wall"],
+      "special":["Burrow"],
 	  "skills":["Athletics","History","Intimidation","Persuasion"]
    }
 ]

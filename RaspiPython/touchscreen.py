@@ -55,6 +55,8 @@ root = Builder.load_string('''
 ''')
 
 currentPlayer = None
+currentPage = None ## 1=init , 2=saving throw , 3=weapons , 4=skills , 5=spells , 6=special ability
+pageNum = 0
 
 class RootWidget(FloatLayout):
 
@@ -106,7 +108,8 @@ class RootWidget(FloatLayout):
 
         ############################################################################
 
-        pageNum = 0
+        global pageNum
+        pageNum = 1
         setting = 0 ## 0 = no preference
                     ## 1 = manual calculation
                     ## 2 = automatic calculation
@@ -271,6 +274,7 @@ class RootWidget(FloatLayout):
             global die
             global selected1
             global pageNum
+            global currentSetting
             if pageNum == 2:
                 for item in sp_list:
                     self.remove_widget(item)
@@ -279,8 +283,9 @@ class RootWidget(FloatLayout):
                     self.add_widget(item2)
 
                 die = 0
+                pageNum = 1
                 dLabel.text = ('Select your Die!')
-                changePageNum(1)
+##                changePageNum(1)
 ##                pageNum = 1
             elif pageNum == 3:
                 for item in tp_list:
@@ -288,8 +293,9 @@ class RootWidget(FloatLayout):
 
                 for item2 in sp_list:
                     self.add_widget(item2)
-                changePageNum(2)
-                print("herewego")
+                pageNum = 2
+##                changePageNum(2)
+##                print("herewego")
 ##                pageNum = 2
             elif pageNum == 4:
                 for item in f2p_list:
@@ -299,7 +305,8 @@ class RootWidget(FloatLayout):
 
                 for item2 in tp_list:
                     self.add_widget(item2)
-                changePageNum(3)
+                pageNum = 3
+##                changePageNum(3)
 
         def diceSelection(instance):
             global die
@@ -316,7 +323,8 @@ class RootWidget(FloatLayout):
                 for item2 in f3p_list:
                     self.add_widget(item2)
 
-                changePageNum(4)
+                pageNum = 4
+##                changePageNum(4)
 
             elif instance == autoDiceButton:
                 print("%d page2 is selected" % pageNum)
@@ -329,7 +337,9 @@ class RootWidget(FloatLayout):
 
                 for item2 in f2p_list:
                     self.add_widget(item2)
-                changePageNum(4)
+
+                pageNum = 4
+##                changePageNum(4)
 
         def changePageNum(num):
             global pageNum
@@ -395,6 +405,7 @@ class RootWidget(FloatLayout):
             global selected1
             global pageNum
             global initFlag
+            global currentPage
 ##            global currentPlayer
             flag = True
 
@@ -404,6 +415,7 @@ class RootWidget(FloatLayout):
                 sLabel2.text = 'Value: --'
                 sLabel.text = 'Select your option'
                 initFlag = True
+                currentPage = 1
                 die = 1
             elif instance == stButton:
                 dLabel.text = ('%s is selected!' % instance.text)
@@ -415,6 +427,7 @@ class RootWidget(FloatLayout):
 ##                    print(item)
                 data = [{'text': i, 'is_selected': False} for i in stData]
                 initFlag = False
+                currentPage = 2
                 die = 2
             elif instance == wpButton:
                 dLabel.text = ('%s is selected!' % instance.text)
@@ -425,6 +438,7 @@ class RootWidget(FloatLayout):
                 sLabel2.text = 'Value: --'
                 sLabel.text = 'Select your option'
                 initFlag = False
+                currentPage = 3
                 die = 3
             elif instance == skButton:
                 dLabel.text = ('%s is selected!' % instance.text)
@@ -433,6 +447,7 @@ class RootWidget(FloatLayout):
                 sLabel2.text = 'Value: --'
                 sLabel.text = 'Select your option'
                 initFlag = False
+                currentPage = 4
                 die = 4
             elif instance == spButton:
                 dLabel.text = ('%s is selected!' % instance.text)
@@ -443,13 +458,16 @@ class RootWidget(FloatLayout):
                 sLabel2.text = 'Value: --'
                 sLabel.text = 'Select your option'
                 initFlag = False
+                currentPage = 5
                 die = 5
             elif instance == saButton:
                 dLabel.text = ('%s is selected!' % instance.text)
+                saData = playerDic[currentPlayer.playerName].special
                 data = [{'text': i, 'is_selected': False} for i in saData]
                 sLabel2.text = 'Value: --'
                 sLabel.text = 'Select your option'
                 initFlag = False
+                currentPage = 6
                 die = 6
             elif instance == calButton:
                 flag = False
@@ -501,17 +519,32 @@ class RootWidget(FloatLayout):
 
         def show_selected_value(spinner, text):
             global currentPlayer
-##            print('The spinner', spinner, 'have text', text)
             currentPlayer = playerDic[text]
-##            print(player.playerName)
-##            changeCurrentPlayer(player)
-##            print(currentPlayer.playerName)
-##            return currentPlayer.playerName
+            print(pageNum)
+            if pageNum == 2:
+##                if currentPage == 1:
+##                    data = [{'text': i, 'is_selected': False} for i in initData]
 
-##        def changeCurrentPlayer(player):
-##            global currentPlayer
-##            currentPlayer = player
+##                elif currentPage == 2:
+##                    data = [{'text': i, 'is_selected': False} for i in stData]
 
+                if currentPage == 3:
+                    wpData = currentPlayer.weapons
+                    data = [{'text': i, 'is_selected': False} for i in wpData]
+
+##                elif currentPage == 4:
+##                    data = [{'text': i, 'is_selected': False} for i in skData]
+
+                elif currentPage == 5:
+                    spData = currentPlayer.spells
+                    data = [{'text': i, 'is_selected': False} for i in spData]
+
+                elif currentPage == 6:
+                    saData = currentPlayer.special
+##                    print(saData)
+                    data = [{'text': i, 'is_selected': False} for i in saData]
+                list_adapter.data = data
+                list_view.populate()
 
 
 ##
