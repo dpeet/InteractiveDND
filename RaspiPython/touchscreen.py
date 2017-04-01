@@ -172,7 +172,7 @@ class RootWidget(FloatLayout):
 ##                "Polymorph",
 ##                "Pounce",
 ##                "Powerful Charge",
-##                "Psionics",
+##                "Psionics",5
 ##                "Rake",
 ##                "Rays",
 ##                "Regeneration",
