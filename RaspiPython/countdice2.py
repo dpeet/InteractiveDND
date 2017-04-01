@@ -9,9 +9,14 @@ import numpy
 import cv2
 import sys
 
-from picamera.array import PiRGBArray
-from picamera import PiCamera
+
 import time
+
+try:
+    from picamera.array import PiRGBArray
+    from picamera import PiCamera
+except:
+    print("picamera is not installed")
 
 def test_cam():
     # initialize the camera and grab a reference to the raw camera capture
@@ -105,4 +110,6 @@ def test_get_num_from_dice():
     return ([5,1,3])
 
 # get_num_from_dice()
-test_cam()
+# test_cam()
+
+test_get_num_from_dice()
