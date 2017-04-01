@@ -642,7 +642,7 @@ class RootWidget(FloatLayout):
                 text='Welcome to the Die Tower!',
                 color = (0,0,0,1),
                 font_size='75sp',
-                font_name= 'data/fonts/Captain Redemption.ttf',
+                font_name= './images/Captain Redemption.ttf',
                 pos_hint = {'center_x': .5, 'center_y': .85})
         self.add_widget(tLabel)
 
@@ -650,7 +650,7 @@ class RootWidget(FloatLayout):
                 text='Select your Option!',
                 color = (0,0,0,1),
                 font_size='45sp',
-                font_name= 'data/fonts/Captain Redemption.ttf',
+                font_name= './images/Captain Redemption.ttf',
                pos_hint = {'center_x': .5, 'center_y': .75})
 
 
@@ -674,14 +674,14 @@ class RootWidget(FloatLayout):
                 text='Select your option',
                 color = (0,0,0,1),
                 font_size='40sp',
-                font_name= 'data/fonts/Captain Redemption.ttf',
+                font_name= './images/Captain Redemption.ttf',
                 pos_hint = {'center_x': .72, 'center_y': .6})
         
         sLabel2 = Label(
                 text='Value: --',
                 color = (0,0,0,1),
                 font_size='40sp',
-                font_name= 'data/fonts/Captain Redemption.ttf',
+                font_name= './images/Captain Redemption.ttf',
                 pos_hint = {'center_x': .72, 'center_y': .50})
         
         data = [{'text': i, 'is_selected': False} for i in wpData]
@@ -723,7 +723,7 @@ class RootWidget(FloatLayout):
                 text='Select your calculation option',
                 color = (0,0,0,1),
                 font_size='60sp',
-                font_name= 'data/fonts/Captain Redemption.ttf',
+                font_name= './images//Captain Redemption.ttf',
                 pos_hint = {'center_x': .5, 'center_y': .7})
 
         manualDiceButton = Button(
@@ -859,7 +859,7 @@ class RootWidget(FloatLayout):
                 text='??',
                 color = (0,0,0,1),
                 font_size='80sp',
-                font_name= 'data/fonts/Captain Redemption.ttf',
+                font_name= './images/Captain Redemption.ttf',
                 pos_hint = {'center_x': .5, 'center_y': .5})
 
         
@@ -1020,7 +1020,7 @@ class RootWidget(FloatLayout):
                 text='The total value = 0',
                 color = (0,0,0,1),
                 font_size='40sp',
-                font_name= 'data/fonts/Captain Redemption.ttf',
+                font_name= './images/Captain Redemption.ttf',
                 pos_hint = {'center_x': .33, 'center_y': .2})
 
         
