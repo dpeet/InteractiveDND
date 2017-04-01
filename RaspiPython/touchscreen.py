@@ -18,6 +18,10 @@ from player import Player
 from countdice2 import get_num_from_dice, test_get_num_from_dice
 import json
 from pprint import pprint
+from kivy.core.window import Window
+
+from kivy.config import Config
+
 
 
 ##Builder.load_string("""
@@ -49,6 +53,10 @@ root = Builder.load_string('''
 
 
 class RootWidget(FloatLayout):
+
+##    Config.set('graphics', 'width', '200')
+##    Config.set('graphics', 'height', '200')
+    Window.size = (500, 1000)
     def callback2(instance):
         print('The button <%s> is being pressed' % instance.text)
 
