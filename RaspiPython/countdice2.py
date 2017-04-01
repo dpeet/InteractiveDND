@@ -9,6 +9,27 @@ import numpy
 import cv2
 import sys
 
+from picamera.array import PiRGBArray
+from picamera import PiCamera
+import time
+
+def test_cam():
+    # initialize the camera and grab a reference to the raw camera capture
+    camera = PiCamera()
+    rawCapture = PiRGBArray(camera)
+
+    # allow the camera to warmup
+    time.sleep(0.1)
+
+    # grab an image from the camera
+    camera.capture(rawCapture, format="bgr")
+    image = rawCapture.array
+
+    # display the image on screen and wait for a keypress
+    cv2.imshow("Image", image)
+    cv2.waitKey(0)
+
+
 def get_num_from_dice():
     HAVE_DISPLAY = True  # show debug windows
     BINARIZATION_THRESHOLD = 50  # Selects the bright white die area
@@ -61,6 +82,7 @@ def get_num_from_dice():
             # print "Contour",i,"with area",dieArea,"discarded"
 
     dice_numbers = []
+    die_sum = 0
     for i in range(len(dice)):
         dieCnt, pipContours = dice[i]
         cv2.drawContours(image, [dieCnt], -1, (64, 64, 128), 2)
@@ -83,3 +105,4 @@ def test_get_num_from_dice():
     return ([5,1,3])
 
 # get_num_from_dice()
+test_cam()
