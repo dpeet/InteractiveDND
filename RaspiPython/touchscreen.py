@@ -526,7 +526,6 @@ class RootWidget(FloatLayout):
                         sLabel.color = (0,0,0,1)
                         
                         sLabel.text = str(sum(test_get_num_from_dice())+int(sLabel3.text))
-
                         
                         ran = random.randint(1, 100)
                         sLabel2.text = ('Value: %d' % ran)
@@ -566,7 +565,7 @@ class RootWidget(FloatLayout):
                 print('what is this?')
 
             dImg1 = Image(source='./images/box.png',
-                        pos_hint = {'center_x': .5, 'center_y': .4},
+                        pos_hint = {'center_x': .5, 'center_y': .35},
                         size_hint = (.9,.7))
             self.add_widget(dImg1)
             self.remove_widget(tLabel)
@@ -660,9 +659,9 @@ class RootWidget(FloatLayout):
                         # available values
                         values=playerNames,
                         # just for positioning in our example
-                        size_hint=(.1, 0.1),
+                        size_hint=(0.175, 0.05),
 ##                        size=(100, 44),
-                        pos_hint={'center_x': .93, 'center_y': .93})
+                        pos_hint={'center_x': .9, 'center_y': .95})
         spinner.bind(text=show_selected_value)
         self.add_widget(spinner)
 ################################# First page widgets! ####################################################################################
@@ -752,31 +751,31 @@ class RootWidget(FloatLayout):
 ################################# Second page widgets! ##############################################################################
 
         backButton = Button(
-                        text = 'Back',
-                        color = (0,0,0,1),
-                        size_hint = (.1, .1),
-                        pos_hint = {'center_x': .1, 'center_y': .9})
+            text='Back',
+            color=(255, 255, 255, 1),
+            size_hint=(0.175, 0.05),
+            pos_hint={'center_x': .1, 'center_y': .95})
         backButton.bind(on_press=backPage)
 
         manualButton = Button(
-                        text = "Rnadom",
-                        color = (0,0,0,1),
-                        size_hint = (.1, .1),
-                        pos_hint = {'center_x': .35, 'center_y': .2})
+            text="Random",
+            color=(255, 255, 255, 1),
+            size_hint=(0.175, 0.05),
+            pos_hint={'center_x': .25, 'center_y': .1})
         manualButton.bind(on_press=dieSelect)
 
         autoButton = Button(
-                        text = "Roll Atk",
-                        color = (0,0,0,1),
-                        size_hint = (.1, .1),
-                        pos_hint = {'center_x': .5, 'center_y': .2})
+            text="Roll Atk",
+            color=(255, 255, 255, 1),
+            size_hint=(0.175, 0.05),
+            pos_hint={'center_x': .5, 'center_y': .1})
         autoButton.bind(on_press=dieSelect)
 
         autoButton2 = Button(
-                        text = "Roll Dmg",
-                        color = (0,0,0,1),
-                        size_hint = (.1, .1),
-                        pos_hint = {'center_x': .65, 'center_y': .2})
+            text="Roll Dmg",
+            color=(255, 255, 255, 1),
+            size_hint=(0.175, 0.05),
+            pos_hint={'center_x': .75, 'center_y': .1})
         autoButton2.bind(on_press=dieSelect)
 
         
@@ -786,28 +785,28 @@ class RootWidget(FloatLayout):
                 color = (0,0,0,1),
                 font_size='40sp',
                 font_name= './images/Captain_Redemption.ttf',
-                pos_hint = {'center_x': .25, 'center_y': .7})
+                pos_hint = {'center_x': .25, 'center_y': .5})
 
         sLabel2 = Label(
                 text='0',
                 color = (0,0,0,1),
                 font_size='40sp',
                 font_name= './images/Captain_Redemption.ttf',
-                pos_hint = {'center_x': .25, 'center_y': .55})
+                pos_hint = {'center_x': .25, 'center_y': .35})
 
         sLabel3 = Label(
                 text='0',
                 color = (0,0,0,1),
                 font_size='40sp',
                 font_name= './images/Captain_Redemption.ttf',
-                pos_hint = {'center_x': .45, 'center_y': .7})
+                pos_hint = {'center_x': .45, 'center_y': .5})
 
         sLabel4 = Label(
                 text='0',
                 color = (0,0,0,1),
                 font_size='40sp',
                 font_name= './images/Captain_Redemption.ttf',
-                pos_hint = {'center_x': .45, 'center_y': .55})
+                pos_hint = {'center_x': .45, 'center_y': .35})
         
 
         data = [{'text': i, 'is_selected': False} for i in wpData]
@@ -830,7 +829,7 @@ class RootWidget(FloatLayout):
 
 
         list_view = ListView(adapter = list_adapter,
-                             pos_hint = {'center_x': .75, 'center_y': .43},
+                             pos_hint = {'center_x': .75, 'center_y': .35},
                              size_hint = (0.25, 0.5))
         list_view.background_normal = (0,0,0,1)
         
