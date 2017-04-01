@@ -18,7 +18,8 @@
       "exp":1165,
       "weapons":["Warhammer", "Handaxe", "Maul"],
       "spells":["Mage Hand", "Green Flame"],
-      "special":["Second Wind"]
+      "special":["Second Wind"],
+	  "skills":["Athletics","History","Intimidation","Persuasion"]
    },
    {
       "class":"Demol",
@@ -37,8 +38,9 @@
       "armor_class":10,
       "speed":30,
       "exp":1200,
-      "weapons":["Warhammer", "Handaxe", "Maul"],
+      "weapons":["LongBow", "Bow"],
       "spells":["Mage Hand", "Green Flame"],
-      "special":["Second Wind"]
+      "special":["Second Wind"],
+	  "skills":["Athletics","History","Intimidation","Persuasion"]
    }
 ]

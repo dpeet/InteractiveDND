@@ -96,6 +96,7 @@ class RootWidget(FloatLayout):
             playerNames.append(item.playerName)
             initData.append(("%s  =     0" %item.playerName))
             playerDic[item.playerName] = item
+            print(item.weapons)
 
 
         if len(playerNames) > 1:
@@ -417,6 +418,8 @@ class RootWidget(FloatLayout):
                 die = 2
             elif instance == wpButton:
                 dLabel.text = ('%s is selected!' % instance.text)
+                print(currentPlayer.playerName)
+                print(playerDic[currentPlayer.playerName].weapons)
                 wpData = playerDic[currentPlayer.playerName].weapons
                 data = [{'text': i, 'is_selected': False} for i in wpData]
                 sLabel2.text = 'Value: --'
@@ -497,17 +500,17 @@ class RootWidget(FloatLayout):
                 changePageNum(2)
 
         def show_selected_value(spinner, text):
-##            global currentPlayer
+            global currentPlayer
 ##            print('The spinner', spinner, 'have text', text)
-            player = playerDic[text]
-            print(player.playerName)
-            changeCurrentPlayer(player)
-            print(currentPlayer.playerName)
+            currentPlayer = playerDic[text]
+##            print(player.playerName)
+##            changeCurrentPlayer(player)
+##            print(currentPlayer.playerName)
 ##            return currentPlayer.playerName
 
-        def changeCurrentPlayer(player):
-            global currentPlayer
-            currentPlayer = player
+##        def changeCurrentPlayer(player):
+##            global currentPlayer
+##            currentPlayer = player
 
 
 
