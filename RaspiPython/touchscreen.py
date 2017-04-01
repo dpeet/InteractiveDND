@@ -586,17 +586,17 @@ class RootWidget(FloatLayout):
         spinner.bind(text=show_selected_value)
         self.add_widget(spinner)
 ################################# First page widgets! ####################################################################################
-
-
+        num = 480/800
+        defNum = .25
         initButton = Button(
-            size_hint=(.2, .2),
+            size_hint=(defNum, defNum*num),
             background_normal="./images/button_init.png",
             pos_hint={'center_x': .20, 'center_y': .6})
 
         initButton.bind(on_press=dieSelect)
 
         stButton = Button(
-            size_hint=(.2, .2),
+            size_hint=(defNum, defNum*num),
             # height=50, width=50,
             background_normal="./images/button_saving_throw.png",
             pos_hint={'center_x': .5, 'center_y': .6})
@@ -604,28 +604,29 @@ class RootWidget(FloatLayout):
         stButton.bind(on_press=dieSelect)
 
         wpButton = Button(
-            size_hint=(.2, .2),
+            size_hint=(defNum, defNum*num),
+##            size= (0.1, .1),
             background_normal="./images/button_weapons.png",
             pos_hint={'center_x': .8, 'center_y': .6})
 
         wpButton.bind(on_press=dieSelect)
 
         skButton = Button(
-            size_hint=(.2, .2),
+            size_hint=(defNum, defNum*num),
             background_normal="./images/button_skills.png",
             pos_hint={'center_x': .2, 'center_y': .30})
 
         skButton.bind(on_press=dieSelect)
 
         spButton = Button(
-            size_hint=(.2, .2),
+            size_hint=(defNum, defNum*num),
             background_normal="./images/button_spell.png",
             pos_hint={'center_x': .5, 'center_y': .30})
 
         spButton.bind(on_press=dieSelect)
 
         saButton = Button(
-            size_hint=(.2, .2),
+            size_hint=(defNum, defNum*num),
             background_normal="./images/button_special.png",
             pos_hint={'center_x': .8, 'center_y': .30})
 
