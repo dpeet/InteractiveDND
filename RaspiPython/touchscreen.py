@@ -587,7 +587,7 @@ class RootWidget(FloatLayout):
         self.add_widget(spinner)
 ################################# First page widgets! ####################################################################################
         num = 480/800
-        defNum = .25
+        defNum = .2
         initButton = Button(
             size_hint=(defNum, defNum*num),
             background_normal="./images/button_init.png",
