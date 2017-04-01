@@ -1020,7 +1020,7 @@ class RootWidget(FloatLayout):
                 text='The total value = 0',
                 color = (0,0,0,1),
                 font_size='40sp',
-                font_name= 'data/fonts/thecroach.ttf',
+                font_name= 'data/fonts/Captain Redemption.ttf',
                 pos_hint = {'center_x': .33, 'center_y': .2})
 
         
