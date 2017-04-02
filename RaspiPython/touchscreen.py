@@ -21,6 +21,7 @@ from pprint import pprint
 from kivy.core.window import Window
 
 from kivy.config import Config
+import operator
 
 Config.set('graphics', 'width', '480')
 Config.set('graphics', 'height', '800')
@@ -624,7 +625,7 @@ class RootWidget(FloatLayout):
                                 prevItem = item
                                 previous = int(item['text'].split(' ')[0])
                             
-                        print(item)
+                    print(probList)
                 
             else:
                 print('what is this?')
@@ -707,9 +708,9 @@ class RootWidget(FloatLayout):
                 if currentPage == 1:
                     selectedItem = list_adapter2.selection[0].text
 ####                    print("here")
-                    print(list_adapter2.data)
-                    print(unsortedPlayerNames)
-                    print(sortedPlayerNames)
+##                    print(list_adapter2.data)
+##                    print(unsortedPlayerNames)
+##                    print(sortedPlayerNames)
                     newList = list()
                     newList2 = list()
                     newList2Names = list()
@@ -721,21 +722,26 @@ class RootWidget(FloatLayout):
                     data = [{'text': i, 'is_selected': False} for i in newList]
                     list_adapter2.data = data
                     list_view2.populate()
-                    print(newList)
-
-                    
-                    ran = random.randint(1,20)
+                    tempDic = list()
+##                    ran = random.randint(1,20)
+                    ran = 10
                     if len(list_adapter3.data) > 0:
                         for item in list_adapter3.data:
-                            print(item)
                             if item['text'] != selectedItem:
                                 newList2.append(item['text'])
+                                tempDic.append((item['text'], int(item['text'].split(' ')[0])))
                     dexx = playerDic[selectedItem].dex
+                    dexx = 0
                     ran = ran + dexx
+
+                    tempDic.append((("%d - %s" % (ran, selectedItem)), ran))
                     newList2.append("%d - %s" % (ran, selectedItem))
-                    newList2.sort(reverse=True)
-                    
-                    data = [{'text': i, 'is_selected': False} for i in newList2]
+                    newList2.sort()
+                    sList = sorted(tempDic, key=lambda dic: dic[1], reverse=True)
+                    fList = list()
+                    for item in sList:
+                        fList.append(item[0])
+                    data = [{'text': i, 'is_selected': False} for i in fList]
                     list_adapter3.data = data
                     list_view3.populate()
                     

@@ -42,5 +42,27 @@
       "spells":["Silence", "Wind Wall"],
       "special":["Burrow"],
 	  "skills":["Athletics","History","Intimidation","Persuasion"]
+   },
+   {
+      "class":"Pet",
+      "name":"Ball chaser",
+      "race":"Dog",
+      "background":"Rogue",
+      "playername":"Ginger",
+      "alignment":"Hate Cats",
+      "str":2,
+      "dex":2,
+      "con":4,
+      "int":1,
+      "wis":0,
+      "cha":-1,
+      "prof":1,
+      "armor_class":10,
+      "speed":30,
+      "exp":1200,
+      "weapons":[["Dagger", "3", "1d6+2"], ["Claws", "4", "1d8+3"]],
+      "spells":["Silence", "Wind Wall"],
+      "special":["Burrow"],
+	  "skills":["Athletics","History","Intimidation","Persuasion"]
    }
 ]
