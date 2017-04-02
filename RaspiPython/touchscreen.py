@@ -524,14 +524,18 @@ class RootWidget(FloatLayout):
                         sLabel.color = (0,0,0,1)
 
 ##                        selectedItem = list_adpater.selection[0].text
-                        listS = selectionItem.split("d")
-                        listT = listS[1].split("+")
+                        txt = sLabel4.text
+                        myList = txt.split("d")
+                        myList2 = myList[1].split("+")
                         
-                        ran = random.randint(1, int(listS[0]))
-                        if (listT[1] > 0 ):
-                             sLabel.text = str(ran + int(listT[1]))
-                        else:
-                            sLabel2.text = str(ran)
+                        ran = random.randint(1, 20)
+                        sLabel.text = str(ran +int(sLabel3.text))
+                        sLabel2.text = str(ran +int(myList2[1]))
+                        
+##                        if (listT[1] > 0 ):
+##                             sLabel.text = str(ran + int(myList2[1]))
+##                        else:
+##                            sLabel2.text = str(ran)
 
 ##                        for item in sp_list:
 ##                            self.remove_widget(item)
@@ -563,7 +567,7 @@ class RootWidget(FloatLayout):
                         
                         sLabel.text = str(sum(test_get_num_from_dice())+int(sLabel3.text))
                         
-                        ran = random.randint(1, 100)
+##                        ran = random.randint(1, 100)
 ##                        sLabel2.text = ('Value: %d' % ran)
 
                         print("here %d" % pageNum)
