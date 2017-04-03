@@ -22,6 +22,7 @@ from kivy.core.window import Window
 
 from kivy.config import Config
 import operator
+from random import shuffle
 
 Config.set('graphics', 'width', '480')
 Config.set('graphics', 'height', '800')
@@ -418,6 +419,9 @@ class RootWidget(FloatLayout):
                 num2 = num2 + num
                 totalManLabel.text = ("The total Value = %d" % num2)
 
+        def exitB(instance):
+            App.get_running_app().stop()
+
 
 
 
@@ -601,31 +605,80 @@ class RootWidget(FloatLayout):
                         sLabel2.text = str(sum(test_get_num_from_dice())+int(myList2[1]))
 ##                        sLabel2.text = ('Value: %d' % ran)
 
-##            elif instance == nxtButton:
-##                print('%d is current die' % die)
 
             elif instance == tieButton:
                 flag = False
-                print("Tie Button")
                 if len(list_adapter3.data) > 0:
-                    previous = -1
-                    prevItem = None
-                    probList = list()
-                    for item in list_adapter3.data:
-                        if previous == -1:
-                            prevItem = item
-                            previous = int(item['text'].split(' ')[0])
-                        else:
-                            if previous == int(item['text'].split(' ')[0]):
-                                probList.append(prevItem)
-                                probList.append(item)
+                    if len(list_adapter3.data) == len(playerNames):
+                        previous = -1
+                        prevItem = None
+                        probList = list()
+                        finalList = list()
+
+                        
+                        index = 0
+                        minI = -1
+                        maxI = len(list_adapter3.data)
+                        flg = False
+                        
+                        for item in list_adapter3.data:
+                            if previous == -1:
                                 prevItem = item
                                 previous = int(item['text'].split(' ')[0])
                             else:
-                                prevItem = item
-                                previous = int(item['text'].split(' ')[0])
+                                if previous == int(item['text'].split(' ')[0]):
+                                    if len(probList) == 0:
+                                        probList.append(prevItem['text'])
+                                        probList.append(item['text'])
+                                    else:
+                                        probList.append(item['text'])
+                                    if (minI < 0 and not flg):
+                                        flg = True
+    ##                                    print("minI %d index %d" % (minI, index))
+                                        minI = index - 2
+    ##                                    print("minI %d index %d" % (minI, index))
+                                    prevItem = item
+                                    previous = int(item['text'].split(' ')[0])
+                                    maxI = index
+                                else:
+                                    prevItem = item
+                                    previous = int(item['text'].split(' ')[0])
+                            index = index + 1
+
+                        shuffle(probList)
+                        if len(probList) != 0:
                             
-                    print(probList)
+                            index = 0
+                            once = 0
+    ##                        print("min: %d max: %d" % (minI, maxI))
+                            finalList.append("!!Final Order!!")
+        ##                    print(list_adapter3.data)
+        ##                    print(probList)
+                            for item in list_adapter3.data:
+                                if index <= minI:
+                                    finalList.append("%s. %s" % (str(index + 1), item['text'].split(' ')[2]))
+                                elif (index > minI and once == 0):
+                                    num = index
+                                    for item2 in probList:
+                                        finalList.append("%s. %s" % (str(num + 1), item2.split(' ')[2]))
+                                        num = num+1
+                                    once = 1
+        ##                            print(finalList)
+
+                                elif index > maxI:
+                                    finalList.append("%s. %s" % (str(index+1), item['text'].split(' ')[2]))
+                                print(index)
+                                index = index + 1
+        ##                    print("min: %d max: %d" % (minI, maxI))
+        ##
+        ##                    print(finalList)
+        ##                    print(probList)
+
+                            data = [{'text': i, 'is_selected': False} for i in finalList]
+                            list_adapter3.data = data
+                            list_view3.populate()
+
+                    
                 
             else:
                 print('what is this?')
@@ -723,24 +776,32 @@ class RootWidget(FloatLayout):
                     list_adapter2.data = data
                     list_view2.populate()
                     tempDic = list()
-##                    ran = random.randint(1,20)
-                    ran = 10
+                    ran = random.randint(1,20)
                     if len(list_adapter3.data) > 0:
                         for item in list_adapter3.data:
                             if item['text'] != selectedItem:
                                 newList2.append(item['text'])
                                 tempDic.append((item['text'], int(item['text'].split(' ')[0])))
                     dexx = playerDic[selectedItem].dex
-                    dexx = 0
                     ran = ran + dexx
 
                     tempDic.append((("%d - %s" % (ran, selectedItem)), ran))
                     newList2.append("%d - %s" % (ran, selectedItem))
                     newList2.sort()
+
+##                    sList = [('10 - Devon', 10), ('10 - Todd', 10), ('10 - Ginger', 10), ('3 - Devon3', 3), ('2 - Devon2', 2), ('14 - Devon', 14)]
+                    
                     sList = sorted(tempDic, key=lambda dic: dic[1], reverse=True)
+##                    sList = [ ('14 - Devon', 14), ('10 - Devon5', 10), ('10 - Todd', 10), ('10 - Ginger', 10), ('3 - Devon3', 3), ('2 - Devon2', 2)]
+##                    sList = [ ('10 - Devon', 10), ('10 - Todd', 10), ('10 - Ginger', 10), ('3 - Devon3', 3), ('2 - Devon2', 2)]
+##                    sList = [ ('14 - Devon', 14), ('11 - Devon', 11), ('10 - Devon', 10), ('10 - Todd', 10), ('10 - Ginger', 10), ('3 - Devon3', 3), ('2 - Devon2', 2)]
+##                    print(sList)
                     fList = list()
                     for item in sList:
                         fList.append(item[0])
+
+                    print(fList)
+##                    fList = ['10 - Devon', '10 - Todd', '10 - Ginger', ']
                     data = [{'text': i, 'is_selected': False} for i in fList]
                     list_adapter3.data = data
                     list_view3.populate()
@@ -786,7 +847,15 @@ class RootWidget(FloatLayout):
         spinner.bind(text=show_selected_value)
         self.add_widget(spinner)
 ################################# First page widgets! ####################################################################################
+        exitButton = Button(
+            text = 'Exit',
+            size_hint=(0.175, 0.05),
+##                        size=(100, 44),
+            pos_hint={'center_x': .5, 'center_y': .95})
 
+        exitButton.bind(on_press=exitB)
+
+        self.add_widget(exitButton)
 
         def get_scalex_and_y(target_width, width, height):
             screen_width = 480.0
@@ -852,13 +921,13 @@ class RootWidget(FloatLayout):
             color=(0, 0, 0, 1),
             font_size='75sp',
             font_name='./images/Captain_Redemption.ttf',
-            pos_hint={'center_x': .5, 'center_y': .75}
+            pos_hint={'center_x': .5, 'center_y': .8}
         )
         self.add_widget(tLabel)
 
         dragon = Image(
             source="./images/Dragon_Title.png",
-            pos_hint = {'center_x': .5, 'center_y': .76}
+            pos_hint = {'center_x': .5, 'center_y': .82}
         )
 
 
