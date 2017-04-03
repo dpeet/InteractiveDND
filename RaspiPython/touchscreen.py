@@ -83,6 +83,8 @@ class RootWidget(FloatLayout):
         initp_list = list()
         wpp_list = list()
         initp_list = list()
+        spp_list = list()
+        stp_list = list()
         
         f3p_list = list()
         zp_list = list()
@@ -135,116 +137,7 @@ class RootWidget(FloatLayout):
                             "fn_italic": "data/fonts/RobotoCondensed-LightItalic.ttf",
                             "fn_bolditalic": "data/fonts/RobotoCondensed-Italic.ttf"
                         }]
-        ## init add dex
 
-##        dmgData = ["Slashing (cut)",
-##                "Bludgeoning (smash)",
-##                "Piercing (pierce)",
-##                "Fire (burn)",
-##                "Cold (Freeze)",
-##                "Poison (Toxin)",
-##                "Acid (Corrosion)",
-##                "Psychic (Mental Durability)",
-##                "Necrotic (Decay)",
-##                "Lightning (Electrical)",
-##                "Thunder (Sound)",
-##                "Force (Force)"]
-##
-##        saData = ["Ability Score Loss",
-##                "Alternate Form",
-##                "Antimagic",
-##                "Blindsight And Blindsense",
-##                "Breath Weapon",
-##                "Change Shape",
-##                "Charm and Compulsion",
-##                "Cold Immunity",
-##                "Constrict",
-##                "Damage Reduction",
-##                "Darkvision",
-##                "Death Attacks",
-##                "Disease",
-##                "Energy Drain And Negative Levels",
-##                "Etherealness",
-##                "Evasion And Improved Evasion",
-##                "Fast Healing",
-##                "Fear",
-##                "Fire Immunity",
-##                "Gaseous Form",
-##                "Gaze Attacks",
-##                "Improved Grab",
-##                "Incorporeality",
-##                "Invisibility",
-##                "Level Loss",
-##                "Low-Light Vision",
-##                "Manufactured Weapons",
-##                "Movement Modes",
-##                "Natural Weapons",
-##                "Nonabilities",
-##                "Paralysis",
-##                "Poison",
-##                "Polymorph",
-##                "Pounce",
-##                "Powerful Charge",
-##                "Psionics",5
-##                "Rake",
-##                "Rays",
-##                "Regeneration",
-##                "Resistance To Energy",
-##                "Scent",
-##                "Sonic Attacks",
-##                "Spell Immunity",
-##                "Spell Resistance",
-##                "Spells",
-##                "Summon",
-##                "Swallow Whole",
-##                "Telepathy",
-##                "Trample",
-##                "Tremorsense",
-##                "Turn Resistance",
-##                "Vulnerability to Energy"]
-##
-##        wpData = ["Club (B 1d4)",
-##                "Dagger (P 1d4)",
-##                "Greatclub (B 1d8)",
-##                "Handaxe (S 1d6)",
-##                "Javelin (P 1d6)",
-##                "Light hammer (B 1d4)",
-##                "Mace (B 1d6)",
-##                "Quarterstaff (B 1d6)",
-##                "Sickle (S 1d4)",
-##                "Spear (P 1d6)",
-##                "Unarmed strike (B 1)",
-##                "Crossbow, light (P 1d8)",
-##                "Dart (P 1d4)",
-##                "Shortbow (P 1d6)",
-##                "Sling (B 1d4)",
-##                "Battleaxe (S 1d8)",
-##                "Flail (B 1d8)",
-##                "Glaive (S 1d10)",
-##                "Greataxe (S 1d12)",
-##                "Greatsword (S 2d6)",
-##                "Halberd (S 1d10)",
-##                "Lance (P 1d12)",
-##                "Longsword (S 1d8)",
-##                "Maul (B 2d6)",
-##                "Morningstar (P 1d8)",
-##                "Pike (P 1d10)",
-##                "Rapier (P 1d8)",
-##                "Scimitar (S 1d6)",
-##                "Shortsword (P 1d6)",
-##                "Trident (P 1d6)",
-##                "War pick (P 1d8)",
-##                "Warhammer (B 1d8)",
-##                "Whip (S 1d4)",
-##                "Blowgun (P 1)",
-##                "Crossbow, hand (P 1d6)",
-##                "Crossbow, heavy (P 1d10)",
-##                "Longbow (P 1d8)",
-##                "Net"]
-##
-##
-##        wpData.sort()
-##
         skData = ["Acrobatics (Dex)",
                 "Animal Handling (Wis)",
                 "Arcana (Int)",
@@ -271,11 +164,6 @@ class RootWidget(FloatLayout):
                 "Wisdom",
                 "Charisma"]
 
-##        initData = ["Tie Roll (1d20)"]
-
-##        initData = playerNames
-##        initData.sort()
-
         numData = ["1", "2", "3", "4", "5", "6"]
 
         diceData = ["d4", "d6", "d8", "d10", "d12", "d20"]
@@ -297,6 +185,12 @@ class RootWidget(FloatLayout):
                 elif currentPage == 1:
                     for item2 in initp_list:
                         self.remove_widget(item2)
+                elif currentPage == 5:
+                    for item2 in spp_list:
+                        self.remove_widget(item2)
+                elif currentPage == 2:
+                    for item2 in stp_list:
+                        self.remove_widget(item2)
                 else:
                     for item in sp_list:
                         self.remove_widget(item)
@@ -307,8 +201,7 @@ class RootWidget(FloatLayout):
                 die = 0
                 pageNum = 1
                 dLabel.text = ('Select your Die!')
-##                changePageNum(1)
-##                pageNum = 1
+
             elif pageNum == 3:
                 for item in tp_list:
                     self.remove_widget(item)
@@ -316,9 +209,7 @@ class RootWidget(FloatLayout):
                 for item2 in sp_list:
                     self.add_widget(item2)
                 pageNum = 2
-##                changePageNum(2)
-##                print("herewego")
-##                pageNum = 2
+
             elif pageNum == 4:
                 for item in f2p_list:
                     self.remove_widget(item)
@@ -328,7 +219,6 @@ class RootWidget(FloatLayout):
                 for item2 in tp_list:
                     self.add_widget(item2)
                 pageNum = 3
-##                changePageNum(3)
 
         def diceSelection(instance):
             global die
@@ -367,47 +257,6 @@ class RootWidget(FloatLayout):
             global pageNum
             pageNum = num
 
-##        def autoSelection(instance):
-##            global currentPlayer
-##            lh = ""
-##            rh = ""
-##            if instance == oneButton:
-##                lh = instance.text
-##            elif instance == twoButton:
-##                lh = instance.text
-##            elif instance == threeButton:
-##                lh = instance.text
-##            elif instance == fourButton:
-##                lh = instance.text
-##            elif instance == fiveButton:
-##                lh = instance.text
-##            elif instance == d4Button:
-##                rh = instance.text
-##            elif instance == d6Button:
-##                rh = instance.text
-##            elif instance == d8Button:
-##                rh = instance.text
-##            elif instance == d10Button:
-##                rh = instance.text
-##            elif instance == d12Button:
-##                rh = instance.text
-##            elif instance == d20Button:
-##                rh = instance.text
-##            elif instance == cal2Button:
-##                mylist = totalLabel.text.split(" ")
-##                if mylist[0] != "?" and mylist[2] != "?":
-####                    totalValLabel.text = str(random.randint(int(mylist[0]), int(mylist[0]) * int(mylist[2])))
-####                    print(test_get_num_from_dice())
-####                    totalValLabel.text = str(sum(test_get_num_from_dice()))
-##                    print("here")
-##                    ## call the openCV file
-##
-##            if lh:
-##                lhs, rhs = totalLabel.text.split(" ", 1)
-##                totalLabel.text = "%s %s" % (lh, rhs)
-##            elif rh:
-##                lhs, rhs = totalLabel.text.split(" ", 1)
-##                totalLabel.text = "%s %s to Roll" % (lhs, rh)
 
         def manualSelection(instance):
             if instance == clearButton:
@@ -454,9 +303,8 @@ class RootWidget(FloatLayout):
                 sLabel5.text = "Saving Throw"
                 sLabel2.text = '0'
                 sLabel.text = '0'
-##                stData = playerDic[currentPlayer.playerName].weapons
-##                for  item in stData:
-##                    print(item)
+##                attack.source = "./images/Button.png"
+                attack.source = "./images/Field_Attack.png"
                 data = [{'text': i, 'is_selected': False} for i in stData]
                 initFlag = False
                 currentPage = 2
@@ -464,12 +312,11 @@ class RootWidget(FloatLayout):
             elif instance == wpButton:
                 dLabel.text = ('%s is selected!' % instance.text)
                 sLabel5.text = "Weapons"
-                print(currentPlayer.playerName)
-                print(playerDic[currentPlayer.playerName].weapons)
                 wpData = []
                 for item in playerDic[currentPlayer.playerName].weapons:
                     wpData.append(item[0])
 ##                wpData = playerDic[currentPlayer.playerName].weapons
+                attack.source = "./images/Field_Attack.png"
                 data = [{'text': i, 'is_selected': False} for i in wpData]
                 sLabel2.text = '0'
                 sLabel.text = '0'
@@ -480,6 +327,7 @@ class RootWidget(FloatLayout):
                 dLabel.text = ('%s is selected!' % instance.text)
                 sLabel5.text = "Skills"
 ##                skData = playerDic[currentPlayer.playerName].skills
+                attack.source = "./images/Field_Attack.png"
                 data = [{'text': i, 'is_selected': False} for i in skData]
                 sLabel2.text = '0'
                 sLabel.text = '0'
@@ -492,6 +340,7 @@ class RootWidget(FloatLayout):
                 print(playerDic[currentPlayer.playerName].spells)
                 spData = playerDic[currentPlayer.playerName].spells
                 data = [{'text': i, 'is_selected': False} for i in spData]
+                attack.source = "./images/Field_Attack.png"
                 sLabel5.text = "Spells"
                 sLabel2.text = '0'
                 sLabel.text = '0'
@@ -501,6 +350,8 @@ class RootWidget(FloatLayout):
             elif instance == saButton:
                 dLabel.text = ('%s is selected!' % instance.text)
                 sLabel5.text = "Special Ability"
+##                attack.source = "./images/Button.png"
+                attack.source = "./images/Field_Attack.png"
                 saData = playerDic[currentPlayer.playerName].special
                 data = [{'text': i, 'is_selected': False} for i in saData]
                 sLabel2.text = '0'
@@ -525,30 +376,24 @@ class RootWidget(FloatLayout):
 
                         print("here %d" % pageNum)
                     else:
-                        selectedItem = list_adapter.selection[0].text
-                        sLabel.color = (0,0,0,1)
+                        if currentPage == 3:
+                            selectedItem = list_adapter.selection[0].text
+                            sLabel.color = (0,0,0,1)
 
-##                        selectedItem = list_adpater.selection[0].text
-                        txt = sLabel4.text
-                        myList = txt.split("d")
-                        myList2 = myList[1].split("+")
-                        
-                        ran = random.randint(1, 20)
-                        sLabel.text = str(ran +int(sLabel3.text))
-                        sLabel2.text = str(ran +int(myList2[1]))
-                        
-##                        if (listT[1] > 0 ):
-##                             sLabel.text = str(ran + int(myList2[1]))
-##                        else:
-##                            sLabel2.text = str(ran)
-
-##                        for item in sp_list:
-##                            self.remove_widget(item)
-##
-##                        for item2 in tp_list:
-##                            self.add_widget(item2)
-##                        changePageNum(3)
-                        print("here %d" % pageNum)
+    ##                        selectedItem = list_adpater.selection[0].text
+                            txt = sLabel4.text
+                            myList = txt.split("d")
+                            myList2 = myList[1].split("+")
+                            
+                            ran = random.randint(1, 20)
+                            sLabel.text = str(ran +int(sLabel3.text))
+                            sLabel2.text = str(ran +int(myList2[1]))
+                            print("here %d" % pageNum)
+                        else:
+                            ran = random.randint(1, 20)
+                            selectedItem = list_adapter.selection[0].text
+                            sLabel.color = (0,0,0,1)
+                            sLabel.text = str(ran +int(sLabel3.text))
 
             elif instance == autoButton:
                 flag = False
@@ -678,7 +523,22 @@ class RootWidget(FloatLayout):
                             list_adapter3.data = data
                             list_view3.populate()
 
-                    
+            elif instance == rollButton:
+                flag = False
+                selected1 = list_adapter.selection
+                if not selected1:
+                    sLabel.text = "Select One!"
+                    sLabel.color = (1,0,0,1)
+                else:
+                    if initFlag:
+                        selectedItem = list_adapter.selection[0].text
+                        sLabel.color = (0,0,0,1)
+                        sLabel.text = selectedItem
+                    else:
+                        selectedItem = list_adapter.selection[0].text
+                        sLabel.color = (0,0,0,1)
+                        sLabel.text = str(sum(test_get_num_from_dice())+int(sLabel3.text))
+      
                 
             else:
                 print('what is this?')
@@ -695,34 +555,29 @@ class RootWidget(FloatLayout):
                 elif currentPage == 1:
                     for item2 in initp_list:
                         self.add_widget(item2)
+                elif currentPage == 5:
+                    for item2 in spp_list:
+                        self.add_widget(item2)
+                elif currentPage == 2:
+                    for item2 in stp_list:
+                        self.add_widget(item2)
                 else:
                     for item2 in sp_list:
                         self.add_widget(item2)
-
             
             pageNum = 2
-##            if flag :
-##                list_adapter.data = data
-##                list_view.populate()
-##
-##                for item in fp_list:
-##                    self.remove_widget(item)
-##                    
-##
-##                for item2 in sp_list:
-##                    self.add_widget(item2)
-##                changePageNum(2)
 
         def show_selected_value(spinner, text):
             global currentPlayer
             currentPlayer = playerDic[text]
-            print(pageNum)
+##            print("here")
             if pageNum == 2:
                 if currentPage == 1:
                     data = [{'text': i, 'is_selected': False} for i in initData]
 
                 elif currentPage == 2:
                     data = [{'text': i, 'is_selected': False} for i in stData]
+##                    print("Saving")
 
                 if currentPage == 3:
                     wpData = []
@@ -757,6 +612,13 @@ class RootWidget(FloatLayout):
                         if item[0] == selectedItem:
                             sLabel3.text = item[1]
                             sLabel4.text = item[2]
+                elif currentPage == 2:
+                    profstat = currentPlayer.profStats
+                    stat = selectedItem[:3].lower()
+                    if stat in profstat:
+                        sLabel3.text = str(currentPlayer.prof)
+                    else:
+                        sLabel3.text = "0"
             elif len(list_adapter2.selection) > 0:
                 if currentPage == 1:
                     selectedItem = list_adapter2.selection[0].text
@@ -806,31 +668,6 @@ class RootWidget(FloatLayout):
                     list_adapter3.data = data
                     list_view3.populate()
                     
-
-
-##
-################################### 0 page widgets! ########################################################################################
-##
-##        dataPlayer = [{'text': i, 'is_selected': False} for i in wpData]
-##
-##        args_converter2 = lambda row_index, rec: {'text': rec['text'],
-##                                                 'size_hint_x': 10,
-##                                                 'size_hint_y': None,
-##                                                 'selected_color': (1,0,0,1),
-##                                                 'deselected_color': (0,0,0,1),
-##                                                 'height': 45}
-##
-##        list_adapter2 = ListAdapter(data=dataPlayer,
-##                                    args_converter=args_converter2,
-##                                    cls=ListItemButton,
-##                                    selection_mode='single',
-##                                    allow_empty_selection=True)
-##
-##
-##        list_view2 = ListView(adapter = list_adapter2,
-##                             pos_hint = {'center_x': .3, 'center_y': .43},
-##                             size_hint = (0.4, 0.6))
-##        list_view2.background_normal = (0,0,0,1)
 
 ################################# 0 page widgets! ########################################################################################
 
@@ -1128,136 +965,6 @@ class RootWidget(FloatLayout):
             size_hint=(0.175, 0.05),
             pos_hint={'center_x': .5, 'center_y': .1})
         tieButton.bind(on_press=dieSelect)
-        
-
-##        manualDiceButton = Button(
-##                        text = 'Manual',
-##                        color = (0,0,0,1),
-##                        size_hint = (.25, .25),
-##                        font_size='35sp',
-##                        pos_hint = {'center_x': .3, 'center_y': .5})
-##        manualDiceButton.bind(on_press=diceSelection)
-##
-##        autoDiceButton = Button(
-##                        text = 'AutoCal',
-##                        color = (0,0,0,1),
-##                        size_hint = (.25, .25),
-##                        font_size='35sp',
-##                        pos_hint = {'center_x': .7, 'center_y': .5})
-##        autoDiceButton.bind(on_press=diceSelection)
-
-
-################################# Forth page (AUTO) widgets! ##############################################################################
-
-##        diceNumLabel = Label(
-##                text='Number of Dice?',
-##                color = (0,0,0,1),
-##                font_size='50sp',
-##                font_name= 'data/fonts/Captain_Redemption.ttf',
-##                pos_hint = {'center_x': .25, 'center_y': .7})
-##
-##        yVal1 = 0.6
-##        oneButton = Button(
-##                        text = "1",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .16, 'center_y': yVal1})
-##        oneButton.bind(on_press=autoSelection)
-##
-##        twoButton = Button(
-##                        text = "2",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .32, 'center_y': yVal1})
-##        twoButton.bind(on_press=autoSelection)
-##
-##        threeButton = Button(
-##                        text = "3",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .48, 'center_y': yVal1})
-##        threeButton.bind(on_press=autoSelection)
-##
-##        fourButton = Button(
-##                        text = "4",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .64, 'center_y': yVal1})
-##        fourButton.bind(on_press=autoSelection)
-##
-##        fiveButton = Button(
-##                        text = "5",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .8, 'center_y': yVal1})
-##        fiveButton.bind(on_press=autoSelection)
-##
-##
-##        diceTypLabel = Label(
-##                text='Type of Dice?',
-##                color = (0,0,0,1),
-##                font_size='50sp',
-##                font_name= 'data/fonts/Captain_Redemption.ttf',
-##                pos_hint = {'center_x': .22, 'center_y': .45})
-##
-####        diceTypLabel
-##        yVal2 = 0.35
-##        d4Button = Button(
-##                        text = "d 4",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .16, 'center_y': yVal2})
-##        d4Button.bind(on_press=autoSelection)
-##
-##        d6Button = Button(
-##                        text = "d 6",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .288, 'center_y': yVal2})
-##        d6Button.bind(on_press=autoSelection)
-##
-##        d8Button = Button(
-##                        text = "d 8",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .416, 'center_y': yVal2})
-##        d8Button.bind(on_press=autoSelection)
-##
-##        d10Button = Button(
-##                        text = "d 10",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .544, 'center_y': yVal2})
-##        d10Button.bind(on_press=autoSelection)
-##
-##        d12Button = Button(
-##                        text = "d 12",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .672, 'center_y': yVal2})
-##        d12Button.bind(on_press=autoSelection)
-##
-##        d20Button = Button(
-##                        text = "d 20",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .8, 'center_y': yVal2})
-##        d20Button.bind(on_press=autoSelection)
-
-
-####        totalLabel = Label(
-####                text='? d ? to Roll',
-####                color = (0,0,0,1),
-####                font_size='40sp',
-####                font_name= 'data/fonts/thecroach.ttf',
-####                pos_hint = {'center_x': .3, 'center_y': .2})
-##
-##        cal2Button = Button(
-##                        text = "=",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .5, 'center_y': .2})
-##        cal2Button.bind(on_press=autoSelection)
 
         totalValLabel = Label(
                 text='??',
@@ -1266,181 +973,15 @@ class RootWidget(FloatLayout):
                 font_name= './images/Captain_Redemption.ttf',
                 pos_hint = {'center_x': .5, 'center_y': .5})
 
+        rollButton = Button(
+            text="Roll",
+            color=(255, 255, 255, 1),
+            size_hint=(0.175, 0.05),
+            pos_hint={'center_x': .75, 'center_y': .1})
+        rollButton.bind(on_press=dieSelect)
 
-################################# Forth page (MANUAL) widgets! ############################################################################
+#################################################################################################################################
 
-##        yValf = 0.65
-##        yVals = 0.55
-##        yValt = 0.45
-##        yValfr = 0.35
-##        num1Button = Button(
-##                        text = "1",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .16, 'center_y': yValf})
-##        num1Button.bind(on_press=manualSelection)
-##
-##        num2Button = Button(
-##                        text = "2",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .32, 'center_y': yValf})
-##        num2Button.bind(on_press=manualSelection)
-##
-##        num3Button = Button(
-##                        text = "3",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .48, 'center_y': yValf})
-##        num3Button.bind(on_press=manualSelection)
-##
-##        num4Button = Button(
-##                        text = "4",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .64, 'center_y': yValf})
-##        num4Button.bind(on_press=manualSelection)
-##
-##        num5Button = Button(
-##                        text = "5",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .8, 'center_y': yValf})
-##        num5Button.bind(on_press=manualSelection)
-##
-##        num6Button = Button(
-##                        text = "6",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .16, 'center_y': yVals})
-##        num6Button.bind(on_press=manualSelection)
-##
-##        num7Button = Button(
-##                        text = "7",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .32, 'center_y': yVals})
-##        num7Button.bind(on_press=manualSelection)
-##
-##        num8Button = Button(
-##                        text = "8",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .48, 'center_y': yVals})
-##        num8Button.bind(on_press=manualSelection)
-##
-##        num9Button = Button(
-##                        text = "9",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .64, 'center_y': yVals})
-##        num9Button.bind(on_press=manualSelection)
-##
-##        num10Button = Button(
-##                        text = "10",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .8, 'center_y': yVals})
-##        num10Button.bind(on_press=manualSelection)
-##
-##        num11Button = Button(
-##                        text = "11",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .16, 'center_y': yValt})
-##        num11Button.bind(on_press=manualSelection)
-##
-##        num12Button = Button(
-##                        text = "12",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .32, 'center_y': yValt})
-##        num12Button.bind(on_press=manualSelection)
-##
-##        num13Button = Button(
-##                        text = "13",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .48, 'center_y': yValt})
-##        num13Button.bind(on_press=manualSelection)
-##
-##        num14Button = Button(
-##                        text = "14",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .64, 'center_y': yValt})
-##        num14Button.bind(on_press=manualSelection)
-##
-##        num15Button = Button(
-##                        text = "15",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .8, 'center_y': yValt})
-##        num15Button.bind(on_press=manualSelection)
-##
-##        num16Button = Button(
-##                        text = "16",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .16, 'center_y': yValfr})
-##        num16Button.bind(on_press=manualSelection)
-##
-##        num17Button = Button(
-##                        text = "17",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .32, 'center_y': yValfr})
-##        num17Button.bind(on_press=manualSelection)
-##
-##        num18Button = Button(
-##                        text = "18",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .48, 'center_y': yValfr})
-##        num18Button.bind(on_press=manualSelection)
-##
-##        num19Button = Button(
-##                        text = "19",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .64, 'center_y': yValfr})
-##        num19Button.bind(on_press=manualSelection)
-##
-##        num20Button = Button(
-##                        text = "20",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .8, 'center_y': yValfr})
-##        num20Button.bind(on_press=manualSelection)
-##
-##        clearButton = Button(
-##                        text = "clear",
-##                        color = (0,0,0,1),
-##                        size_hint = (.1, .1),
-##                        pos_hint = {'center_x': .65, 'center_y': .2})
-##        clearButton.bind(on_press=manualSelection)
-##
-##        totalManLabel = Label(
-##                text='The total value = 0',
-##                color = (0,0,0,1),
-##                font_size='40sp',
-##                font_name= './images/Captain_Redemption.ttf',
-##                pos_hint = {'center_x': .33, 'center_y': .2})
-
-
-
-
-###########################################################################################################################################
-
-##        zp_list.append()
-##        zp_list.append()
-##        zp_list.append()
-##        zp_list.append()
-##        zp_list.append()
-##        zp_list.append()
-##        self.add_widget(dImg1)
-##        self.remove_widget(tLabel)
-##        self.add_widget(tLabel)
         fp_list.append(dImg1)
         fp_list.append(initButton)
         fp_list.append(stButton)
@@ -1449,19 +990,6 @@ class RootWidget(FloatLayout):
         fp_list.append(saButton)
         fp_list.append(wpButton)
         fp_list.append(dLabel)
-        # fp_list.append(initImg)
-        # fp_list.append(stImg)
-        # fp_list.append(dmgImg)
-        # fp_list.append(skImg)
-        # fp_list.append(saImg)
-        # fp_list.append(wpImg)
-
-##        fp_list.append(initLabel)
-##        fp_list.append(stLabel)
-##        fp_list.append(dmgLabel)
-##        fp_list.append(skLabel)
-##        fp_list.append(saLabel)
-##        fp_list.append(wpLabel)
         
         sp_list.append(backButton)
         sp_list.append(list_view)
@@ -1471,7 +999,6 @@ class RootWidget(FloatLayout):
         sp_list.append(sLabel2)
         sp_list.append(sLabel3)
         sp_list.append(sLabel4)
-##        sp_list.append(secLabel)
         sp_list.append(manualButton)
         sp_list.append(autoButton)
         sp_list.append(autoButton2)
@@ -1480,7 +1007,6 @@ class RootWidget(FloatLayout):
         
 
         wpp_list.append(dImg2)
-        wpp_list.append(dImg3)
         wpp_list.append(dImg4)
         wpp_list.append(backButton)
         wpp_list.append(list_view)
@@ -1493,7 +1019,6 @@ class RootWidget(FloatLayout):
         wpp_list.append(manualButton)
         wpp_list.append(autoButton)
         wpp_list.append(autoButton2)
-##        wpp_list.append(secLabel)
         wpp_list.append(sLabel5)
 
         initp_list.append(dImg4)
@@ -1502,68 +1027,37 @@ class RootWidget(FloatLayout):
         initp_list.append(backButton)
         initp_list.append(list_view3)
         initp_list.append(tieButton)
-        
-##        initp_list.append()
 
-        
-        
+        spp_list.append(dImg2)
+        spp_list.append(dImg4)
+        spp_list.append(backButton)
+        spp_list.append(list_view)
+        spp_list.append(attack)
+        spp_list.append(sLabel)
+##        spp_list.append(sLabel2)
+        spp_list.append(sLabel3)
+        spp_list.append(sLabel5)
+        spp_list.append(manualButton)
+        spp_list.append(rollButton)
 
-##        tp_list.append(manualDiceButton)
-##        tp_list.append(autoDiceButton)
+        stp_list.append(dImg2)
+        stp_list.append(dImg4)
+        stp_list.append(backButton)
+        stp_list.append(list_view)
+        stp_list.append(attack)
+        stp_list.append(sLabel)
+##        stp_list.append(sLabel2)
+        stp_list.append(sLabel5)
+        stp_list.append(sLabel3)
+        stp_list.append(manualButton)
+        stp_list.append(rollButton)
+        
         tp_list.append(backButton)
-##        tp_list.append(optionLabel)
-
-
-##        f2p_list.append(diceNumLabel)
-##        f2p_list.append(diceTypLabel)
-##        f2p_list.append(oneButton)
-##        f2p_list.append(twoButton)
-##        f2p_list.append(threeButton)
-##        f2p_list.append(fourButton)
-##        f2p_list.append(fiveButton)
-##        f2p_list.append(totalLabel)
-##        f2p_list.append(d4Button)
-##        f2p_list.append(d6Button)
-##        f2p_list.append(d8Button)
-##        f2p_list.append(d10Button)
-##        f2p_list.append(d12Button)
-##        f2p_list.append(d20Button)
         f2p_list.append(backButton)
-##        f2p_list.append(totalValLabel)
-##        f2p_list.append(cal2Button)
 
-##        f3p_list.append(list_view2)
-##        f3p_list.append(list_view3)
-##        f3p_list.append(num1Button)
-##        f3p_list.append(num2Button)
-##        f3p_list.append(num3Button)
-##        f3p_list.append(num4Button)
-##        f3p_list.append(num5Button)
-##        f3p_list.append(num6Button)
-##        f3p_list.append(num7Button)
-##        f3p_list.append(num8Button)
-##        f3p_list.append(num9Button)
-##        f3p_list.append(num10Button)
-##        f3p_list.append(num11Button)
-##        f3p_list.append(num12Button)
-##        f3p_list.append(num13Button)
-##        f3p_list.append(num14Button)
-##        f3p_list.append(num15Button)
-##        f3p_list.append(num16Button)
-##        f3p_list.append(num17Button)
-##        f3p_list.append(num18Button)
-##        f3p_list.append(num19Button)
-##        f3p_list.append(num20Button)
-##        f3p_list.append(backButton)
-##        f3p_list.append(clearButton)
-##        f3p_list.append(totalManLabel)
-
-##        f2p_list.append(sixButton)
-
-
-
-        for item in sp_list:
-            self.remove_widget(item)
+##
+##        for item in sp_list:
+##            self.remove_widget(item)
 
         for item2 in fp_list:
             self.add_widget(item2)
