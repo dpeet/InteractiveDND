@@ -24,41 +24,41 @@ def test_cam():
     rawCapture = PiRGBArray(camera)
 
     # allow the camera to warmup
-    time.sleep(0.1)
+    time.sleep(0.5)
 
     # grab an image from the camera
     camera.capture(rawCapture, format="bgr")
     image = rawCapture.array
+    return image
 
     # display the image on screen and wait for a keypress
     cv2.imshow("Image", image)
     cv2.waitKey(0)
 
 
-def get_num_from_dice():
-    HAVE_DISPLAY = True  # show debug windows
-    BINARIZATION_THRESHOLD = 50  # Selects the bright white die area
+def get_num_from_dice(HAVE_DISPLAY = False): #shows debug windows
+    BINARIZATION_THRESHOLD = 175  # Selects the bright white die area
 
     # Area size definitions (the script "knows" how big a die should be)
     AREA_FACTOR = 1  # compensate camera zoom or position
-    DIE_AREA_MIN = AREA_FACTOR * 1000
-    DIE_AREA_MAX = AREA_FACTOR * 3000
-    PIP_AREA_MIN = AREA_FACTOR * 5
-    PIP_AREA_MAX = AREA_FACTOR * 30
+    DIE_AREA_MIN = AREA_FACTOR * 5000
+    DIE_AREA_MAX = AREA_FACTOR * 7000
+    PIP_AREA_MIN = AREA_FACTOR * 50
+    PIP_AREA_MAX = AREA_FACTOR * 200
 
-    # retval, image = vc.read()  # read frame from camera
-    image = cv2.imread("image7.jpg")
-    # cv2.imshow('input', image)
-    image = image[0:-200, 300:-100]  # crop picture
-    # cv2.imshow('cropped', image)
+    # image = cv2.imread("image7.jpg")
+    image = test_cam()
+    image = image[60:-10, 40:]  # crop picture
+    if HAVE_DISPLAY:
+        cv2.imshow('cropped', image)
     # image = cv2.medianBlur(image, 5)
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)  # convert to grayscale
     retval, bin = cv2.threshold(gray, BINARIZATION_THRESHOLD, 255, cv2.THRESH_BINARY)  # select white die areas
     dilateKernel = cv2.getStructuringElement(cv2.MORPH_CROSS, (7, 7))
     bin = cv2.dilate(bin, dilateKernel)  # dilate white areas to prevent pip fraying
-    cv2.imshow("dilated", bin)
     if HAVE_DISPLAY:
         cv2.imshow('binary', bin)
+        cv2.imshow("dilated", bin)
     _, contours0, hierarchy = cv2.findContours(bin.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)  # find contours
     contours = [cv2.approxPolyDP(cnt, 2, True) for cnt in contours0]  # simplify contours
 
@@ -94,22 +94,23 @@ def get_num_from_dice():
         cv2.drawContours(image, pipContours, -1, (64, 128, 64), 2)
         dice_numbers.append(len(pipContours))
         die_sum = die_sum + len(pipContours)
-        dice_numbers.append(die_sum)
+        # print (i, len(pipContours))
         cv2.putText(image, "%d" % len(pipContours), (dieCnt[0][0][0], dieCnt[0][0][1]), cv2.FONT_HERSHEY_PLAIN,
                     2.0, (255, 64, 64), 2)
     cv2.putText(image, "%d" % die_sum, (10, 50), cv2.FONT_HERSHEY_PLAIN, 3.0, (255, 255, 255), 2)
-    cv2.imshow('Die and Pips', image)
 
     if HAVE_DISPLAY:
+        cv2.imshow('Die and Pips', image)
         ch = cv2.waitKey(0)
         # if ch == 27:  # exit on Esc
         #     break
+    print (dice_numbers)
     return dice_numbers
 
 def test_get_num_from_dice():
     return ([5,1,3])
 
-# get_num_from_dice()
-# test_cam()
+get_num_from_dice()
+#test_cam()
 
-test_get_num_from_dice()
+#test_get_num_from_dice()
