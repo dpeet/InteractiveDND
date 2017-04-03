@@ -110,7 +110,7 @@ def get_num_from_dice(HAVE_DISPLAY = False): #shows debug windows
 def test_get_num_from_dice():
     return ([5,1,3])
 
-get_num_from_dice()
+#get_num_from_dice()
 #test_cam()
 
 #test_get_num_from_dice()
