@@ -29,6 +29,7 @@ def test_cam():
     # grab an image from the camera
     camera.capture(rawCapture, format="bgr")
     image = rawCapture.array
+    camera.close()
     return image
 
     # display the image on screen and wait for a keypress
@@ -37,22 +38,23 @@ def test_cam():
 
 
 def get_num_from_dice(HAVE_DISPLAY = False): #shows debug windows
-    BINARIZATION_THRESHOLD = 175  # Selects the bright white die area
+    BINARIZATION_THRESHOLD = 125  # Selects the bright white die area
 
     # Area size definitions (the script "knows" how big a die should be)
     AREA_FACTOR = 1  # compensate camera zoom or position
-    DIE_AREA_MIN = AREA_FACTOR * 5000
-    DIE_AREA_MAX = AREA_FACTOR * 7000
-    PIP_AREA_MIN = AREA_FACTOR * 50
+    DIE_AREA_MIN = AREA_FACTOR * 3000
+    DIE_AREA_MAX = AREA_FACTOR * 10000
+    PIP_AREA_MIN = AREA_FACTOR * 25
     PIP_AREA_MAX = AREA_FACTOR * 200
 
     # image = cv2.imread("image7.jpg")
     image = test_cam()
-    image = image[60:-10, 40:]  # crop picture
+    image = image[20:, 130:-60]  # crop picture
     if HAVE_DISPLAY:
         cv2.imshow('cropped', image)
-    # image = cv2.medianBlur(image, 5)
+    
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)  # convert to grayscale
+    gray = cv2.medianBlur(gray, 5)
     retval, bin = cv2.threshold(gray, BINARIZATION_THRESHOLD, 255, cv2.THRESH_BINARY)  # select white die areas
     dilateKernel = cv2.getStructuringElement(cv2.MORPH_CROSS, (7, 7))
     bin = cv2.dilate(bin, dilateKernel)  # dilate white areas to prevent pip fraying
@@ -110,7 +112,7 @@ def get_num_from_dice(HAVE_DISPLAY = False): #shows debug windows
 def test_get_num_from_dice():
     return ([5,1,3])
 
-#get_num_from_dice()
+#get_num_from_dice(True)
 #test_cam()
 
 #test_get_num_from_dice()

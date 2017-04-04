@@ -266,7 +266,7 @@ class RootWidget(FloatLayout):
             elif instance == autoDiceButton:
                 print("%d page2 is selected" % pageNum)
                 print("%d option is selected" % die)
-                totalValLabel.text = ("%s rolled  %s !!!" % (spinner.text, str(sum(test_get_num_from_dice()))))
+                totalValLabel.text = ("%s rolled  %s !!!" % (spinner.text, str(sum(get_num_from_dice()))))
                 print("here")
                 print(selected1)
                 for item in tp_list:
@@ -453,7 +453,7 @@ class RootWidget(FloatLayout):
                         selectedItem = list_adapter.selection[0].text
                         sLabel.color = (0,0,0,1)
                         
-                        sLabel.text = str(sum(test_get_num_from_dice())+int(sLabel3.text))
+                        sLabel.text = str(sum(get_num_from_dice())+int(sLabel3.text))
                         
 ##                        ran = random.randint(1, 100)
 ##                        sLabel2.text = ('Value: %d' % ran)
@@ -481,7 +481,7 @@ class RootWidget(FloatLayout):
                         txt = sLabel4.text
                         myList = txt.split("d")
                         myList2 = myList[1].split("+")
-                        sLabel2.text = str(sum(test_get_num_from_dice())+int(myList2[1]))
+                        sLabel2.text = str(sum(get_num_from_dice())+int(myList2[1]))
 
 
             elif instance == tieButton:
@@ -559,9 +559,8 @@ class RootWidget(FloatLayout):
                     else:
                         selectedItem = list_adapter.selection[0].text
                         sLabel.color = (0,0,0,1)
-                        sLabel.text = str(sum(test_get_num_from_dice())+int(sLabel3.text))
-      
-                
+                        sLabel.text = str(sum(get_num_from_dice())+int(sLabel3.text))
+                      
             else:
                 print('what is this?')
 
