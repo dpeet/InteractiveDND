@@ -71,6 +71,7 @@ class RootWidget(FloatLayout):
         spp_list = list()
         stp_list = list()
         skp_list = list()
+        sap_list = list()
         
         f3p_list = list()
         zp_list = list()
@@ -179,6 +180,9 @@ class RootWidget(FloatLayout):
                         self.remove_widget(item2)
                 elif currentPage == 4:
                     for item2 in skp_list:
+                        self.remove_widget(item2)
+                elif currentPage == 6:
+                    for item2 in sap_list:
                         self.remove_widget(item2)
                 else:
                     for item in sp_list:
@@ -495,6 +499,9 @@ class RootWidget(FloatLayout):
                 elif currentPage == 4:
                     for item2 in skp_list:
                         self.add_widget(item2)
+                elif currentPage == 6:
+                    for item2 in sap_list:
+                        self.add_widget(item2)
                 else:
                     for item2 in sp_list:
                         self.add_widget(item2)
@@ -569,6 +576,9 @@ class RootWidget(FloatLayout):
 
                 elif currentPage == 5:
                     sLabel3.text = str(currentPlayer.int)
+
+                elif currentPage == 6:
+                    sLabel3.text = str(currentPlayer.con)
                     
             elif len(list_adapter2.selection) > 0:
                 if currentPage == 1:
@@ -989,6 +999,18 @@ class RootWidget(FloatLayout):
         skp_list.append(manualButton)
         skp_list.append(rollButton)
         skp_list.append(skStatLabel)
+
+        sap_list.append(dImg2)
+        sap_list.append(dImg4)
+        sap_list.append(backButton)
+        sap_list.append(list_view)
+        sap_list.append(attack)
+        sap_list.append(sLabel)
+        sap_list.append(sLabel3)
+        sap_list.append(sLabel5)
+        sap_list.append(manualButton)
+        sap_list.append(rollButton)
+        
         
         tp_list.append(backButton)
         f2p_list.append(backButton)
