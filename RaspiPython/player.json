@@ -43,7 +43,7 @@
       "weapons":[["Crossbow", "3", "1d6+2"], ["LongBow", "4", "1d8+3"]],
       "spells":["Silence", "Wind Wall"],
       "special":["Burrow"],
-	  "skills":["Athletics","History","Intimidation","Persuasion"]
+	  "skills":["Athletics","History","Nature","Stealth"]
    },
    {
       "class":"Pet",
@@ -66,6 +66,6 @@
       "weapons":[["Dagger", "3", "1d6+2"], ["Claws", "4", "1d8+3"]],
       "spells":["Silence", "Wind Wall"],
       "special":["Burrow"],
-	  "skills":["Athletics","History","Intimidation","Persuasion"]
+	  "skills":["Athletics","Arcana","Insight","Investigation"]
    }
 ]

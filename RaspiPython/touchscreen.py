@@ -85,6 +85,7 @@ class RootWidget(FloatLayout):
         initp_list = list()
         spp_list = list()
         stp_list = list()
+        skp_list = list()
         
         f3p_list = list()
         zp_list = list()
@@ -138,24 +139,45 @@ class RootWidget(FloatLayout):
                             "fn_bolditalic": "data/fonts/RobotoCondensed-Italic.ttf"
                         }]
 
-        skData = ["Acrobatics (Dex)",
-                "Animal Handling (Wis)",
-                "Arcana (Int)",
-                "Athletics (Str)",
-                "Deception (Cha)",
-                "History (Int)",
-                "Insight (Wis)",
-                "Intimidation (Cha)",
-                "Investigation (Int)",
-                "Medicine (Wis)",
-                "Nature (Int)",
-                "Perception (Wis)",
-                "Performance (Cha)",
-                "Persuasion (Cha)",
-                "Religion (Int)",
-                "Sleight of Hand (Dex)",
-                "Stealth (Dex)",
-                "Survival (Wise)"]
+##        skData = ["Acrobatics (Dex)",
+##                "Animal Handling (Wis)",
+##                "Arcana (Int)",
+##                "Athletics (Str)",
+##                "Deception (Cha)",
+##                "History (Int)",
+##                "Insight (Wis)",
+##                "Intimidation (Cha)",
+##                "Investigation (Int)",
+##                "Medicine (Wis)",
+##                "Nature (Int)",
+##                "Perception (Wis)",
+##                "Performance (Cha)",
+##                "Persuasion (Cha)",
+##                "Religion (Int)",
+##                "Sleight of Hand (Dex)",
+##                "Stealth (Dex)",
+##                "Survival (Wise)"]
+
+        skData = ["Acrobatics",
+                "Animal Handling",
+                "Arcana",
+                "Athletics",
+                "Deception",
+                "History",
+                "Insight",
+                "Intimidation",
+                "Investigation",
+                "Medicine",
+                "Nature",
+                "Perception",
+                "Performance",
+                "Persuasion",
+                "Religion",
+                "Sleight of Hand",
+                "Stealth",
+                "Survival"]
+        skDataS = ["dex","wis", "int", "str", "cha", "int", "wis", "cha", "int",
+                "wis", "int", "wis", "cha", "cha", "int", "dex", "dex", "wis"]
 ##
         stData = ["Strength",
                 "Dexterity",
@@ -190,6 +212,9 @@ class RootWidget(FloatLayout):
                         self.remove_widget(item2)
                 elif currentPage == 2:
                     for item2 in stp_list:
+                        self.remove_widget(item2)
+                elif currentPage == 4:
+                    for item2 in skp_list:
                         self.remove_widget(item2)
                 else:
                     for item in sp_list:
@@ -293,6 +318,7 @@ class RootWidget(FloatLayout):
                 data = [{'text': i, 'is_selected': False} for i in []]
                 list_adapter3.data = data
                 list_view3.populate()
+                sLabel3.text = '0'
                 sLabel2.text = '0'
                 sLabel.text = '0'
                 initFlag = True
@@ -302,9 +328,10 @@ class RootWidget(FloatLayout):
                 dLabel.text = ('%s is selected!' % instance.text)
                 sLabel5.text = "Saving Throw"
                 sLabel2.text = '0'
+                sLabel3.text = '0'
                 sLabel.text = '0'
-##                attack.source = "./images/Button.png"
-                attack.source = "./images/Field_Attack.png"
+                attack.source = "./images/Field_Save.png"
+##                attack.source = "./images/Field_Attack.png"
                 data = [{'text': i, 'is_selected': False} for i in stData]
                 initFlag = False
                 currentPage = 2
@@ -319,7 +346,9 @@ class RootWidget(FloatLayout):
                 attack.source = "./images/Field_Attack.png"
                 data = [{'text': i, 'is_selected': False} for i in wpData]
                 sLabel2.text = '0'
+                sLabel3.text = '0'
                 sLabel.text = '0'
+                sLabel4.text = '0'
                 initFlag = False
                 currentPage = 3
                 die = 3
@@ -327,10 +356,16 @@ class RootWidget(FloatLayout):
                 dLabel.text = ('%s is selected!' % instance.text)
                 sLabel5.text = "Skills"
 ##                skData = playerDic[currentPlayer.playerName].skills
+                skData = []
+                for item in playerDic[currentPlayer.playerName].skills:
+                    skData.append(item)
+                print(skData)
                 attack.source = "./images/Field_Attack.png"
                 data = [{'text': i, 'is_selected': False} for i in skData]
                 sLabel2.text = '0'
+                sLabel3.text = '0'
                 sLabel.text = '0'
+                skStatLabel.text = '--'
                 initFlag = False
                 currentPage = 4
                 die = 4
@@ -342,7 +377,9 @@ class RootWidget(FloatLayout):
                 data = [{'text': i, 'is_selected': False} for i in spData]
                 attack.source = "./images/Field_Attack.png"
                 sLabel5.text = "Spells"
+                
                 sLabel2.text = '0'
+                sLabel3.text = '0'
                 sLabel.text = '0'
                 initFlag = False
                 currentPage = 5
@@ -355,6 +392,7 @@ class RootWidget(FloatLayout):
                 saData = playerDic[currentPlayer.playerName].special
                 data = [{'text': i, 'is_selected': False} for i in saData]
                 sLabel2.text = '0'
+                sLabel3.text = '0'
                 sLabel.text = '0'
                 initFlag = False
                 currentPage = 6
@@ -363,7 +401,7 @@ class RootWidget(FloatLayout):
                 flag = False
                 selected1 = list_adapter.selection
                 if not selected1:
-                    sLabel.text = "Select One!"
+                    sLabel.text = "Select!"
                     sLabel.color = (1,0,0,1)
                 else:
                     if initFlag:
@@ -399,7 +437,7 @@ class RootWidget(FloatLayout):
                 flag = False
                 selected1 = list_adapter.selection
                 if not selected1:
-                    sLabel.text = "Select One!"
+                    sLabel.text = "Select!"
                     sLabel.color = (1,0,0,1)
                 else:
                     if initFlag:
@@ -425,7 +463,7 @@ class RootWidget(FloatLayout):
                 flag = False
                 selected1 = list_adapter.selection
                 if not selected1:
-                    sLabel2.text = "Select One!"
+                    sLabel2.text = "Select!"
                     sLabel2.color = (1,0,0,1)
                 else:
                     if initFlag:
@@ -443,12 +481,7 @@ class RootWidget(FloatLayout):
                         txt = sLabel4.text
                         myList = txt.split("d")
                         myList2 = myList[1].split("+")
-                        
-##                        sLabel.text = str(sum(test_get_num_from_dice())+int(sLabel3.text))
-                        
-##                        ran = random.randint(1, 100)
                         sLabel2.text = str(sum(test_get_num_from_dice())+int(myList2[1]))
-##                        sLabel2.text = ('Value: %d' % ran)
 
 
             elif instance == tieButton:
@@ -479,9 +512,7 @@ class RootWidget(FloatLayout):
                                         probList.append(item['text'])
                                     if (minI < 0 and not flg):
                                         flg = True
-    ##                                    print("minI %d index %d" % (minI, index))
                                         minI = index - 2
-    ##                                    print("minI %d index %d" % (minI, index))
                                     prevItem = item
                                     previous = int(item['text'].split(' ')[0])
                                     maxI = index
@@ -495,10 +526,7 @@ class RootWidget(FloatLayout):
                             
                             index = 0
                             once = 0
-    ##                        print("min: %d max: %d" % (minI, maxI))
                             finalList.append("!!Final Order!!")
-        ##                    print(list_adapter3.data)
-        ##                    print(probList)
                             for item in list_adapter3.data:
                                 if index <= minI:
                                     finalList.append("%s. %s" % (str(index + 1), item['text'].split(' ')[2]))
@@ -508,17 +536,11 @@ class RootWidget(FloatLayout):
                                         finalList.append("%s. %s" % (str(num + 1), item2.split(' ')[2]))
                                         num = num+1
                                     once = 1
-        ##                            print(finalList)
 
                                 elif index > maxI:
                                     finalList.append("%s. %s" % (str(index+1), item['text'].split(' ')[2]))
                                 print(index)
                                 index = index + 1
-        ##                    print("min: %d max: %d" % (minI, maxI))
-        ##
-        ##                    print(finalList)
-        ##                    print(probList)
-
                             data = [{'text': i, 'is_selected': False} for i in finalList]
                             list_adapter3.data = data
                             list_view3.populate()
@@ -527,7 +549,7 @@ class RootWidget(FloatLayout):
                 flag = False
                 selected1 = list_adapter.selection
                 if not selected1:
-                    sLabel.text = "Select One!"
+                    sLabel.text = "Select!"
                     sLabel.color = (1,0,0,1)
                 else:
                     if initFlag:
@@ -561,6 +583,9 @@ class RootWidget(FloatLayout):
                 elif currentPage == 2:
                     for item2 in stp_list:
                         self.add_widget(item2)
+                elif currentPage == 4:
+                    for item2 in skp_list:
+                        self.add_widget(item2)
                 else:
                     for item2 in sp_list:
                         self.add_widget(item2)
@@ -586,6 +611,9 @@ class RootWidget(FloatLayout):
                     data = [{'text': i, 'is_selected': False} for i in wpData]
 
                 elif currentPage == 4:
+                    skData = []
+                    for item in playerDic[currentPlayer.playerName].skills:
+                        skData.append(item)
                     data = [{'text': i, 'is_selected': False} for i in skData]
 
                 elif currentPage == 5:
@@ -619,6 +647,28 @@ class RootWidget(FloatLayout):
                         sLabel3.text = str(currentPlayer.prof)
                     else:
                         sLabel3.text = "0"
+                elif currentPage == 4:
+                    ind = skData.index(str(selectedItem))
+                    skStatLabel.text = skDataS[ind].upper()
+                    
+                    stat = ""
+                    if skDataS[ind] == "str":
+                        stat = currentPlayer.str
+                    elif skDataS[ind] == "dex":
+                        stat =  currentPlayer.dex
+                    elif skDataS[ind] == "con":
+                        stat =  currentPlayer.con
+                    elif skDataS[ind] == "int":
+                        stat =  currentPlayer.int
+                    elif skDataS[ind] == "wis":
+                        stat =  currentPlayer.wis
+                    elif skDataS[ind] == "cha":
+                        stat =  currentPlayer.cha
+                    sLabel3.text = str(stat)
+
+                elif currentPage == 5:
+                    sLabel3.text = str(currentPlayer.int)
+                    
             elif len(list_adapter2.selection) > 0:
                 if currentPage == 1:
                     selectedItem = list_adapter2.selection[0].text
@@ -758,13 +808,13 @@ class RootWidget(FloatLayout):
             color=(0, 0, 0, 1),
             font_size='75sp',
             font_name='./images/Captain_Redemption.ttf',
-            pos_hint={'center_x': .5, 'center_y': .8}
+            pos_hint={'center_x': .5, 'center_y': .765}
         )
         self.add_widget(tLabel)
 
         dragon = Image(
             source="./images/Dragon_Title.png",
-            pos_hint = {'center_x': .5, 'center_y': .82}
+            pos_hint = {'center_x': .5, 'center_y': .78}
         )
 
 
@@ -887,8 +937,8 @@ class RootWidget(FloatLayout):
 
 
         list_view = ListView(adapter = list_adapter,
-                             pos_hint = {'center_x': .75, 'center_y': .31},
-                             size_hint = (0.25, 0.5))
+                             pos_hint = {'center_x': .75, 'center_y': .37},
+                             size_hint = (0.25, 0.35))
         list_view.background_normal = (0,0,0,0)
         
         
@@ -980,6 +1030,13 @@ class RootWidget(FloatLayout):
             pos_hint={'center_x': .75, 'center_y': .1})
         rollButton.bind(on_press=dieSelect)
 
+        skStatLabel = Label(
+                text='--',
+                color = (0,0,0,1),
+                font_size='33sp',
+                font_name= './images/Captain_Redemption.ttf',
+                pos_hint = {'center_x': .48, 'center_y': .37})
+
 #################################################################################################################################
 
         fp_list.append(dImg1)
@@ -1007,6 +1064,7 @@ class RootWidget(FloatLayout):
         
 
         wpp_list.append(dImg2)
+        wpp_list.append(dImg3)
         wpp_list.append(dImg4)
         wpp_list.append(backButton)
         wpp_list.append(list_view)
@@ -1046,11 +1104,22 @@ class RootWidget(FloatLayout):
         stp_list.append(list_view)
         stp_list.append(attack)
         stp_list.append(sLabel)
-##        stp_list.append(sLabel2)
         stp_list.append(sLabel5)
         stp_list.append(sLabel3)
         stp_list.append(manualButton)
         stp_list.append(rollButton)
+
+        skp_list.append(dImg2)
+        skp_list.append(dImg4)
+        skp_list.append(backButton)
+        skp_list.append(list_view)
+        skp_list.append(attack)
+        skp_list.append(sLabel)
+        skp_list.append(sLabel5)
+        skp_list.append(sLabel3)
+        skp_list.append(manualButton)
+        skp_list.append(rollButton)
+        skp_list.append(skStatLabel)
         
         tp_list.append(backButton)
         f2p_list.append(backButton)
