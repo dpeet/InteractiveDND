@@ -69,7 +69,8 @@ def get_num_from_dice(HAVE_DISPLAY = False): #shows debug windows
     for i in range(len(contours)):
         dieCnt = contours[i]
         dieArea = cv2.contourArea(dieCnt)
-        print (i, " ", dieArea)
+        if (HAVE_DISPLAY):
+            print (i, " ", dieArea)
 
         if dieArea > DIE_AREA_MIN and dieArea < DIE_AREA_MAX:
             # print "Contour", i, "is a die with area", dieArea
