@@ -687,7 +687,8 @@ class RootWidget(FloatLayout):
                     list_adapter2.data = data
                     list_view2.populate()
                     tempDic = list()
-                    ran = random.randint(1,20)
+##                    ran = random.randint(1,20)
+                    ran = sum(get_num_from_dice())
                     if len(list_adapter3.data) > 0:
                         for item in list_adapter3.data:
                             if item['text'] != selectedItem:
