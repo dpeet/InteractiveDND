@@ -99,7 +99,6 @@ class RootWidget(FloatLayout):
             playerNames.append(item.playerName)
             initData.append(("%s  =     0" %item.playerName))
             playerDic[item.playerName] = item
-            print(item.weapons)
 
 
         if len(playerNames) > 1:
@@ -165,7 +164,6 @@ class RootWidget(FloatLayout):
             global selected1
             global pageNum
             global currentSetting
-            print("clicked")
             if pageNum == 2:
                 if currentPage == 3:
                     for item in wpp_list:
@@ -288,7 +286,6 @@ class RootWidget(FloatLayout):
                 skData = []
                 for item in playerDic[currentPlayer.playerName].skills:
                     skData.append(item)
-                print(skData)
                 attack.source = "./images/Field_Attack.png"
                 data = [{'text': i, 'is_selected': False} for i in skData]
                 sLabel2.text = '0'
@@ -300,8 +297,6 @@ class RootWidget(FloatLayout):
                 die = 4
             elif instance == spButton:
                 dLabel.text = ('%s is selected!' % instance.text)
-                print(currentPlayer.playerName)
-                print(playerDic[currentPlayer.playerName].spells)
                 spData = playerDic[currentPlayer.playerName].spells
                 data = [{'text': i, 'is_selected': False} for i in spData]
                 attack.source = "./images/Field_Attack.png"
@@ -348,7 +343,6 @@ class RootWidget(FloatLayout):
                             ran = random.randint(1, 20)
                             sLabel.text = str(ran +int(sLabel3.text))
                             sLabel2.text = str(ran +int(myList2[1]))
-                            print("here %d" % pageNum)
                         else:
                             ran = random.randint(1, 20)
                             selectedItem = list_adapter.selection[0].text
@@ -370,7 +364,10 @@ class RootWidget(FloatLayout):
                     else:
                         selectedItem = list_adapter.selection[0].text
                         sLabel.color = (0,0,0,1)
-                        sLabel.text = str(sum(get_num_from_dice())+int(sLabel3.text))
+                        reslt = get_num_from_dice()
+                        print(reslt)
+                        print(sum(reslt))
+                        sLabel.text = str(sum(reslt)+int(sLabel3.text))
 
             elif instance == autoButton2:
                 flag = False
@@ -389,7 +386,10 @@ class RootWidget(FloatLayout):
                         txt = sLabel4.text
                         myList = txt.split("d")
                         myList2 = myList[1].split("+")
-                        sLabel2.text = str(sum(get_num_from_dice())+int(myList2[1]))
+                        reslt = get_num_from_dice()
+                        print(reslt)
+                        print(sum(reslt))
+                        sLabel2.text = str(sum(reslt)+int(myList2[1]))
 
 
             elif instance == tieButton:
@@ -447,7 +447,6 @@ class RootWidget(FloatLayout):
 
                                 elif index > maxI:
                                     finalList.append("%s. %s" % (str(index+1), item['text'].split(' ')[2]))
-                                print(index)
                                 index = index + 1
                             data = [{'text': i, 'is_selected': False} for i in finalList]
                             list_adapter3.data = data
@@ -467,7 +466,10 @@ class RootWidget(FloatLayout):
                     else:
                         selectedItem = list_adapter.selection[0].text
                         sLabel.color = (0,0,0,1)
-                        sLabel.text = str(sum(get_num_from_dice())+int(sLabel3.text))
+                        reslt = get_num_from_dice()
+                        print(reslt)
+                        print(sum(reslt))
+                        sLabel.text = str(sum(reslt)+int(sLabel3.text))
                       
             else:
                 print('what is this?')
@@ -528,7 +530,6 @@ class RootWidget(FloatLayout):
                 elif currentPage == 6:
                     saData = currentPlayer.special
                     data = [{'text': i, 'is_selected': False} for i in saData]
-                print(currentPage)
                 list_adapter.data = data
                 list_view.populate()
 
@@ -583,7 +584,10 @@ class RootWidget(FloatLayout):
                     list_adapter2.data = data
                     list_view2.populate()
                     tempDic = list()
-                    ran = sum(get_num_from_dice())
+                    reslt = get_num_from_dice()
+                    print(reslt)
+                    print(sum(reslt))
+                    ran = sum(reslt)
                     if len(list_adapter3.data) > 0:
                         for item in list_adapter3.data:
                             if item['text'] != selectedItem:
@@ -991,11 +995,6 @@ class RootWidget(FloatLayout):
 
         for item2 in fp_list:
             self.add_widget(item2)
-
-
-    def btn_pressed(self, instance, pos):
-        print ('pos: printed from widget: {pos}'.format(pos=pos))
-
 
 
 class CustomBtn(Widget):
